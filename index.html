@@ -28,19 +28,33 @@
 	    var Konamiz=function(){function a(a,b,c){a.addEventListener?a.addEventListener(b,c,!1):a.attachEvent&&a.attachEvent("on"+b,function(b){return c.call(a,b)})}function b(a){var b="";for(var d=0;d<a.length;d++){var e=a[d].toUpperCase();typeof c[e]!="undefined"?b+=c[e]:b+=e.charCodeAt(0)}return b}var c={SPACE:32,ENTER:13,UP:38,DOWN:40,LEFT:37,RIGHT:39},d="38384040373937396665";return function(c){var e=function(){},f=function(){},g=c instanceof Array&&c.length>0?b(c):d,h="";(function(b){a(document,"keydown",function(a){h+=a.keyCode,console.log(h,g.indexOf(h)),h===g?(h="",b.isStarted?b.stop():b.start()):g.indexOf(h)===-1&&(h=a.keyCode+"")})})(this),this.isStarted=!1,this.onStart=function(a){return e=a,this},this.onStop=function(a){return f=a,this},this.start=function(){return e.call(this),this.isStarted=!0,this},this.stop=function(){return f.call(this),this.isStarted=!1,this}}}();
 	    var k = new Konamiz().onStart(function() {document.bgColor = "#6600CC";});
   </script>
+ 
   <style>
      .center {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+      text-align:center;
      }
      .fontstyle{
       font-size: 30px;
       color: #FFFFFF;
       font-family: Arial;
+      text-align:center;
      }
-
+     .fontstyle1{
+      font-size: 30px;
+      color: #FFFFFF;
+      font-family: Arial;
+      text-align:center;
+     }
+     .fontstyle2{
+      font-size: 70px;
+      color: #FFFFFF;
+      font-family: Arial;
+      text-align:center;
+     }
   </style>
   </head>
   <body text-align:center>
@@ -48,7 +62,18 @@
         <div class="fontstyle">
             <p>Miao Yifei 表示他非常无聊</p>
         </div>
-        <div class="fontstyle">
+        <div class="fontstyle2" >
+          <span id="NumBe" >
+             <script>
+              var Num1="";
+            for(var i=0;i<9;i++)
+             {
+              Num1+=Math.floor(Math.random()*10);
+             }
+             document.getElementById("NumBe").innerHTML=Num1;
+          </script></span>
+        </div>
+		<div class="fontstyle1" >
             <p>A Miao Yifei's Boring Page</p>
         </div>
     </div> 
