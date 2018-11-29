@@ -29,6 +29,38 @@
 	    var Konamiz=function(){function a(a,b,c){a.addEventListener?a.addEventListener(b,c,!1):a.attachEvent&&a.attachEvent("on"+b,function(b){return c.call(a,b)})}function b(a){var b="";for(var d=0;d<a.length;d++){var e=a[d].toUpperCase();typeof c[e]!="undefined"?b+=c[e]:b+=e.charCodeAt(0)}return b}var c={SPACE:32,ENTER:13,UP:38,DOWN:40,LEFT:37,RIGHT:39},d="38384040373937396665";return function(c){var e=function(){},f=function(){},g=c instanceof Array&&c.length>0?b(c):d,h="";(function(b){a(document,"keydown",function(a){h+=a.keyCode,console.log(h,g.indexOf(h)),h===g?(h="",b.isStarted?b.stop():b.start()):g.indexOf(h)===-1&&(h=a.keyCode+"")})})(this),this.isStarted=!1,this.onStart=function(a){return e=a,this},this.onStop=function(a){return f=a,this},this.start=function(){return e.call(this),this.isStarted=!0,this},this.stop=function(){return f.call(this),this.isStarted=!1,this}}}();
 	    var k = new Konamiz().onStart(function() {document.bgColor = "#6600CC";});
   </script>
+  <script src="http://pv.sohu.com/cityjson?ie=utf-8"></script> 
+  <script language="javascript">
+      function getCurDate()
+        {
+         var d = new Date();
+         var week;
+         switch (d.getDay()){
+         case 1: week="MON."; break;
+         case 2: week="Tues."; break;
+         case 3: week="Wed."; break;
+         case 4: week="Thur."; break;
+         case 5: week="Fri."; break;
+         case 6: week="Sat."; break;
+         default: week="Sun.";
+        }
+         var years = d.getFullYear();
+         var month = add_zero(d.getMonth()+1);
+         var days = add_zero(d.getDate());
+         var hours = add_zero(d.getHours());
+         var minutes = add_zero(d.getMinutes());
+         var seconds=add_zero(d.getSeconds());
+         var ndate = years+"/"+month+"/"+days+"/ "+hours+":"+minutes+":"+seconds+" "+week;
+         var divT=document.getElementById("logInfo");
+         divT.innerHTML= ndate;
+        }
+      function add_zero(temp)
+        {
+        if(temp<10) return "0"+temp;
+        else return temp;
+        }
+        setInterval("getCurDate()",100);
+        </script>
  
   <style>
      .center {
@@ -40,26 +72,46 @@
      }
      .fontstyle{
       font-size: 30px;
-      color: #FFFFFF;
+      color:rgba(255,255,255,0.5);
       font-family: Arial;
       text-align:center;
      }
      .fontstyle1{
-      font-size: 30px;
-      color: #FFFFFF;
+      font-size: 14px;
+      color:rgba(255,255,255,0.5);
       font-family: Arial;
       text-align:center;
      }
      .fontstyle2{
       font-size: 70px;
-      color: #FFFFFF;
+      color:rgba(255,255,255,0.5);
       font-family: Arial;
       text-align:center;
+     }
+     .fontstyle3{
+      font-size: 14px;
+      color:rgba(255,255,255,0.5);
+      font-family: Arial;
+      text-align:center;
+      display:inline
+     }
+     .fontstyle4{
+      font-size: 14px;
+      color: #FFFFFF;
+      font-family: Arial;
+      color:rgba(255,255,255,0.5);
+      display:inline;
      }
   </style>
   </head>
   <body text-align:center>
+
     <div class="center">
+        <div class="fontstyle4">
+            <script> document.write(returnCitySN["cip"]+'  / '+returnCitySN["cname"]) </script>
+        </div><div class="fontstyle4"><b>&nbsp;&nbsp;|&nbsp;&nbsp;</b></div><div class="fontstyle3">
+            <span id="logInfo"></span>
+        </div>
         <div class="fontstyle">
             <p>Miao Yifei 表示他非常无聊</p>
         </div>
@@ -75,7 +127,7 @@
           </script></span>
         </div>
 		<div class="fontstyle1" >
-            <p>A Miao Yifei's Boring Page</p>
+            <p>A Miao Yifei's Boring Page <b>&nbsp;&nbsp;|&nbsp;&nbsp;</b> Miao Yifei is boring now</p>
         </div>
     </div> 
     <script type="text/javascript">
@@ -85,3 +137,4 @@
     </script>
   </body>
 </html>
+
