@@ -93,27 +93,6 @@
   </style>
   </head>
   <body text-align:center>
-      <script>
-	
-
-          var request = new XMLHttpRequest();
-          var url = 'http://www.ifmate.com/myf/visit.php';
-          request.open("GET",url,true);
-          
-          request.send();
-          
-              window.onload = function(){
-              var color = '#'+Math.floor(Math.random()*0xffffff).toString(16);
-                  document.body.style.backgroundColor=color;
-              }
-          
-          
-            setInterval(test, 5000);
-            function test(){
-               var color = '#'+Math.floor(Math.random()*0xffffff).toString(16);
-               document.body.style.backgroundColor=color;
-            }
-          </script>
      <div class="fontstyle4" >
         <script type="text/javascript">  
           document.write(returnCitySN["cip"]+','+returnCitySN["cname"])  
@@ -142,4 +121,23 @@
         </div>
     </div> 
   </body>
+  <script>
+      var request = new XMLHttpRequest();
+      var url = 'http://www.ifmate.com/myf/visit.php';
+      request.open("GET",url,true);
+      
+      request.send();
+      
+          window.onload = function(){
+          var color = '#'+Math.floor(Math.random()*0xffffff).toString(16);
+              document.body.style.backgroundColor=color;
+          }
+      
+      
+        setInterval(test, 5000);
+        function test(){
+           var color = '#'+Math.floor(Math.random()*0xffffff).toString(16);
+           document.body.style.backgroundColor=color;
+        }
+      </script>
 </html>
