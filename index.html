@@ -18,7 +18,7 @@
       _gaq.push(['_setAccount', 'UA-36420061-1']);
       _gaq.push(['_trackPageview']);
     
-     function() {
+      (function() {
         var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
@@ -60,6 +60,8 @@
         }
         setInterval("getCurDate()",100);
         </script>
+        <script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>  
+ 
   <style>
      .center {
       position: absolute;
@@ -98,7 +100,7 @@
       bottom: 0%;
       right: 0%;
       transform: translate(-10%, -50%);
-      font-size: 16px;
+      font-size: 14px;
       color: #FFFFFF;
       font-family: Arial;
       color:rgba(255,255,255,0.5);
@@ -108,18 +110,17 @@
   </head>
   <body text-align:center>
      <div class="fontstyle4" >
-        <script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>  
         <script type="text/javascript">  
-          document.write(returnCitySN["cip"]+','+returnCitySN["cname"]);
+          document.write(returnCitySN["cip"]+','+returnCitySN["cname"])  
           </script>
      </div> 
     <div class="center">
-    <div class="fontstyle3">
+      <div class="fontstyle3">
             <span id="logInfo"></span> 
-    </div>
-     <-- <div class="fontstyle">
+      </div>
+        <!-- <div class="fontstyle">
             <p>Miao Yifei 表示他非常无聊</p>
-        </div> -->
+        </div>  -->
         <div class="fontstyle2" >
           <span id="NumBe" >
              <script>
