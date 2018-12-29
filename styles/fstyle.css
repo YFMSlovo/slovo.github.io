@@ -5,12 +5,14 @@
 		 z-index:1;		 
 		 transform: translateX(-50%);
 		 text-align:center;
+		 margin:0;
 		}
 .fontstyle{
 		 font-size: 14px;
 		 color:rgba(255,255,255,0.5);
 		 font-family: Arial;
 		 text-align:center;
+		 margin:0;
     }
 .fontstyle1{
 	     position: absolute;
@@ -23,19 +25,22 @@
 		 z-index:2;		 
 		 transform: translateX(-50%);
 		 text-align:center;
+		 margin:0;
 		}
 .fontstyle2{
 		 font-size: 28px;
 		 color:rgba(255,255,255,0.5);
 		 font-family: Arial;
 		 text-align:center;
+		 margin:0;
 		}
 .fontstyle3{
 		 font-size: 12px;
 		 color:rgba(255,255,255,0.5);
 		 font-family: Arial;
 		 text-align:center;
-		 display:inline
+		 display:inline;
+		 margin:0;
 		}
 .fontstyle4{
 		 position: absolute;
@@ -48,4 +53,5 @@
 		 z-index:1;
 		 color:rgba(255,255,255,0.5);
 		 display:inline;
+		 margin:0;
 		}
