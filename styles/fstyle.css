@@ -1,6 +1,7 @@
 .center {
 		 position: absolute;
 		 /* top: 0%; */
+		 width: 1000px;
 		 left: 50%;
 		 z-index:1;		 
 		 transform: translateX(-50%);
@@ -20,12 +21,13 @@
 		 color:rgba(255,255,255,0.5);
 		 font-family: Arial;
 		 text-align:center;
+		 width: 1000px;
 		 bottom: 0%;
 		 left: 50%;
 		 z-index:2;		 
 		 transform: translateX(-50%);
 		 text-align:center;
-		 margin:0;
+		 margin:0 ;
 		}
 .fontstyle2{
 		 font-size: 28px;
