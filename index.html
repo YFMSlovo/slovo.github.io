@@ -60,33 +60,31 @@
 
 </head>
 <body style="background-color: #000000">
-		<div class="fontstyle4">
+		<!-- <div class="fontstyle4">
         <script type="text/javascript">  
           document.write(returnCitySN["cip"]+','+returnCitySN["cname"])  
           </script>
-		 </div> 
+		 </div>  -->
 		 <div class="center">
 				<div class="fontstyle3">
-							<span id="logInfo"></span> 
+							<span id="logInfo"></span><b>&nbsp;&nbsp;|&nbsp;&nbsp;</b><span id="NumBe" >
+									<script>
+									 var Num1="";
+								 for(var i=0;i<9;i++)
+									{
+									 Num1+=Math.floor(Math.random()*10);
+									}
+									document.getElementById("NumBe").innerHTML=Num1;
+							 </script></span>
+							<br/>
+							<script type="text/javascript">  
+								document.write(returnCitySN["cip"]+','+returnCitySN["cname"])  
+							</script>
 				</div>
-					<!-- <div class="fontstyle">
-							<p>Miao Yifei 表示他非常无聊</p>
-					</div>  -->
-					<div class="fontstyle2" >
-						<span id="NumBe" >
-							 <script>
-								var Num1="";
-							for(var i=0;i<9;i++)
-							 {
-								Num1+=Math.floor(Math.random()*10);
-							 }
-							 document.getElementById("NumBe").innerHTML=Num1;
-						</script></span>
-					</div>
-			<div class="fontstyle1" >
-							<span>A Miao Yifei's Boring Page <b>&nbsp;&nbsp;|&nbsp;&nbsp;</b> Miao Yifei 表示他非常无聊</span>
-					</div>
 			</div> 
+			<div class="fontstyle1" >
+					<span>A Miao Yifei's Boring Page <b>&nbsp;&nbsp;|&nbsp;&nbsp;</b> Miao Yifei 表示他非常无聊</span>
+			</div>
 		<div style="z-index:-1; height: 100%;">
 				<!-- <div id="bg" opacity:0></div> -->
 				<div id="container"></div>

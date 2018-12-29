@@ -9,7 +9,7 @@ request.send();
 // 	  document.body.style.backgroundColor=color;
 // 	  }
 		
-setInterval(test, 1000);
+setInterval(test, 10000);
  function test(){
 	// var color = '#'+Math.floor(Math.random()*0xffffff).toString(16);
 	//  document.body.style.backgroundColor=color;
