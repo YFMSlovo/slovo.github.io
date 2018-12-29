@@ -1,0 +1,45 @@
+.center {
+		 position: absolute;
+		 top: 2%;
+		 left: 2%;
+		 z-index:1;		 
+		 transform: translate(-2%, -2%);
+		 text-align:center;
+		}
+.fontstyle{
+		 font-size: 14px;
+		 color:rgba(255,255,255,0.5);
+		 font-family: Arial;
+		 text-align:center;
+    }
+.fontstyle1{
+		 font-size: 8px;
+		 color:rgba(255,255,255,0.5);
+		 font-family: Arial;
+		 text-align:center;
+		}
+.fontstyle2{
+		 font-size: 40px;
+		 color:rgba(255,255,255,0.5);
+		 font-family: Arial;
+		 text-align:center;
+		}
+.fontstyle3{
+		 font-size: 18px;
+		 color:rgba(255,255,255,0.5);
+		 font-family: Arial;
+		 text-align:center;
+		 display:inline
+		}
+.fontstyle4{
+		 position: absolute;
+		 bottom: 0%;
+		 right: 0%;
+		 transform: translate(-20%, -20%);
+		 font-size: 14px;
+		 color: #FFFFFF;
+		 font-family: Arial;
+		 z-index:1;
+		 color:rgba(255,255,255,0.5);
+		 display:inline;
+		}
