@@ -166,17 +166,19 @@
         document.body.style.backgroundColor="#ffffff";
     }
 
-        setInterval(test, 10000);
-          function test(){
-		         var color = '#'+Math.floor(Math.random()*0xffffff).toString(16);
-		         document.body.style.backgroundColor=color;
-             
+        setInterval(test1, 10000);
+          function test1(){
               var Num1="";
             for(var i=0;i<59;i++)
              {
               Num1+=Math.floor(Math.random()*60);
              }
              document.getElementById("NumBe").innerHTML=Num1;
+        }
+        setInterval(test2, 60000);
+          function test2(){
+		         var color = '#'+Math.floor(Math.random()*0xffffff).toString(16);
+		         document.body.style.backgroundColor=color;
         }
       </script>
 </html>
