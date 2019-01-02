@@ -56,7 +56,7 @@
       transform: translate(-50%, -50%);
      }
      .fontstyle1{
-      font-size: 14px;
+      font-size: 18px;
       color:rgba(0,0,0,1);
       font-family: Arial;
       text-align:left;
@@ -64,7 +64,7 @@
      }
      .fontstyle2{
      position: absolute;
-		 font-size: 9px;
+		 font-size: 10px;
 		 color:rgba(0,0,0,1);
 		 font-family: Arial;
 		 text-align:center;
@@ -77,7 +77,14 @@
 		 margin:0 ;
      }
      .fontstyle3{
-      font-size: 46px;
+      font-size: 50px;
+      color:rgba(0,0,0,1);
+      font-family: Arial;
+      text-align:left;
+      display:inline
+     }
+     .fontstyle4{
+      font-size: 8px;
       color:rgba(0,0,0,1);
       font-family: Arial;
       text-align:left;
@@ -89,8 +96,8 @@
         #login_click{ margin-top:32px; height:40px;}  
         #login_click a {  
             text-decoration:none;  
-            background:rgba(47,67,94,0);  
-            color:rgba(242,242,242,0);  
+            background:rgba(22,22,22,1);  
+            color:rgba(242,242,242,1);  
               
             padding: 10px 30px 10px 30px;  
             font-size:16px;  
@@ -103,7 +110,7 @@
             transition:all linear 0.30s;  
               
             }  
-           #login_click a:hover { background:rgba(56,95,158,0); }  
+           #login_click a:hover { background:rgba(71,71,71,1); }  
           
         </style>  
   </head>
@@ -116,6 +123,18 @@
       <div class="fontstyle3">
         <span>Error. 404 Not Found.</span>
       </div>
+      <br>
+      <div class="fontstyle4" >
+        <span id="NumBe" >
+           <script>
+            var Num1="";
+          for(var i=0;i<59;i++)
+           {
+            Num1+=Math.floor(Math.random()*60);
+           }
+           document.getElementById("NumBe").innerHTML=Num1;
+        </script></span>
+      </div>
       <p>
       <div class="fontstyle1">
         <!-- <span>The Page is Lost <b>&nbsp;&nbsp;|&nbsp;&nbsp;</b> There Is Nothing Here</span> -->
@@ -125,7 +144,7 @@
         <span>Beneath this mask there is more than flesh. Beneath this mask there is an idea. And ideas are bulletproof.</span>
       </div>
       <div id="login_click">  
-        <a href="./indexcube.html">Start</a>  
+        <a href="http://www.ifmate.com">Take Me Home</a>  
       </div>  
     </div> 
     <div class="fontstyle2" >
@@ -142,6 +161,15 @@
       request.open("GET",url,true);
       
       request.send();
-      
+    
+        setInterval(test, 3000);
+        function test(){
+              var Num1="";
+            for(var i=0;i<59;i++)
+             {
+              Num1+=Math.floor(Math.random()*60);
+             }
+             document.getElementById("NumBe").innerHTML=Num1;
+        }
       </script>
 </html>
