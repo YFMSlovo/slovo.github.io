@@ -9,8 +9,8 @@
     <link rel="icon" href="favicon.png" type="image/x-icon">
     <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
     <meta name="description" content="There is nothing, there is everything">
-    <meta name="author" content="Yifei Miao">	  
-    <meta name="viewport" content="width=device-width, initial-scale=0.6, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+    <meta name="author" content="Yifei Miao">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=0.6, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" /> -->
     <meta property="og:title" content="Miao Boring Page" />
     <meta property="og:description" content="A Boring Page" />
     <meta property="og:type" content="website" />
@@ -84,7 +84,7 @@
      .fontstyle3{
       -webkit-text-size-adjust: 100%;
       font-size: 16px;
-      color:rgba(100,100,100,1);
+      color:rgba(0,0,0,1);
       font-family: Arial;
       text-align:left;
       display:inline;
@@ -150,24 +150,25 @@
         <a href="http://www.ifmate.com">Error. 404 Not Found.</a>
       </div>
       <br>
-      <div class="fontstyle4">
-        <span><b>Service Code: </b></span><span>ifmate - </span>
-      </div><div class="fontstyle4" >
-       <span id="NumBe">
-           <script>
-            var Num1="";
-          for(var i=0;i<89;i++)
-           {
-            Num1+=Math.floor(Math.random()*10);
-           }
-           document.getElementById("NumBe").innerHTML=Num1;
-        </script></span>
+      <div class="fontstyle3">
+        <span><b>———————&nbsp;&nbsp;很抱歉，您要访问的页面不存在！&nbsp;&nbsp;———————</b></span>
       </div>
       <p>
-      <div class="fontstyle3">
-        <span>———————&nbsp;&nbsp;很抱歉，您要访问的页面不存在！&nbsp;&nbsp;———————</span>
-      </div>
-      <br><br>
+        <div class="fontstyle4">
+          <span><b>Service Code: </b></span><span>ifmate - </span>
+        </div><div class="fontstyle4" >
+         <span id="NumBe">
+             <script>
+              var Num1="";
+            for(var i=0;i<89;i++)
+             {
+              Num1+=Math.floor(Math.random()*10);
+             }
+             document.getElementById("NumBe").innerHTML=Num1;
+          </script></span>
+        </div>
+      </p>
+      <p>
       <div class="fontstyle5">
         <!-- <span>The Page is Lost <b>&nbsp;&nbsp;|&nbsp;&nbsp;</b> There Is Nothing Here</span> -->
         <!-- <br> -->
@@ -188,6 +189,12 @@
     </div>
   </body>
   <script>
+      var request = new XMLHttpRequest();
+      var url = 'http://www.ifmate.com/myf/visit.php';
+      request.open("GET",url,true);
+      
+      request.send();
+     
       window.onload = function(){
         document.body.style.backgroundColor="#ffffff";
     }
