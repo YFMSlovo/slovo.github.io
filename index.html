@@ -64,10 +64,19 @@
             -webkit-transition:all linear 0.10s;  
             -moz-transition:all linear 0.10s;  
             transition:all linear 0.10s;  
-              
             }  
            #start_click a:hover { background:rgba(100,100,100,1); }  
-        </style>  
+        </style>
+    <style>
+      #paint a{
+        font-size: 34px;
+        color:rgba(172,172,172,1);
+        font-family: Arial;
+        text-align:left;
+        display:inline;
+        text-decoration:none;  
+      }
+    </style>
   <style>  
     #login_click{ margin-top:32px; height:40px;}  
     #login_click a {  
@@ -145,10 +154,10 @@
   </head>
   <body text-align:center >
     <div class="centermain">
-      <div class="fontstyle1">
-        <span>Loading...Please Wait...</span>
+      <div id="paint">
+        <a href="./paint.html">Loading...Please Wait...</a>
       </div>
-      <br><br>
+      <br>
       <p>
         <div class="spinner">
           <div class="rect1"></div>
