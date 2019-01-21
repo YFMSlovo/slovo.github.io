@@ -60,6 +60,9 @@ thin.onclick = function(){
 thick.onclick = function(){
   lineWidth = 10
 }
+heavy.onclick = function(){
+  lineWidth = 20
+}
 
 /******/
 
