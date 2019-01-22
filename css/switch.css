@@ -1,0 +1,133 @@
+*, *:before, *:after {
+  transition: .2s ease-in-out;
+}
+
+html, body {
+  font-family: helvetica neue,helvetica,arial,sans-serif;
+  font-weight: 200;
+}
+
+#light-switch {
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+#light-switch:checked ~ #background {
+  background-color: #1d1d1d;
+}
+#light-switch:checked ~ #light-switch-label {
+  box-shadow: 0 2px 2px #bebebe;
+}
+#light-switch:checked ~ #light-switch-label .switch {
+  box-shadow: 0 10px 10px -5px #e6e6e6, 0 0 0 1px rgba(0, 0, 0, 0.1), 0 0 0 4px #ffffff, 0 0 0 5px rgba(0, 0, 0, 0.1);
+}
+#light-switch:checked ~ #light-switch-label .switch:before {
+  height: 75px;
+  top: 0px;
+  line-height: 75px;
+  background: #f0f0f0;
+  color: #b9b9b9;
+  text-shadow: 0 0 3px #bebebe;
+}
+#light-switch:checked ~ #light-switch-label .switch:after {
+  height: 70px;
+  bottom: 5px;
+  line-height: 70px;
+  background: #cacaca;
+  box-shadow: 0 5px 0 #9b9b9b;
+  color: #8f8f8f;
+  text-shadow: 0 0 0px transparent;
+}
+
+#light-switch-label {
+  position: absolute;
+  display: block;
+  height: 300px;
+  width: 200px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  margin: 10px auto 0 auto;
+  background-color: #ffffff;
+  border-radius: 10px;
+}
+#light-switch-label .switch {
+  cursor: pointer;
+  height: 150px;
+  width: 100px;
+  background: #ffffff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -75px 0 0 -50px;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 10px 10px -5px rgba(233, 219, 176, 0), 0 0 0 1px rgba(0, 0, 0, 0.1), 0 0 0 4px #ffffff, 0 0 0 5px rgba(0, 0, 0, 0.1);
+}
+#light-switch-label .switch:before {
+  content: 'OFF';
+  display: block;
+  position: absolute;
+  height: 70px;
+  text-align: center;
+  line-height: 70px;
+  width: 100px;
+  top: 5px;
+  left: 0;
+  background: #dadada;
+  color: #8f8f8f;
+  border-radius: 5px 5px 0 0;
+}
+#light-switch-label .switch:after {
+  content: 'ON';
+  display: block;
+  position: absolute;
+  height: 75px;
+  text-align: center;
+  line-height: 75px;
+  width: 100px;
+  bottom: 0;
+  left: 0;
+  background: #f0f0f0;
+  color: #b9b9b9;
+  text-shadow: 0 0 3px #bebebe;
+  border-radius: 0 0 5px 5px;
+}
+#light-switch-label .screw {
+  position: absolute;
+  height: 16px;
+  width: 16px;
+  border-radius: 100%;
+  left: 50%;
+  margin-left: -8px;
+  background: #dadada;
+  overflow: hidden;
+  box-shadow: inset 0 2px 0 rgba(0, 0, 0, 0.15);
+}
+#light-switch-label .screw:before {
+  content: '';
+  display: block;
+  position: absolute;
+  height: 100%;
+  width: 2px;
+  left: 50%;
+  margin-left: -1px;
+  background: rgba(0, 0, 0, 0.2);
+}
+#light-switch-label .screw:first-of-type {
+  top: 30px;
+}
+#light-switch-label .screw:last-of-type {
+  bottom: 30px;
+}
+
+#background {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: #eaeaea;
+  z-index: 1;
+}

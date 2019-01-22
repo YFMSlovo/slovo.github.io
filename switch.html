@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html lang="cn">
+<!-- 
+  you can't stop the signal.
+-->
+  <head>
+    <title>Switch</title>
+    <link rel="icon" href="favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+    <meta name="description" content="There is nothing, there is everything">
+    <meta name="author" content="Yifei Miao">
+    <meta name="viewport" content="width=device-width, initial-scale=0.6, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+    <meta property="og:title" content="Miao Boring Page" />
+    <meta property="og:description" content="A Boring Page" />
+    <meta property="og:type" content="website" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
+  <link rel="stylesheet" href="css/reset.min.css">
+  <link rel="stylesheet" href="css/switch.css">
+  <style>
+.k{
+  position: fixed;
+  width: 100px;
+  height: 30px;
+  top: 95%;
+  left: 95%;
+  padding: 20px;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+}
+    </style>
+</head>
+
+<body>
+    <div class="k">
+        <img src="./img/k.png">
+    </div>
+    <input type="checkbox" id="light-switch" />
+    <label for="light-switch" id="light-switch-label" >
+      <div class="screw"></div>
+      <div class="switch"></div>
+      <div class="screw"></div>
+    </label>
+    <div id="background"></div>
+</body>
+</html>
