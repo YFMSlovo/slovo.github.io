@@ -48,6 +48,16 @@
 		 margin:0 ;
      }
   </style>
+  <style>
+      #nothing a{
+        font-size: 28px;
+        color:rgba(172,172,172,1);
+        font-family: Arial;
+        text-align:left;
+        display: inline;
+        text-decoration:none;  
+      }
+    </style>
     <style>  
         #start_click{ margin-top:32px; height:40px;}  
         #start_click a {  
@@ -67,16 +77,6 @@
             }  
            #start_click a:hover { background:rgba(100,100,100,1); }  
         </style>
-    <style>
-      .loading{
-        font-size: 28px;
-        color:rgba(172,172,172,1);
-        font-family: Arial;
-        text-align:left;
-        display: inline;
-        text-decoration:none; 
-      }
-    </style>
   <style>  
     #login_click{ margin-top:32px; height:40px;}  
     #login_click a {  
@@ -153,11 +153,10 @@
     </style>
   </head>
   <body text-align:center >
-    <div class="centermain">
-      <div class="loading">
-        <span>&nbsp;Loading...Please Wait...</span>
-        <br>
-      </div>
+      <div class="centermain">
+          <div id="nothing">
+            <a href="./nothing.html">Loading...Please Wait...</a>
+          </div>
       <br>
       <p>
         <div class="spinner">
