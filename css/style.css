@@ -2,11 +2,8 @@ ul,ol{list-style: none;}
 *{margin:0;padding:0;}
 .k{
   position: fixed;
-  width: 100px;
-  height: 30px;
-  top: 8%;
-  left: 6%;
-  padding: 20px;
+  bottom: 5%;
+  right: 1%;
 }
 .icon {
   width: 1em; height: 1em;
