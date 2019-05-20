@@ -112,6 +112,31 @@
      }
   </style>
   <style>
+      #progress{
+          width: 482px;
+          height: 5px;
+          overflow: hidden;
+          background-color: rgba(200, 200, 200, 1);
+      }
+      #progress span {
+          display: inline-block;
+          width: 100%;
+          height: 20px;
+          background: rgba(0, 0, 0, 1); /* Old browsers */
+          text-align: center;
+          color:#fff;
+          -webkit-animation:load 5s infinite ease-in;
+      }
+      @-webkit-keyframes load{
+          0%{
+              width: 0%;
+          }
+          100%{
+              width:100%;
+          }
+      }
+  </style>
+  <style>
     #ifmate a{
       font-size: 50px;
       color:rgba(0,0,0,1);
@@ -170,6 +195,9 @@
           </script></span>
         </div>
       </p>
+      <div id="progress">
+        <span></span>
+      </div>
       <p>
       <div class="fontstyle5">
         <!-- <span>The Page is Lost <b>&nbsp;&nbsp;|&nbsp;&nbsp;</b> There Is Nothing Here</span> -->
