@@ -1,8 +1,8 @@
 ## Welcome to the boring Page
 
-He is a boring guy, do meaningless things,there is nothing.
+This person is a boring guy, always do boring things.
 
 ### Have fun
 
-If you are boring now, just open the boring page, and meditation...
+If you are boring now, just open the boring page...
 
