@@ -1,31 +1,22 @@
 <html>
   <head>
-    <title>文章生成器</title>
+    <title>Boring Word</title>
     <meta http-equiv="content-type" content="txt/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-BM8WXEWW3P"></script>
   </head>
   <body>
     <div id="主体">
-      <div id="标题">文章生成器</div>
+      <div id="标题">Boring Word</div>
       <div id="主题">
-        <span>主题</span>
-        <input value="一天掉多少根头发"></input>
-        <button onclick="生成文章()">生成</button>
+        <span>Key Word</span>
+        <input value="你有多么无聊"></input>
+        <button onclick="生成文章()">Go</button>
       </div>
       <div id="文章"></div>
     </div>
-    <div id="页脚">
-      <p>
-        网页版
-        <a class="链接" href="https://github.com/suulnnka/BullshitGenerator"><svg class="图标" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
-        @<a class="链接" href="https://www.zhihu.com/people/su-lan-qia">suulnnka</a>
-       </p>
-      <p>
-        原版
-        <a class="链接" href="https://github.com/menzi11/BullshitGenerator"><svg class="图标" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
-        @<a class="链接" href="https://www.zhihu.com/people/ke-meng-90">menzi11</a>
-      </p>
+    <div class="back">
+      <span id="back_click"><a href="./error.html">Back</a></span>
     </div>
   </body>
 </html>
@@ -342,22 +333,26 @@ function 生成文章(){
     }
     #主体{
       border: 2px solid #333333;
+      font-family: Arial;
       margin: 20px;
       padding: 20px;
       background: #f8f8f8;
     }
     #标题{
       font-size: 1.9rem;
+      font-family: Arial;
       line-height: 1.9rem;
       text-align: center;
     }
     #主题{
       text-align: center;
+      font-family: Arial;
       margin-top: 20px;
       font-size: 0px;
     }
     #主题 span{
       font-size: 1rem;
+      font-family: Arial;
       vertical-align: baseline;
       margin-left: 20px;
     }
@@ -379,14 +374,17 @@ function 生成文章(){
       margin: 0;
       vertical-align: top;
       font-size: 0.75rem;
+      font-family: Arial;
       background: #454545;
       color: #efefef;
     }
     #文章 div{
       margin-top: 20px;
+      font-family: Arial;
     }
     #页脚{
       margin: 20px;
+      font-family: Arial;
     }
     #页脚 p{
       margin: 5px;
@@ -407,5 +405,31 @@ function 生成文章(){
       margin-top: 4px;
     }
   }
-  
+  #back_click{ margin-top:32px; height:40px;}  
+  #back_click a {  
+      text-decoration:none;  
+      background:rgba(234,234,234,0);  
+      color:#333333;  
+            
+      padding: 10px 30px 10px 30px;  
+      font-size:16px;  
+      font-family: 微软雅黑,宋体,Arial,Helvetica,Verdana,sans-serif;  
+      font-weight:bold;  
+      border-radius:2px;
+      border-style: solid;
+      border-color: #333333;
+      border-width:2px;
+      
+      -webkit-transition:all linear 0.10s;  
+      -moz-transition:all linear 0.10s;  
+      transition:all linear 0.10s;  
+      } 
+</style>
+<style>
+.back{
+  position: fixed;
+  bottom: 2%;
+  right: 1%;
+  padding: 20px;
+}
 </style>
