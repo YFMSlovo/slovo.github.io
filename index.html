@@ -58,6 +58,13 @@
 		 text-align:center;
 		 margin:0 ;
      }
+     .fontstyle4{
+      font-size: 12px;
+      color:rgb(172,172,172);
+      font-family: Arial;
+      text-align:center;
+      display:inline
+     }
     </style>
 <style>
  input[type="text"], input[type="password"]{
@@ -124,7 +131,23 @@ input[type="submit"]:hover{
                Num1+=Math.floor(Math.random()*10);
               }
               document.getElementById("NumBe").innerHTML=Num1;
-           </script></span>
+              </script>
+           </span><span class="fontstyle4">&nbsp;(</span><span id="ant" class="fontstyle4">
+           <script>
+               var odiv = document.getElementById("ant");
+               var count = 59;
+               odiv.innerHTML=count;
+               var timer = null;
+               timer = setInterval(function () {
+               if (count >= 0) {
+                 count = count - 1;
+                 odiv.innerHTML = count;
+                 }
+               else {
+               clearInterval(timer);
+              }
+             }, 1000);</script>
+           </span><span class="fontstyle4">s</span><span class="fontstyle4">)</span>
           <br>
           <hr style="height:1px;border:none;border-top:1px solid #555555;" />
           <!-- <span>Invitation code: </span><br><br> -->
@@ -172,4 +195,23 @@ input[type="submit"]:hover{
                   }
               }
   </script>
+  <script>
+      window.onload = function () {
+      function sec(){
+        var count = 59;
+          odiv.innerHTML=count;
+        var timer = null;
+        timer = setInterval(function () {
+          if (count > 0) {
+            count = count - 1;
+            odiv.innerHTML = count;
+          }
+          else {
+            clearInterval(timer);
+          }
+        }, 1000);
+      }
+      setInterval(sec,60000);
+      }
+      </script>
 </html>
