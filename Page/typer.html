@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+*(c) Copyright 2011 Simone Masiero. Some Rights Reserved. 
+*This work is licensed under a Creative Commons Attribution-Noncommercial-Share Alike 3.0 License
+-->
+<head>
+    <title>Typer</title>
+    <link rel="icon" href="../favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../favicon.png" type="image/x-icon">
+    <meta name="description" content="There is nothing, there is everything">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <link href="../Typer/style.css" rel="stylesheet" type="text/css">
+    <textarea name="txt" rows="5" cols="20" style="display:none" autofocus="autofocus"></textarea>
+    <script src="../Typer/jquery.min.js" type="text/javascript"></script><style type="text/css"></style>
+    <script src="../Typer/script.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        Typer.speed = 10;//按下一个按键出多少个字符
+        Typer.file = '../Typer/kernel.txt';//读取的文件
+        Typer.init();
+    </script>
+<style>
+.back{
+    position: fixed;
+    bottom: 2%;
+    right: 2%;
+    padding: 10px;
+    z-index: 9999;
+    }
+    </style>
+<style>  
+        #back_click{ margin-top:32px; height:40px;}  
+        #back_click a {  
+            text-decoration:none;  
+            background:rgba(234,234,234,0);  
+            color:rgb(17, 189, 54);  
+                  
+            /* padding: 5px 10px 5px 10px;   */
+            font-size:16px;  
+            font-family: 微软雅黑,宋体,Arial,Helvetica,Verdana,sans-serif;  
+            font-weight:bold;  
+            border-radius:2px;
+            border-style: solid;
+            /* border-color: rgba(234,234,234,1); */
+            border-width:0px;
+            
+            -webkit-transition:all linear 0.10s;  
+            -moz-transition:all linear 0.10s;  
+            transition:all linear 0.10s;  
+            } 
+      </style> 
+</head>
+<body>
+    <div class="back">
+     <span id="back_click"><a href="./switch.html">Back</a></span>
+    </div>
+    <div>
+        <div>
+            <p style="color: rgba(167,10,10,1);">
+                <span>##############################################</span><br>
+                <span>####<span style="color: rgba(0,0,0,1);">####</span>###<span style="color: rgba(0,0,0,1);">####</span>##<span style="color: rgba(0,0,0,1);">####</span>####<span style="color: rgba(0,0,0,1);">####</span>######<span style="color: rgba(0,0,0,1);">#####</span>######</span><br>
+                <span>####<span style="color: rgba(0,0,0,1);">##</span>#<span style="color: rgba(0,0,0,1);">##</span>#<span style="color: rgba(0,0,0,1);">##</span>#<span style="color: rgba(0,0,0,1);">##</span>###<span style="color: rgba(0,0,0,1);">##</span>####<span style="color: rgba(0,0,0,1);">##</span>##<span style="color: rgba(0,0,0,1);">##</span>###<span style="color: rgba(0,0,0,1);">##</span>#####<span style="color: rgba(0,0,0,1);">##</span>####</span><br>
+                <span>####<span style="color: rgba(0,0,0,1);">##</span>##<span style="color: rgba(0,0,0,1);">###</span>##<span style="color: rgba(0,0,0,1);">##</span>###<span style="color: rgba(0,0,0,1);">##</span>###<span style="color: rgba(0,0,0,1);">##</span>####<span style="color: rgba(0,0,0,1);">##</span>##<span style="color: rgba(0,0,0,1);">##</span>#####<span style="color: rgba(0,0,0,1);">##</span>####</span><br>
+                <span>####<span style="color: rgba(0,0,0,1);">##</span>#######<span style="color: rgba(0,0,0,1);">##</span>###<span style="color: rgba(0,0,0,1);">##</span>###<span style="color: rgba(0,0,0,1);">########</span>##<span style="color: rgba(0,0,0,1);">##</span>#####<span style="color: rgba(0,0,0,1);">##</span>####</span><br>
+                <span>####<span style="color: rgba(0,0,0,1);">##</span>#######<span style="color: rgba(0,0,0,1);">##</span>##<span style="color: rgba(0,0,0,1);">####</span>##<span style="color: rgba(0,0,0,1);">##</span>####<span style="color: rgba(0,0,0,1);">##</span>####<span style="color: rgba(0,0,0,1);">#####</span>######</span><br>
+                <span>##############################################</span><br>
+            </p>
+            <p style="color: rgba(255,255,255,1);">
+                <span>——————————————————————————————————————————————————————————</span><br>
+                <span>Linux Version 5.3.10-longterm, Complied # 64 - Kali</span><br>
+                <span>4 1GHz Intel i9 Processors, 16Gb RAM, 19155 Bogomips Tatal</span><br>
+                <span>MIAOYIFEI.COM</span><br>
+                <span>This Application Need <span style="text-decoration:underline; color: rgba(255,196,0,1);">PC Environment<span></span>
+            </p>
+        </div>
+        <div>
+            <span><b>[LOGIN]&nbsp;UserName of Admin :</b></span><span style="color: rgba(255,255,255,1);">&nbsp;root</span><br>
+            <span><b>[LOGIN]&nbsp;PassWord for Admin :</b></span><br><br>
+            <span style="color: rgba(255,255,255,1);"><b>root@MIAO&nbsp;</b>~&nbsp;#&nbsp;Typing...</span>
+        </div>
+        <br>
+        <div id="console"></div>
+    </div>  
+    
+    <div style="height:40px"></div>
+</body>
+</html>

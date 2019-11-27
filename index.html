@@ -37,6 +37,7 @@
       font-family: Arial;
       text-align:center;
       display:inline;
+      text-decoration:none
      }
      .fontstyle2{
       font-size: 18px;
@@ -123,7 +124,7 @@ input[type="submit"]:hover{
   <body text-align:center >
     <div class="centermain">
         <div class="fontstyle1">
-          <span class="fontstyle1" style="font-weight:600;">MIAOYIFEI.COM</span>&nbsp;&nbsp;|&nbsp;&nbsp;<span class="fontstyle1">Invitation code: </span>
+          <a class="fontstyle1" style="font-weight:600;" href="./Page/v.html">MIAOYIFEI.COM</a>&nbsp;&nbsp;|&nbsp;&nbsp;<span class="fontstyle1">Invitation code: </span>
           <span id="NumBe" class="fontstyle1">
               <script>
                var Num1="";
@@ -155,7 +156,7 @@ input[type="submit"]:hover{
           <span class="fontstyle2">Life Is a Joke. It Always Takes Half and Keeps Half.</span>
         </div>
         <p>
-            <form method="get" action="begin.html" name="myform" >
+            <form method="get" action="./Page/begin.html" name="myform" >
                 <input type="text" class="text" value="MIAOYIFEI" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'MIAOYIFEI';}" >
                 <input type="password" id="password" name="password" class="loginInput" value="PASSWORD" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
                 <div class="submit">
@@ -188,7 +189,7 @@ input[type="submit"]:hover{
   <script language=javascript>
           function toopen(){
               if(document.getElementById("password").value==document.getElementById("NumBe").innerHTML*2 ){
-                     document.forms[0].action="begin.html";
+                     document.forms[0].action="/Page/begin.html";
                      return true;
                   }else{
                   alert("Wrong Password!")
