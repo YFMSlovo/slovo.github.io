@@ -24,20 +24,20 @@
     <script src="https://pv.sohu.com/cityjson?ie=utf-8"></script> 
     <style>
      .centermain {
-      width: 50%;
+      width: 460px;
       position: absolute;
       top: 40%;
       left: 50%;
       transform: translate(-50%, -50%);
-      text-align:center;
+      text-align:left;
      }
      .fontstyle1{
-      font-size: 24px;
+      font-size: 18px;
       color:rgba(100,100,100,1);
       font-family: Arial;
       text-align:center;
       display:inline;
-      text-decoration:none;
+      text-decoration:none
      }
      .fontstyle2{
       font-size: 18px;
@@ -69,11 +69,11 @@
      }
     </style>
 <style>
- input[type="text"]{
+ input[type="text"], input[type="password"]{
 	text-align:left;
 	position: relative;
-	width:70%;
-	padding:3%;
+	width:91.5%;
+	padding:4%;
 	background:rgb(223, 223, 223);
 	margin-bottom: 4%;
 	font-family: 'Open Sans', sans-serif;
@@ -86,7 +86,7 @@
 	border:1px solid rgb(223, 223, 223);
 	-webkit-appearance:none;
 }
- input[type="text"]:hover{
+ input[type="text"]:hover, input[type="password"]:hover{
  	border:1px solid #949494;
 	transition:0.5s;
 	-webkit-transition:0.5s;
@@ -96,25 +96,25 @@
  	
  }
 input[type="submit"]{
-	width: 20%;
+	width: 100%;
 	padding: 3%;
 	margin-bottom: 4%;
 	background: rgba(22,22,22,1);
 	font-family: 'Open Sans', sans-serif;
 	color: #ECECEC;
-	/* font-size: 20px; */
+	font-size: 20px;
 	outline: none;
 	border: none;
 	cursor: pointer;
-	font-weight:600;
+	font-weight:500;
 	border-radius: 5px;
-  font-size: 16px;
 	transition: 0.5s;
 	-webkit-appearance:none;
 	-webkit-transition: 0.5s;
 	-moz-transition: 0.5s;
 	-o-transition: 0.5s;
 	-ms-transition: 0.5s;
+  z-index: 9999;
 }
 input[type="submit"]:hover{
 	background:rgba(100,100,100,1);
@@ -124,16 +124,46 @@ input[type="submit"]:hover{
   </head>
   <body text-align:center >
     <div class="centermain">
-        <div>
-          <a class="fontstyle1" style="font-weight:600; text-align:center;" href="./Page/login.html">MIAOYIFEI.COM</a>
+        <div class="fontstyle1">
+          <a class="fontstyle1" style="font-weight:600;" href="./begin.html">MIAOYIFEI.COM</a>&nbsp;&nbsp;|&nbsp;&nbsp;<span class="fontstyle1">Invitation code: </span>
+          <span id="NumBe" class="fontstyle1">
+              <script>
+               var Num1="";
+             for(var i=0;i<5;i++)
+              {
+               Num1+=Math.floor(Math.random()*10);
+              }
+              document.getElementById("NumBe").innerHTML=Num1;
+              </script>
+           </span><span class="fontstyle4">&nbsp;(</span><span id="ant" class="fontstyle4">
+           <script>
+               var odiv = document.getElementById("ant");
+               var count = 59;
+               odiv.innerHTML=count;
+               var timer = null;
+               timer = setInterval(function () {
+               if (count >= 0) {
+                 count = count - 1;
+                 odiv.innerHTML = count;
+                 }
+               else {
+               clearInterval(timer);
+              }
+             }, 1000);</script>
+           </span><span class="fontstyle4">s</span><span class="fontstyle4">)</span>
+          <br>
+          <hr style="height:1px;border:none;border-top:1px solid #555555;" />
+          <!-- <span>Invitation code: </span><br><br> -->
+          <span class="fontstyle2">Life Is a Joke. It Always Takes Half and Keeps Half.</span>
         </div>
-        <br>
         <p>
-            <form  action="https://www.baidu.com/s" >
-              <input type="text" class="text" value="SAY HELLO" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'SAY HELLO';}" >&nbsp;&nbsp;<input type="submit" value="HOW" >
-            </form>
-              
+            <form  method="get" action="./v.html" name="myform" >
+              <input type="text" class="text" value="MIAOYIFEI" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'MIAOYIFEI';}" >
+              <input type="password" id="password" name="password" class="loginInput" value="PASSWORD" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
+              <div class="submit">
+              <input type="submit" value="LOGIN" onclick="return toopen();"> 
               </div>
+            </form>
         </p>
     </div> 
     <div class="fontstyle3" >
@@ -160,7 +190,7 @@ input[type="submit"]:hover{
   <script language=javascript>
           function toopen(){
               if(document.getElementById("password").value == document.getElementById("NumBe").innerHTML*1 ){
-                     document.forms[0].action="/Page/begin.html";
+                     document.forms[0].action="./v.html";
                      return true;
                   }else{
                   alert("Wrong Password!")
