@@ -5,7 +5,7 @@
   you can't stop the signal.
 -->
   <head>
-    <title>LOGIN</title>
+    <title>Miao</title>
     <link rel="icon" href="favicon.png" type="image/x-icon">
     <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
     <meta name="description" content="There is nothing, there is everything">
@@ -130,7 +130,8 @@ input[type="submit"]:hover{
         <br>
         <p>
             <form  action="https://www.baidu.com/s" >
-              <input type="text" class="text" value="SAY HELLO" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'SAY HELLO';}" >&nbsp;&nbsp;<input type="submit" value="HOW" >
+              <input type="text" name = "wd" class="text" value="SAY HELLO" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'SAY HELLO';}" >&nbsp;&nbsp;
+              <input type="submit" method="get" value="HOW" name="wd" >
             </form>
               
               </div>
@@ -144,47 +145,4 @@ input[type="submit"]:hover{
       </script></P>
   </div>
   </body>
-  <script>
-      window.onload = function(){
-}
-    setInterval(test1, 60000);
-      function test1(){
-          var Num1="";
-        for(var i=0;i<5;i++)
-         {
-          Num1+=Math.floor(Math.random()*10);
-         }
-         document.getElementById("NumBe").innerHTML=Num1;
-    }
-  </script>
-  <script language=javascript>
-          function toopen(){
-              if(document.getElementById("password").value == document.getElementById("NumBe").innerHTML*1 ){
-                     document.forms[0].action="/Page/begin.html";
-                     return true;
-                  }else{
-                  alert("Wrong Password!")
-                  return false;
-                  }
-              }
-  </script>
-  <script>
-      window.onload = function () {
-      function sec(){
-        var count = 59;
-          odiv.innerHTML=count;
-        var timer = null;
-        timer = setInterval(function () {
-          if (count > 0) {
-            count = count - 1;
-            odiv.innerHTML = count;
-          }
-          else {
-            clearInterval(timer);
-          }
-        }, 1000);
-      }
-      setInterval(sec,60000);
-      }
-      </script>
 </html>
