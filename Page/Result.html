@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Miao's Result</title>
+<style>
+body{
+  margin:0; 
+  padding:0; 
+  overflow-y:hidden
+}
+</style>
+<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+<script type="text/javascript"> 
+window.onerror=function(){return true;} 
+$(function(){ 
+  headerH = 0;  
+  var h=$(window).height();
+  $("#xxx").height((h-headerH)+"px"); 
+});
+</script>
+</head>
+<body>
+  <iframe id="xxx" frameborder="0" style="width:100%;"></iframe>
+<script type="text/javascript">
+  function getArgs() { 
+      var args = {};
+          var query = location.search.substring(1);
+           // Get query string
+      var pairs = query.split("&"); 
+                      // Break at ampersand
+       for(var i = 0; i < pairs.length; i++) {
+              var pos = pairs[i].indexOf('=');
+               // Look for "name=value"
+              if (pos == -1) continue;
+                      // If not found, skip
+                  var argname = pairs[i].substring(0,pos);// Extract the name
+                  var value = pairs[i].substring(pos+1);// Extract the value
+                  value = decodeURIComponent(value);// Decode it, if needed
+                  args[argname] = value;
+                          // Store as a property
+          }
+      return args;// Return the object 
+   }
+  var str =getArgs();
+  // alert(str['q']);//和input的name对应取值,
+  if (str == null){
+    document.getElementById("xxx").src = "https://www.baidu.com"
+  }
+  else{
+    document.getElementById("xxx").src = "https://www.baidu.com/s?wd=" + str['wd']
+  }
+  </script>
+</body>
+</html>
