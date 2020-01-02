@@ -135,9 +135,9 @@
         </div>
         <br>
         <p>
-            <form  action="https://www.baidu.com/s" >
+            <form  action="./Page/Result.html" >
               <input type="text" name = "wd" id="inputText" autocomplete="off" target="_blank" value="HELLO" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'HELLO';}" >&nbsp;
-              <input type="submit" id="inputSubmit" method="get" value="HOW" name="wd" >
+              <input type="submit" id="inputSubmit" method="get" value="HOW" name="cd" >
             </form>
             <ul id="ul">
             </ul>
@@ -168,7 +168,7 @@
         var str = '';
         if (list.length > 0) {
             list.forEach(function (ele, index) {
-                str += '<li><a href ="https://www.baidu.com/s?wd=' + ele + '">' + ele + '</li>';
+                str += '<li><a href ="./Page/Result.html?wd=' + ele + '">' + ele + '</li>';
             })
             oUl.innerHTML = str;
         } else {
