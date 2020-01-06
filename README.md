@@ -2,7 +2,11 @@
 
 This person is a boring guy, always do boring things.
 
-### Have fun
+### Display URL
+
+[Boring Page](https://www.miaoyifei.com) 
+
+### Have Fun
 
 If you are boring now, just open the boring page...
 
