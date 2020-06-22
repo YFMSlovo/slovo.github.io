@@ -128,6 +128,26 @@
 	            background:rgba(100,100,100,1);
             	color:#fff;
             }
+			.sul {
+            /* border: 1px solid #ddd; */
+            border-top: 0;
+            margin:0;
+            padding-left:24px;
+            position: absolute;
+            /* list-style:none; */
+            text-align:left;
+        }
+            .sul a{
+            display: inline-block;
+            font-family: Arial,"Microsoft YaHei","微软雅黑","MicrosoftJhengHei","华文细黑","STHeiti","MingLiu";
+            font-size: 16px;
+            width: 100%;
+            text-decoration: none;
+            color: rgb(180, 180, 180) ;
+            outline: none;
+            height: 1px;
+            /* line-height: 8px; */
+        }
 		</style>
 	</head>
 	<body>
@@ -154,7 +174,6 @@
 							</td>
 							<td id="from_box">
 								<form id="from_ecosia" style="display:block" action="https://www.ecosia.org/search" target="_blank" method="get">
-									<input name="" type="hidden" value="ecosia" />
 									<input type="text" name = "q" id="inputText" autocomplete="off" target="_blank" value="HELLO" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'HELLO';}" >&nbsp;
 									<input type="submit" class="button" id="inputSubmit1" method="get" value="FIND" onMouseOver="this.style.opacity='1'" onMouseOut="this.style.opacity='0.7'">
 								</form>
