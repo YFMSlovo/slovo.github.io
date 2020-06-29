@@ -207,8 +207,8 @@
 	</head>
 	<body>
 		<div style="text-align:right;">
-			<a type="button" onclick="popped()" class="fontstyle3">OPEN WITH MOBILE</a>
-			<span class="fontstyle4">&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</span>
+			<a type="button" onclick="popped()" class="fontstyle3" id="owm1">OPEN WITH MOBILE</a>
+			<span class="fontstyle4" id="owm2">&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</span>
 			<a class="fontstyle3" href="./Page/changelog.html">CHANGELOG</a>
 		</div>
 		<div class="centermain">
@@ -368,7 +368,17 @@
 				document.getElementById('mask').style.display="none";
 				document.getElementById('header').style.display="none";
 			}
-		</script>		
+		</script>
+        <script type="text/javascript">
+		    if ((navigator.userAgent.match(/(iPhone|iPod|Android|ios|iPad)/i))) {    //手机端
+			document.getElementById('owm1').style.display="none";
+			document.getElementById('owm2').style.display="none";
+	    	} else {
+			//跳到电脑端
+			document.getElementById('owm1').style.display="";
+			document.getElementById('owm2').style.display="";
+		}
+		</script>	
 	</body>
 
 </html>
