@@ -30,7 +30,42 @@
           color: #a0a0a0;
           background: #ffffff;
         }
-        
+        .top {
+          top: 0px;
+          width: 100%;
+          height: 48px;
+          position: fixed;
+          z-index: 9999;
+          background: #f3f3f3;
+        }
+        .fontstyle1{
+          line-height: 48px;
+          font-size: 18px;
+          color:rgba(100,100,100,1);
+          font-family: Arial,"Microsoft YaHei","微软雅黑","MicrosoftJhengHei","华文细黑","STHeiti","MingLiu";
+          text-align:center;
+          display:inline;
+          text-decoration:none;
+          font-weight: 1000;
+        }
+        .fontstyle2{
+          line-height: 48px;
+          font-size: 18px;
+          font-family: Arial,"Microsoft YaHei","微软雅黑","MicrosoftJhengHei","华文细黑","STHeiti","MingLiu";
+          text-align:center;
+          display:inline;
+          text-decoration:none;
+          font-weight: 500;
+          color: #c0c0c0;
+        }
+        .profilex{
+          position: fixed;
+          width: 26px;
+          height: 26px;
+          border-radius:20px;
+          top: 9px;
+          display: inline-block;
+        }
         .tabs {
           width: 100%;
           float: none;
@@ -99,11 +134,23 @@
         </style>
 </head>
 <body>
-    <ul class="tabs">
+    <div class="top">
+      <div class="fontstyle1">&nbsp;&nbsp;MIAOYIFEI.COM</div>
+      <div class="fontstyle2" style="float: right;">
+        <span class="fontstyle2"></span>
+            <img class="profilex" src="./favicon.png">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MYF&nbsp;&nbsp;|&nbsp;&nbsp;
+        </span>
+        <a class="fontstyle2" style="color:rgb(60, 60, 60);" href="./login.html">LOGOUT&nbsp;&nbsp;</a>
+      </div>
+    </div>
+    <div>
+      <div style="height: 50px;"></div>
+      <ul class="tabs">
         <li>
         <input type="radio" name="tabs" id="tab1" checked />
         <label for="tab1">周易</label>
-        <hr style="height:1px;border:none;border-top:1px solid #c5c5c5;" />
+        <hr style="height:1px;border:none;border-top:1px solid #e5e5e5;" />
         <div id="tab-content1" class="tab-content">
         <p>
             <P style="font-size: 18;">
@@ -162,7 +209,7 @@
         <li>
         <input type="radio" name="tabs" id="tab2" />
         <label for="tab2">五行干支</label>
-        <hr style="height:1px;border:none;border-top:1px solid #c5c5c5;" />
+        <hr style="height:1px;border:none;border-top:1px solid #e5e5e5;" />
         <div id="tab-content2" class="tab-content">
         <p>
           <P style="font-size: 18;">
@@ -216,7 +263,7 @@
         <li>
             <input type="radio" name="tabs" id="tab3" />
             <label for="tab3">五运</label>
-            <hr style="height:1px;border:none;border-top:1px solid #c5c5c5;" />
+            <hr style="height:1px;border:none;border-top:1px solid #e5e5e5;" />
             <div id="tab-content2" class="tab-content">
             <p>
               <P style="font-size: 18;">
@@ -276,7 +323,7 @@
             <li>
               <input type="radio" name="tabs" id="tab4" />
               <label for="tab4">天时</label>
-              <hr style="height:1px;border:none;border-top:1px solid #c5c5c5;" />
+              <hr style="height:1px;border:none;border-top:1px solid #e5e5e5;" />
               <div id="tab-content2" class="tab-content">
               <p>
                 <P style="font-size: 18;">
@@ -317,7 +364,7 @@
             <li>
               <input type="radio" name="tabs" id="tab5" />
               <label for="tab5">地理</label>
-              <hr style="height:1px;border:none;border-top:1px solid #c5c5c5;" />
+              <hr style="height:1px;border:none;border-top:1px solid #e5e5e5;" />
               <div id="tab-content2" class="tab-content">
               <p>
                 <P style="font-size: 18;">
@@ -362,7 +409,7 @@
             <li>
               <input type="radio" name="tabs" id="tab6" />
               <label for="tab6">堪舆</label>
-              <hr style="height:1px;border:none;border-top:1px solid #c5c5c5;" />
+              <hr style="height:1px;border:none;border-top:1px solid #e5e5e5;" />
               <div id="tab-content2" class="tab-content">
               <p>
                 <P style="font-size: 18;">
@@ -503,5 +550,7 @@
               </div>
               </li>
         </ul>
+    </div>
+    
 </body>
 </html>
