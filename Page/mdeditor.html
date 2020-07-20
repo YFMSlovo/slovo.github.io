@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8" />
+        <title>Markdown Editor</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="icon" href="../favicon.png" type="image/x-icon">
+        <link rel="shortcut icon" href="../favicon.png" type="image/x-icon">
+        <meta name="description" content="There is nothing, there is everything">
+        <meta name="author" content="Yifei Miao">
+        <meta name="viewport" content="width=device-width, initial-scale=0.6, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+        <meta property="og:title" content="Miao Boring Page" />
+        <meta property="og:description" content="A Boring Page" />
+        <meta property="og:type" content="website" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="apple-touch-icon-precomposed" sizes="57x57" href="../img/ico/icon-57.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../img/ico/icon-72.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../img/ico/icon-114.png">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../img/ico/icon-144.png">
+        <link rel="stylesheet" href="../mdeditor/css/style.css" />
+        <link rel="stylesheet" href="../mdeditor/css/editormd.css" />
+    </head>
+    <body>
+        <div id="layout">
+            <header>
+                <h1>Markdown Editor</h1>
+            </header>
+            <div id="test-editormd">
+                <textarea style="display:none;">[TOC]
+
+#### A Instant Editor
+
+- TeX (Based on KaTeX);
+- Emoji;
+- Task lists;
+- HTML tags decode;
+- Flowchart and Sequence Diagram;
+
+#### Thanks TO
+- Original Author : pandao
+- Github : https://github.com/pandao/editor.md
+
+#### Dependents
+
+- [CodeMirror](http://codemirror.net/ "CodeMirror")
+- [marked](https://github.com/markedjs/marked "marked")
+- [jQuery](http://jquery.com/ "jQuery")
+- [FontAwesome](http://fontawesome.io/ "FontAwesome")
+- [github-markdown.css](https://github.com/sindresorhus/github-markdown-css "github-markdown.css")
+- [KaTeX](http://khan.github.io/KaTeX/ "KaTeX")
+- [prettify.js](http://code.google.com/p/google-code-prettify/ "prettify.js")
+- [Rephael.js](http://raphaeljs.com/ "Rephael.js")
+- [flowchart.js](http://adrai.github.io/flowchart.js/ "flowchart.js")
+- [sequence-diagram.js](http://bramp.github.io/js-sequence-diagrams/ "sequence-diagram.js")
+- [Prefixes.scss](https://github.com/pandao/prefixes.scss "Prefixes.scss")
+
+#### License
+- The MIT License.
+
+</textarea>
+            </div>
+        </div>
+        <script src="../mdeditor/js/jquery.min.js"></script>
+        <script src="../mdeditor/js/editormd.min.js"></script>
+        <script type="text/javascript">
+			var testEditor;
+
+            $(function() {
+                testEditor = editormd("test-editormd", {
+                    width   : "90%",
+                    height  : "10%",
+                    syncScrolling : "single",
+                    path    : "../mdeditor/lib/"
+                });
+            });
+        </script>
+    </body>
+</html>
