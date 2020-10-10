@@ -1,12 +1,11 @@
-## Welcome to the boring Page
+# MIAO
 
-This person is a boring guy, always do boring things.
+A boring pag, It's of no use.
 
-### Display URL
+### Display UR
 
-[Boring Page](https://www.miaoyifei.com) 
+[MIAO](https://www.miaoyifei.com) 
 
 ### Have Fun
 
-If you are boring now, just open the boring page...
-
+There are many hidden buttons to go to the new page, but many designs of this website violate design principles, need to give up common operating ideas to use the website.
