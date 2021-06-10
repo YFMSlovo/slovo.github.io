@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>MIAO's Home Page</title>
+		<title>MIAO</title>
 		<link rel="icon" href="favicon.png" type="image/x-icon">
 		<link rel="shortcut icon" href="favicon.png" type="image/x-icon">
 		<meta name="description" content="There is nothing, there is everything">
@@ -207,7 +207,8 @@
 	</head>
 	<body>
 		<div style="text-align:right;">
-			<a type="button" onclick="popped()" class="fontstyle3" id="owm1">OPEN WITH MOBILE</a>
+			<br>
+			<a type="button" onclick="popped()" class="fontstyle3" id="owm1" >OPEN WITH MOBILE</a>
 			<span class="fontstyle4" id="owm2">&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</span>
 			<a class="fontstyle3" href="./Page/changelog.html">CHANGELOG</a>
 		</div>
@@ -358,6 +359,7 @@
 			}
 		</script>
 		<script type="text/javascript">
+		    // 手机端隐藏“手机打开”弹窗
 			document.getElementById('mask').style.display="none";
 			document.getElementById('header').style.display="none";
 			function popped(){
@@ -378,7 +380,10 @@
 			document.getElementById('owm1').style.display="";
 			document.getElementById('owm2').style.display="";
 		}
-		</script>	
+		</script>
+		<script>
+			
+		</script>
 	</body>
 
 </html>
