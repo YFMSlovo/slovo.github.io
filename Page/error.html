@@ -57,10 +57,16 @@
      .centermain {
       -webkit-text-size-adjust: 100%;
       position: absolute;
-      width: 520px;
+      width: 500px;
+      height: 290px;
+      border: 50px solid #fff;
       top: 40%;
       left: 50%;
       transform: translate(-50%, -50%);
+      background-color: #fff;
+      border-radius: 4px;      
+				-moz-border-radius: 4px;      
+				-webkit-border-radius: 4px;
      }
      .fontstyle1{
       -webkit-text-size-adjust: 100%;
@@ -238,7 +244,7 @@
              }
              document.getElementById("NumBe").innerHTML=Num1;
         }
-        setInterval(test2, 60000);
+        setInterval(test2, 10000);
           function test2(){
 		         var color = '#'+Math.floor(Math.random()*0xffffff).toString(16);
 		         document.body.style.backgroundColor=color;
