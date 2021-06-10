@@ -93,22 +93,39 @@
                 text-align:center;
 				border-radius: 6px;
 				z-index:4;
-				opacity:0.6;
+				opacity:0.8;
+			}
+			.circle{
+				position: absolute;
+				top: 20px; 
+				left: 20px;
+				width: 50px;      
+				height: 50px;
+				background-color:rgba(255,255,255,0.2);      
+				border-radius: 50%;      
+				-moz-border-radius: 50%;      
+				-webkit-border-radius: 50%;
 			}
 		   </style>
 	</head>
 	<body>
-		<div class="centermain" id="pc">
-			<a class="fontstyle3" href="./TrueIndex.html">扫码用手机打开 / SCAN QRCODE</a><br><br><br><br>
-			<img src="./img/MobileIndexQr.png" class="qr">
+		<a type="button" onclick="pcb1()" id="pc1"><div class="circle"></div></a>
+		<a type="button" onclick="pcb2()" id="pc2"><div class="circle"></div></a>
+		<a type="button" onclick="phb1()" id="ph1"><div class="circle"></div></a>
+		<a type="button" onclick="phb2()" id="ph2"><div class="circle"></div></a>
+		<div class="centermain">
+			<a class="fontstyle3" href="./TrueIndex.html" id="pc3">扫码用手机打开 / SCAN QRCODE</a><br><br><br>
+			<img src="./img/MobileIndexQr.png" class="qr" id="pc4"><br><br>
 		</div>
-		<div class="centermain" id="phone">
-			<a class="fontstyle5" href="./TrueIndex.html">
+		<div class="centermain">
+			<a class="fontstyle5" href="./TrueIndex.html" id="ph3">
 			<P>
 				<span class="fontstyle3">请使用电脑浏览&nbsp;miaoyifei.com</span>
 				<br>
 				<br>
 				<span class="fontstyle3">Please Browse On Computer</span>
+				<br>
+				<br>
 			</P>
 	    	</a>
 		</div>
@@ -151,14 +168,52 @@
 		  }
 	  }
 	</script>
+	<script type="text/javascript">
+		// 电脑端按钮
+		document.getElementById('pc1').style.display="";
+		document.getElementById('pc2').style.display="none";
+		document.getElementById('pc3').style.display="none";
+		document.getElementById('pc4').style.display="none";
+		function pcb1(){
+			document.getElementById('pc1').style.display="none";
+			document.getElementById('pc2').style.display="";
+			document.getElementById('pc3').style.display="";
+			document.getElementById('pc4').style.display="";
+		}
+		function pcb2(){
+			document.getElementById('pc1').style.display="";
+			document.getElementById('pc2').style.display="none";
+			document.getElementById('pc3').style.display="none";
+			document.getElementById('pc4').style.display="none";
+		}
+	</script>
+		<script type="text/javascript">
+			// 手机端按钮
+			document.getElementById('ph1').style.display="";
+			document.getElementById('ph2').style.display="none";
+			document.getElementById('ph3').style.display="none";
+			document.getElementById('ph4').style.display="none";
+			function phb1(){
+				document.getElementById('ph1').style.display="none";
+				document.getElementById('ph2').style.display="";
+				document.getElementById('ph3').style.display="";
+				document.getElementById('ph4').style.display="";
+			}
+			function phb2(){
+				document.getElementById('ph1').style.display="";
+				document.getElementById('ph2').style.display="none";
+				document.getElementById('ph3').style.display="none";
+				document.getElementById('ph4').style.display="none";
+			}
+		</script>
     <script type="text/javascript">
 		if ((navigator.userAgent.match(/(iPhone|iPod|Android|ios|iPad)/i))) {    //跳到手机端
-			document.getElementById('phone').style.display="";
-			document.getElementById('pc').style.display="none";
+			document.getElementById('ph1').style.display="";
+			document.getElementById('pc1').style.display="none";
 		} else {
 			//跳到电脑端
-			document.getElementById('phone').style.display="none";
-			document.getElementById('pc').style.display="";
+			document.getElementById('ph1').style.display="none";
+			document.getElementById('pc1').style.display="";
 		}
 		</script>
 </html>
