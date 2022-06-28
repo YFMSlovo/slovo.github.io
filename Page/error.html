@@ -61,7 +61,7 @@
       height: 290px;
       border: 40px solid #fff;
       border-left: 50px solid #fff;
-	border-bottom: 60px solid #fff;
+      border-bottom: 60px solid #fff;
       top: 40%;
       left: 50%;
       transform: translate(-50%, -50%);
@@ -97,7 +97,7 @@
       -webkit-text-size-adjust: 100%;
       font-size: 16px;
       color:rgba(0,0,0,1);
-      font-family: Arial,"Microsoft YaHei","微软雅黑","MicrosoftJhengHei","华文细黑","STHeiti","MingLiu";
+      font-family: "Arial","Microsoft YaHei","微软雅黑","MicrosoftJhengHei","华文细黑","STHeiti","MingLiu";
       text-align:left;
       display:inline;
      }
@@ -106,7 +106,7 @@
       width: 520px;
       font-size: 8px;
       color:rgba(100,100,100,1);
-      font-family: Arial;
+      font-family: "Arial";
       text-align:left;
       display:inline
      }
@@ -195,7 +195,7 @@
          <span id="NumBe">
              <script>
               var Num1="";
-            for(var i=0;i<88;i++)
+            for(var i=0;i<72;i++)
              {
               Num1+=Math.floor(Math.random()*10);
              }
@@ -240,13 +240,13 @@
         setInterval(test1, 10000);
           function test1(){
               var Num1="";
-            for(var i=0;i<88;i++)
+            for(var i=0;i<72;i++)
              {
               Num1+=Math.floor(Math.random()*10);
              }
              document.getElementById("NumBe").innerHTML=Num1;
         }
-        setInterval(test2, 60000);
+        setInterval(test2, 10000);
           function test2(){
 		         var color = '#'+Math.floor(Math.random()*0xffffff).toString(16);
 		         document.body.style.backgroundColor=color;
