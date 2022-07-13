@@ -66,7 +66,7 @@
         .fontstyle2{
 			position: fixed;
 				font-size: 10px;
-				color:#000000;
+				color:#fff;
 				font-family: Arial;
 				text-align:center;
 				width: 500px;
@@ -119,11 +119,17 @@
         window.onload = function(){
             var color = '#'+Math.floor(Math.random()*0xffffff).toString(16);
             document.getElementById('run').style.backgroundColor=color;
+            document.body.style.backgroundColor='#'+Math.floor(Math.random()*0xffffff).toString(16);;
     };
          var color2 = document.getElementById('run');
          color2.onmouseover=function(){
             this.style.backgroundColor='#'+Math.floor(Math.random()*0xffffff).toString(16);
          }
+         setInterval(test2, 10000);
+      function test2(){
+         var color = '#'+Math.floor(Math.random()*0xffffff).toString(16);
+         document.body.style.backgroundColor=color;
+    }
         </script>
 </body>
 </html>
