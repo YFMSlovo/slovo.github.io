@@ -24,7 +24,7 @@
         .container{
             /* position: relative; */
             width: 100%;
-            height: 350px;
+            height: 250px;
             left: 0px;
         }
         .ft {
@@ -71,7 +71,7 @@
             .centermain {
             -webkit-text-size-adjust: 100%;
             position: absolute;
-            width: 600px;
+            width: 1100px;
             height: 370px;
             top: 50%;
             left: 50%;
@@ -83,14 +83,14 @@
      }
             .fontstyle1{
             /* font-size: 300px; */
-            color:rgba(255, 255, 255, 0.5);
+            /* color:rgba(255, 255, 255, 0.5); */
             font-family: Arial;
             text-align:left;
             margin: -20px;
-            line-height: 200px;
+            /* line-height: 200px; */
             display:inline;
             text-decoration:none;  
-            height: 300px;
+            height: 271px;
            }
         .fontstyle2{
 			position: fixed;
@@ -120,8 +120,10 @@
           
      }
      .img{
-        width: 251px;
-        height: 279px;
+        width: 231px;
+        height: 259px;
+     }
+     .imaged{
         position: absolute;
         top: 50%;
         left: 50%;
@@ -132,11 +134,26 @@
 <body style="background-color:#e7e7e7 ;">
     <div class="centermain">
         <div class="fontstyle1">
-            <script>
-                var m=64;
-                var n=Math.floor(Math.random()*m+1)
-                document.write("<img src=./img/gua/"+ n +".png class=img>")
-            </script>
+            <div class="imaged">
+                <script>
+                   var d = new Date();
+                   var years = d.getFullYear();
+                   var month = d.getMonth()+1;
+                   var days = d.getDate();
+                   var yd = Math.floor(years+2697-3-39)%60;
+                   var ud = Math.floor(month) % 2+ Math.floor(days)% 9;
+                   var dd = Math.floor(month+days) % (5)
+                   var gd = Math.floor(years+month+days)%45;
+                   var n = (ud+yd+dd+gd)%64+1;
+                    document.write("<img src=./img/gua/"+ n +".png class=img>")
+                </script>
+                &nbsp;
+                <script>
+                    var m=64;
+                    var n=Math.floor(Math.random()*m+1)
+                    document.write("<img src=./img/gua/"+ n +".png class=img>")
+                </script>
+            </div>
         </div>
         <span id="logInfo" class="fontstyle3"></span>
     </div>
