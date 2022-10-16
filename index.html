@@ -15,7 +15,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="./img/ico/icon-72.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="./img/ico/icon-114.png">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="./img/ico/icon-144.png">
-<!--     <embed src="music/rain.mp3" hidden="true" autostart="true" loop="true" width="0px" height="0px">  -->
+    <!-- <embed src="music/rain.mp3" hidden="true" autostart="true" loop="true" width="0px" height="0px">  -->
     <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
     <script src="http://api.duoshitong.com/"></script>
     <script src="https://pv.sohu.com/cityjson?ie=utf-8"></script> 
@@ -140,11 +140,12 @@
                    var years = d.getFullYear();
                    var month = d.getMonth()+1;
                    var days = d.getDate();
-                   var yd = Math.floor(years+2697-3-39)%60;
-                   var ud = Math.floor(month) % 2+ Math.floor(days)% 9;
-                   var dd = Math.floor(month+days) % (5)
-                   var gd = Math.floor(years+month+days)%45;
-                   var n = (ud+yd+dd+gd)%64+1;
+                   var yd = Math.floor(years+2697-3-39)%60; //取年
+                   var ud = Math.floor(month) % 2+ Math.floor(days)% 3; //以月取阴，以日取阳
+                   var sd = Math.floor(month+days) % 8 + Math.floor(month+days) % 9; //取阴阳至道
+                   var dd = Math.floor(month+days) % 5; //居于中和
+                   var gd = Math.floor(years+month+days)*(1+49)%49;//大衍之数五十，其用四十有九
+                   var n = (ud+yd+dd+sd+gd)%64+1;
                     document.write("<img src=./img/gua/"+ n +".png class=img>")
                 </script>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
