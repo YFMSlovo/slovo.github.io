@@ -8,4 +8,6 @@ A boring pag, It's of no use.
 
 ### Have Fun
 
-There are many hidden buttons to go to the new page, but many designs of this website violate design principles, need to give up common operating ideas to use the website.
+There are many hidden buttons to go to the new page, but many designs of this website violate design principles, need to give up common ideas to use the website.
+---
+有点功能，但不多
