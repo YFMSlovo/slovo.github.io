@@ -1,245 +1,233 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>MIAO</title>
-    <link rel="icon" href="favicon.png" type="image/x-icon">
-    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
-    <meta name="description" content="There is nothing, there is everything">
-    <meta name="author" content="Yifei Miao">
-    <meta name="viewport" content="width=device-width, initial-scale=0.6, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
-    <meta property="og:title" content="Miao Boring Page" />
-    <meta property="og:description" content="A Boring Page" />
-    <meta property="og:type" content="website" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="./img/ico/icon-57.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="./img/ico/icon-72.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="./img/ico/icon-114.png">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="./img/ico/icon-144.png">
-    <!-- <embed src="music/rain.mp3" hidden="true" autostart="true" loop="true" width="0px" height="0px">  -->
-    <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
-    <script src="http://api.duoshitong.com/"></script>
-    <script src="https://pv.sohu.com/cityjson?ie=utf-8"></script> 
-    <title>MIAO</title>
-    <style>
-        .container{
-            /* position: relative; */
-            width: 100%;
-            height: 250px;
-            left: 0px;
-        }
-        .ft {
-            position: absolute;
-            bottom: 0%;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        .btn-group {
-            float: right;
-            left: 0px;
-        }
-        button {
-            cursor: pointer;
-        }
-        .run {
-            position: absolute;
-            left: 0px;
-            bottom: 100px;
-			width: 60px;
-			height: 60px;
-			border-radius: 50%;
-			-moz-border-radius: 50%;      
-			-webkit-border-radius: 50%;
-            border: 0px;
-            left: 50%;
-            background-color: #000;
-				transform: translateX(-50%);
-        }
-        .circle{
-				position: absolute;
-				bottom: 100px; 
-				left: 50%;
-				transform: translateX(-50%);
-				width: 57px;      
-				height: 57px;
-				background-color:rgba(250, 250, 250, 0.5);      
-				border-radius: 50%;      
-				-moz-border-radius: 50%;
-				-webkit-border-radius: 50%;
-                border:1px solid rgba(210, 210, 210, 0.5);
-                z-index: -1;
+<html>
+	<head>
+		<title>MIAO</title>
+		<link rel="icon" href="favicon.png" type="image/x-icon">
+		<link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+		<meta name="description" content="There is nothing, there is everything">
+		<meta name="author" content="Yifei Miao">
+		<meta name="viewport" content="width=device-width, initial-scale=0.6, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+		<meta property="og:title" content="Miao Boring Page" />
+		<meta property="og:description" content="A Boring Page" />
+		<meta property="og:type" content="website" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="apple-touch-icon-precomposed" sizes="57x57" href="./img/ico/icon-57.png">
+		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="./img/ico/icon-72.png">
+		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="./img/ico/icon-114.png">
+		<link rel="apple-touch-icon-precomposed" sizes="144x144" href="./img/ico/icon-144.png">
+		<embed src="music/rain.mp3" hidden="true" autostart="true" loop="true" width="0px" height="0px"> 
+		<!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
+		<script src="https://pv.sohu.com/cityjson?ie=utf-8"></script> 
+		<style>
+			body{
+            /* 加载背景图 */
+            background-image: url(https://open.saintic.com/api/bingPic/);
+			/* 加载背景图-随机 */
+			/* background-image: url(https://api.kdcc.cn/img/rand.php); */
+            /* 背景图垂直、水平均居中 */
+            background-position: center center;
+            /* 背景图不平铺 */
+            background-repeat: no-repeat;
+            /* 当内容高度大于图片高度时，背景图像的位置相对于viewport固定 */
+            background-attachment: fixed;
+            /* 让背景图基于容器大小伸缩 */
+            background-size: cover; 
+            /* 设置背景颜色，背景图加载过程中会显示背景色 */
+            background-color: #ffffff;
+            }
+			.centermain {
+			 width: 550px;
+			 position: absolute;
+			 top: 50%;
+			 left: 50%;
+			 transform: translate(-50%, -50%);
+			 text-align:center;
 			}
-            .centermain {
-            -webkit-text-size-adjust: 100%;
-            position: absolute;
-            width: 1100px;
-            height: 370px;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            border-radius: 4px;      
-				-moz-border-radius: 4px;      
-				-webkit-border-radius: 4px;
-            z-index: -6;
-     }
-            .fontstyle1{
-            /* font-size: 300px; */
-            /* color:rgba(255, 255, 255, 0.5); */
-            font-family: Arial;
-            text-align:left;
-            margin: -20px;
-            /* line-height: 200px; */
-            display:inline;
-            text-decoration:none;  
-            height: 271px;
-           }
-        .fontstyle2{
+			.fontstyle1{
+			 font-size: 30px;
+			 color:rgba(100,100,100,1);
+			 font-family: Arial;
+			 text-align:center;
+			 display:inline;
+			 text-decoration:none;
+			 border-bottom: #b1b1b1 solid 1px;
+			}
+			.fontstyle2{
 			position: fixed;
 				font-size: 10px;
-				color:rgba(255, 255, 255, 0.5);
+				color:#ffffff;
 				font-family: Arial;
 				text-align:center;
 				width: 500px;
 				bottom: 0%;
 				left: 50%;
-				z-index:2;	
+				z-index:2;		 
 				transform: translateX(-50%);
-				margin:0;
+				text-align:center;
+				margin:0 ;
 			}
-            .fontstyle3{
-          -webkit-text-size-adjust: 100%;
-          font-size: 20px;
-          color:rgba(0, 0, 0, 0.5);
-          text-decoration:none;
-          font-family: Arial;
-          /* text-align:center; */
-          position: absolute;
-          z-index: -1;
-          bottom: 0%;
-          left: 50%;
-          transform: translate(-50%);
+			.fontstyle3{
+				font-size: 30px;
+                color:#ffffff;
+                font-family: Arial,"Microsoft YaHei","微软雅黑","MicrosoftJhengHei","华文细黑","STHeiti","MingLiu";
+                display:inline;
+                text-decoration:none;
+			}
+			.fontstyle4{
+				font-size: 16px;
+                color:#ffffff;
+                font-family: Arial;
+                display:inline;
+                text-decoration:none;
+                }
+			.fontstyle5{
+                color:#ffffff;
+                font-family: Arial,"Microsoft YaHei","微软雅黑","MicrosoftJhengHei","华文细黑","STHeiti","MingLiu";
+                display:inline;
+                text-decoration:none;
+			}
+			.qr{
+				width: 200px;
+				height: 200px;
+                text-align:center;
+				border-radius: 4px;
+				z-index:4;
+				opacity:0.8;
+			}
+			.circle{
+				position: absolute;
+				bottom: 100px; 
+				left: 50%;
+				transform: translateX(-50%);
+				width: 60px;      
+				height: 60px;
+				background-color:rgba(255,255,255,0.2);
+				border-radius: 50%;      
+				-moz-border-radius: 50%;      
+				-webkit-border-radius: 50%;
+			}
+			.phoneback{
+			    width: 550px;
+			    position: absolute;
+			    top: 50%;
+			    left: 50%;
+			    transform: translate(-50%, -50%);
+				background-color:rgba(255,255,255,0.3);      
+				border-radius: 4px;
+				-moz-border-radius: 4px;      
+				-webkit-border-radius: 4px;
+			}
+		   </style>
+	</head>
+	<body>
+		<a type="button" onclick="pcb1()" id="pc1"><div class="circle"></div></a>
+		<a type="button" onclick="pcb2()" id="pc2"><div class="circle"></div></a>
+		<a type="button" onclick="phb1()" id="ph1"><div class="circle"></div></a>
+		<a type="button" onclick="phb2()" id="ph2"><div class="circle"></div></a>
+		<div class="centermain">
+			<a class="fontstyle3" href="./indexY.html" id="pc3">扫码用手机打开 / SCAN QRCODE</a><br><br><br>
+			<img src="./img/MobileIndexQr.png" class="qr" id="pc4"><br><br>
+		</div>
+		<div class="centermain">
+			<a class="fontstyle5" href="./indexY.html" id="ph3">
+				<div class="phoneback">
+					<P>
+						<span class="fontstyle3">请使用电脑浏览&nbsp;miaoyifei.com</span>
+						<br>
+						<br>
+						<span class="fontstyle3">Please Browse On Computer</span>
+						<br>
+						<br>
+					</P>
+				</div>
 
-          
-     }
-     .img{
-        width: 231px;
-        height: 259px;
-     }
-     .imaged{
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-     }
-    </style>
-</head>
-<body style="background-color:#e7e7e7 ;">
-    <div class="centermain">
-        <div class="fontstyle1">
-            <div class="imaged">
-                <script>
-                   var d = new Date();
-                   var years = d.getFullYear();
-                   var month = d.getMonth()+1;
-                   var days = d.getDate();
-                   var yd = Math.floor(years+2697-3-39)%60; //六十甲子轮回
-                   var ud = Math.floor(month) % 2+ Math.floor(days)% 3; //以月取阴，以日取阳，去三以象万物
-                   var sd = Math.floor(month+days) % 6 + Math.floor(month+days) % 9; //取阴阳至道
-                   var gd = Math.floor(years+month+days)*49%50;//大衍之数五十，其用四十有九
-                   var dd = Math.floor(years+month+days)% 5; //人居岁月天地之中正
-                   var n = (yd+ud+sd+gd+dd)%64+1;//合天之意：1+2+5+8+4+43+1=63+1=64
-                    document.write("<img src=./img/gua/"+ n +".png class=img>")
-                </script>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <script>
-                    var d = new Date();
-                    var day = d.getFullYear()+d.getMonth()+1+d.getDate();
-                    var now = d.getHours()+d.getMinutes()+d.getSeconds();
-                    var nows = d.getMilliseconds();
-                    var n=Math.floor(day+now+nows)%64+1; //天地之意，置于一瞬；人事之意，置于一瞬
-                    document.write("<img src=./img/gua/"+ n +".png class=img>")
-                </script>
-            </div>
-        </div>
-        <a class="fontstyle3" href="./indextoo.html"><span>毅卜</span>&nbsp;&nbsp;<b>|</b>&nbsp;&nbsp;<span id="logInfo"></span></a>
-    </div>
-    
-    <div class="container">
-        <a class="circle" href="javascript:location.reload()" target="_self"></a>
-            <div class="ft">
-                <div class="btn-group">
-                    <div class="btn run" id="run"></div>
-                </div>
-            </div>
-    </div>
-    <div class="fontstyle2" >
-        <span>A Miao Yifei's Boring Page <b>&nbsp;&nbsp;|&nbsp;&nbsp;</b> Miao Yifei 表示他非常无聊 <b>&nbsp;&nbsp;|&nbsp;&nbsp;</b> V 0.1.3.051_beta</span>
-        <P>
-          <script type="text/javascript"> 
-          document.write(returnCitySN["cip"]+','+returnCitySN["cname"])  
-        </script></P>
-    </div>
-    <script>
-        (function(){
-            function $(selector) {
-                return document.querySelector(selector);
-            }
-            var $container = $('.container');
-            var $btn = $('#run');
-            var isBlockClose = true;
-
-            var maxX = $container.clientWidth - 1, maxY = $container.clientHeight - 1;
-            var originPos = $btn.getBoundingClientRect();
-
-            $btn.addEventListener('mouseover', function() {
-                this.style.left = Math.floor(Math.random() * maxX - originPos.left) + 'px';
-                this.style.top = Math.floor(Math.random() * maxY - originPos.top) + 'px';
-                
-            document.getElementById('run').style.backgroundColor=color;
-                //console.log(this.style.left, this.style.top);
-            });
-        })();
-    </script>
-      <script>
-         var color2 = document.getElementById('run');
-         color2.onmouseover=function(){
-            this.style.backgroundColor='#'+Math.floor(Math.random()*0xffffff).toString(16);
-         }
-         setInterval(test2, 64000);
-      function test2(){
-         var color = '#'+Math.floor(Math.random()*0xffffff).toString(16);
-         document.body.style.backgroundColor=color;
-    }
-        </script>
-          <script language="javascript">
-            function getCurDate()
-              {
-               var d = new Date();
-               var week;
-               switch (d.getDay()){
-               case 1: week="星期一"; break;
-               case 2: week="星期二"; break;
-               case 3: week="星期三"; break;
-               case 4: week="星期四"; break;
-               case 5: week="星期五"; break;
-               case 6: week="星期六"; break;
-               default: week="星期日";
-              }
-               var years = d.getFullYear();
-               var month = add_zero(d.getMonth()+1);
-               var days = add_zero(d.getDate());
-               var hours = add_zero(d.getHours());
-               var minutes = add_zero(d.getMinutes());
-               var seconds=add_zero(d.getSeconds());
-               var ndate = years+"/"+month+"/"+days+"/ "+hours+":"+minutes+":"+seconds+" "+week;
-               var divT=document.getElementById("logInfo");
-               divT.innerHTML= ndate;
-              }
-            function add_zero(temp)
-              {
-              if(temp<10) return "0"+temp;
-              else return temp;
-              }
-              setInterval("getCurDate()",100);
-              </script>
-</body>
+	    	</a>
+		</div>
+		<div class="fontstyle2" >
+			<span>A Miao Yifei's Boring Page <b>&nbsp;&nbsp;|&nbsp;&nbsp;</b> Miao Yifei 表示他非常无聊 <b>&nbsp;&nbsp;|&nbsp;&nbsp;</b> V 0.1.3.051_beta</span>
+			<P>
+			  <script type="text/javascript"> 
+			  document.write(returnCitySN["cip"]+','+returnCitySN["cname"])  
+			</script></P>
+		</div>
+		</div>
+	</body>
+	<script>
+		// 音乐播放
+	  function autoPlayMusic() {
+	  // 自动播放音乐效果，解决浏览器或者APP自动播放问题
+	  function musicInBrowserHandler() {
+		  musicPlay(true);
+		  document.body.removeEventListener('touchstart', musicInBrowserHandler);
+	  }
+	  document.body.addEventListener('touchstart', musicInBrowserHandler);
+  
+	  // 自动播放音乐效果，解决微信自动播放问题
+	  function musicInWeixinHandler() {
+		  musicPlay(true);
+		  document.addEventListener("WeixinJSBridgeReady", function () {
+			  musicPlay(true);
+		  }, false);
+		  document.removeEventListener('DOMContentLoaded', musicInWeixinHandler);
+	  }
+	  document.addEventListener('DOMContentLoaded', musicInWeixinHandler);
+	  }
+		  function musicPlay(isPlay) {
+		  var media = document.querySelector('#bg-music');
+		  if (isPlay && media.paused) {
+			  media.play();
+		  }
+		  if (!isPlay && !media.paused) {
+			  media.pause();
+		  }
+	  }
+	</script>
+	<script type="text/javascript">
+		// 电脑端按钮
+		document.getElementById('pc1').style.display="";
+		document.getElementById('pc2').style.display="none";
+		document.getElementById('pc3').style.display="none";
+		document.getElementById('pc4').style.display="none";
+		function pcb1(){
+			document.getElementById('pc1').style.display="none";
+			document.getElementById('pc2').style.display="";
+			document.getElementById('pc3').style.display="";
+			document.getElementById('pc4').style.display="";
+		}
+		function pcb2(){
+			document.getElementById('pc1').style.display="";
+			document.getElementById('pc2').style.display="none";
+			document.getElementById('pc3').style.display="none";
+			document.getElementById('pc4').style.display="none";
+		}
+	</script>
+		<script type="text/javascript">
+			// 手机端按钮
+			document.getElementById('ph1').style.display="";
+			document.getElementById('ph2').style.display="none";
+			document.getElementById('ph3').style.display="none";
+			document.getElementById('ph4').style.display="none";
+			function phb1(){
+				document.getElementById('ph1').style.display="none";
+				document.getElementById('ph2').style.display="";
+				document.getElementById('ph3').style.display="";
+				document.getElementById('ph4').style.display="";
+			}
+			function phb2(){
+				document.getElementById('ph1').style.display="";
+				document.getElementById('ph2').style.display="none";
+				document.getElementById('ph3').style.display="none";
+				document.getElementById('ph4').style.display="none";
+			}
+		</script>
+    <script type="text/javascript">
+		if ((navigator.userAgent.match(/(iPhone|iPod|Android|ios|iPad)/i))) {    //跳到手机端
+			document.getElementById('ph1').style.display="";
+			document.getElementById('pc1').style.display="none";
+		} else {
+			//跳到电脑端
+			document.getElementById('ph1').style.display="none";
+			document.getElementById('pc1').style.display="";
+		}
+		</script>
 </html>
