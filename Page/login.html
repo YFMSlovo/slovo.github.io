@@ -180,17 +180,19 @@ input[type="submit"]:hover{
 			#header-close{
 				position: absolute;
 				font-family: Arial;
-				border-radius: 1px;
-				/* background: #000000; */
-				color: #fff;
+				background: #fff;
+				color: #000;
+        border-radius:40px;
+        width: 20px;
+        height: 20px;
 				left: 50%;
-				top: 110%;
+				top: 360px;
 				transform: translate(-50%, -50%);
 				text-align: center;
-                display:inline;
-                text-decoration:none;
-				font-size: 16px;
-                border-bottom: #fff solid 1px;
+        display:inline;
+        text-decoration:none;
+				font-size: 20px;
+        border: #fff solid 20px;
 				z-index:4;	
 			}
 </style>
@@ -259,7 +261,7 @@ input[type="submit"]:hover{
     <div class="popup" id="header">
       <div>
         <img src="../img/TureIndexQr.png" class="qr">
-         <a id="header-close" onclick="hidder()">CLOSE</a>
+         <a id="header-close" onclick="hidder()">X</a>
       </div>
     </div>
   </div>
