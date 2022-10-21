@@ -42,7 +42,7 @@
 				color:rgba(100,100,100,1);
 				font-family: Arial;
 				text-align:center;
-/* 				width: 400px; */
+				/* width: 400px; */
 				bottom: 0%;
 				left: 50%;
 				z-index:2;		 
@@ -153,57 +153,7 @@
         }
 		</style>
 		<style>
-			.mask{
-				position: fixed;
-				left: 0px;
-				top: 0px;
-				background: #000;
-				width: 100%;
-				height: 100%;
-				opacity: 0.7;
-				z-index:4;	
-			}
-			.popup{
-				position: absolute;
-				background: #fff;
-				width: 300px;
-				height: 300px;
-				border-radius: 4px;
-				margin: 10px;
-				top: 40%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                text-align:center;
-				z-index:4;	
-			}
-			.qr{
-				width: 300px;
-				height: 300px;
-                text-align:center;
-				border-radius: 4px;
-				z-index:4;	
-			}
-			#header{
-				height: 300px;
-				z-index:4;	
-			}
-			#header-close{
-				position: absolute;
-				font-family: Arial;
-				border-radius: 1px;
-				/* background: #000000; */
-				color: #fff;
-				left: 50%;
-				top: 110%;
-				transform: translate(-50%, -50%);
-				text-align: center;
-                display:inline;
-                text-decoration:none;
-				font-size: 16px;
-                border-bottom: #fff solid 1px;
-				z-index:4;	
-			}
-			.bug{
+		.bug{
         width:100px;
         height:100px;
         position:fixed;
@@ -214,12 +164,6 @@
 		</style>
 	</head>
 	<body>
-		<div style="text-align:right;">
-			<br>
-			<a type="button" onclick="popped()" class="fontstyle3" id="owm1" >OPEN WITH MOBILE</a>
-			<span class="fontstyle4" id="owm2">&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</span>
-			<a class="fontstyle3" href="../Page/changelog.html">CHANGELOG</a>
-		</div>
 		<div >
 			<img alt="" src="../img/bug.gif" class="bug">
 		</div>
@@ -284,16 +228,6 @@
 			  <script type="text/javascript"> 
 			  document.write(returnCitySN["cip"]+','+returnCitySN["cname"])  
 			</script></P>
-		</div>
-		<div style="width: 550px;left: 10px;">
-			<div class="mask" id='mask'>
-			</div>
-			<div class="popup" id="header">
-				<div>
-					<img src="../img/TureIndexQr.png" class="qr">
-					 <a id="header-close" onclick="hidder()">CLOSE</a>
-				</div>
-			</div>
 		</div>
 		<script>
 			var search = document.getElementById("search");
@@ -369,32 +303,8 @@
 				}
 			}
 		</script>
-		<script type="text/javascript">
-		    // 手机端隐藏“手机打开”弹窗
-			document.getElementById('mask').style.display="none";
-			document.getElementById('header').style.display="none";
-			function popped(){
-				document.getElementById('mask').style.display="";
-				document.getElementById('header').style.display="";
-			}
-			function hidder(){
-				document.getElementById('mask').style.display="none";
-				document.getElementById('header').style.display="none";
-			}
-		</script>
-        <script type="text/javascript">
-		    if ((navigator.userAgent.match(/(iPhone|iPod|Android|ios|iPad)/i))) {    //手机端
-			document.getElementById('owm1').style.display="none";
-			document.getElementById('owm2').style.display="none";
-	    	} else {
-			//跳到电脑端
-			document.getElementById('owm1').style.display="";
-			document.getElementById('owm2').style.display="";
-		}
-		</script>
 		<script>
 			
 		</script>
 	</body>
-
 </html>
