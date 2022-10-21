@@ -21,7 +21,8 @@
 		<style>
 			body{
             /* 加载背景图 */
-            background-image: url(https://open.saintic.com/api/bingPic/);
+            /* background-image: url(https://open.saintic.com/api/bingPic/); */
+
 			/* 加载背景图-随机 */
 			/* background-image: url(https://api.kdcc.cn/img/rand.php); */
             /* 背景图垂直、水平均居中 */
@@ -53,6 +54,13 @@
 			 text-align:center;
 			 z-index: -1;
 			}
+			.fontstyle0{
+			font-size: 124px;
+            color:rgba(255,255,255,1);
+            font-family: Arial;
+            text-align:center;
+			height: 120px;
+			}
 			.fontstyle1{
 			 font-size: 30px;
 			 color:rgba(100,100,100,1);
@@ -73,7 +81,6 @@
 				left: 50%;
 				z-index:2;		 
 				transform: translateX(-50%);
-				text-align:center;
 				margin:0 ;
 			}
 			.fontstyle3{
@@ -81,10 +88,11 @@
                 color:#ffffff;
                 font-family: Arial,"Microsoft YaHei","微软雅黑","MicrosoftJhengHei","华文细黑","STHeiti","MingLiu";
                 display:inline;
+				text-align:left;
                 text-decoration:none;
 			}
 			.fontstyle4{
-				font-size: 16px;
+				font-size: 26px;
                 color:#ffffff;
                 font-family: Arial;
                 display:inline;
@@ -136,6 +144,21 @@
 				-moz-border-radius: 6px;      
 				-webkit-border-radius: 6px;
 				/* padding: 10px; */
+			}
+			.xob{
+				position: absolute;
+				top:0px;
+				left: 50%;
+				padding-top:10px;
+				padding-bottom:10px;
+				padding-right: 50px;
+				padding-left: 50px;
+				transform: translate(-50%, 0);
+				color: rgba(255,255,255,0.5);
+				background-color:rgba(255,255,255,0.1);
+				border-bottom-left-radius: 10px;
+				border-bottom-right-radius: 10px;
+				z-index: 8;
 			}
 		   </style>
 		   <style>
@@ -318,6 +341,10 @@
 	}</style>
 	</head>
 	<body>
+		<div class="centermain" id="miao"><div class="fontstyle0">MIAO</div><br><span class="fontstyle4" id="logInfo"></span></div>
+		<a type="button" onclick="xbak()" id="xb"><div class="xob"><div style="width: 20px;height: 20px;border:2px solid rgba(255,255,255,0.5);border-radius: 4px;"></div></div></a>
+		<a type="button" onclick="obak()" id="ob"><div class="xob"><div style="width: 20px;height: 20px;border:2px solid rgba(255,255,255,0.5);border-radius: 20px;"></div></div></a>
+
 		<a type="button" onclick="pcb1()" id="pc1"><div class="circle"></div></a>
 		<a type="button" onclick="pcb2()" id="pc2"><div class="circle"></div></a>
 		<a type="button" onclick="phb1()" id="ph1"><div class="circle"></div></a>
@@ -424,7 +451,7 @@
 		</div>
 		   </div>
 
-		<div class="fontstyle2" >
+		<div class="fontstyle2" id="footer">
 			<span>A Miao Yifei's Boring Page <b>&nbsp;&nbsp;|&nbsp;&nbsp;</b> Miao Yifei 表示他非常无聊 <b>&nbsp;&nbsp;|&nbsp;&nbsp;</b> V 0.1.3.051_beta</span>
 			<P>
 			  <script type="text/javascript"> 
@@ -433,6 +460,85 @@
 		</div>
 		</div>
 	</body>
+	<script language="javascript">
+		//时间
+      function getCurDate()
+        {
+         var d = new Date();
+         var week;
+         switch (d.getDay()){
+         case 1: week="MON."; break;
+         case 2: week="Tues."; break;
+         case 3: week="Wed."; break;
+         case 4: week="Thur."; break;
+         case 5: week="Fri."; break;
+         case 6: week="Sat."; break;
+         default: week="Sun.";
+        }
+         var years = d.getFullYear();
+         var month = add_zero(d.getMonth()+1);
+         var days = add_zero(d.getDate());
+         var hours = add_zero(d.getHours());
+         var minutes = add_zero(d.getMinutes());
+         var seconds=add_zero(d.getSeconds());
+         var ndate = years+"/"+month+"/"+days+"/ "+hours+":"+minutes+":"+seconds+" "+week;
+         var divT=document.getElementById("logInfo");
+         divT.innerHTML= ndate;
+        }
+      function add_zero(temp)
+        {
+        if(temp<10) return "0"+temp;
+        else return temp;
+        }
+        setInterval("getCurDate()",100);
+
+		//背景选择按钮
+		var color = '#'+Math.floor(Math.random()*0xffffff).toString(16);
+         document.body.style.backgroundColor=color;
+		setInterval(bakclr, 60000);
+		document.getElementById('xb').style.display="none";
+		document.getElementById('footer').style.display="none";
+        function xbak(){
+			document.getElementById('ob').style.display="";
+			document.getElementById('xb').style.display="none";
+			document.body.style.backgroundImage="none"
+			document.getElementById('footer').style.display="none";
+			document.getElementById('miao').style.display="";
+			//电脑端
+			document.getElementById('pc1').style.display="none";
+			document.getElementById('player1').style.display="none";
+		    document.getElementById('pc2').style.display="none";
+		    document.getElementById('pc3').style.display="none";
+		    document.getElementById('pc4').style.display="none";
+			//手机端
+			document.getElementById('ph1').style.display="none";
+			document.getElementById('ph2').style.display="none";
+			document.getElementById('ph3').style.display="none";
+			document.getElementById('ph4').style.display="none";
+
+
+		}
+		function obak(){
+			document.getElementById('ob').style.display="none";
+			document.getElementById('xb').style.display="";
+			document.body.style.backgroundImage="url(https://open.saintic.com/api/bingPic/)"
+			document.getElementById('footer').style.display="";
+			document.getElementById('miao').style.display="none";
+
+			if ((navigator.userAgent.match(/(iPhone|iPod|Android|ios|iPad)/i))) {    //跳到手机端
+			    document.getElementById('ph1').style.display="";
+			    document.getElementById('pc1').style.display="none";
+		        } else {
+			         //跳到电脑端
+			    document.getElementById('ph1').style.display="none";
+			    document.getElementById('pc1').style.display="";
+		        }
+		}
+      function bakclr(){
+         var color = '#'+Math.floor(Math.random()*0xffffff).toString(16);
+         document.body.style.backgroundColor=color;
+    }
+	</script>
 	<!-- <script>
 		// 音乐播放
 	  function autoPlayMusic() {
@@ -464,8 +570,8 @@
 	  }
 	</script> -->
 	<script type="text/javascript">
-		// 电脑端按钮
-		document.getElementById('pc1').style.display="";
+		// 电脑端弹出功能按钮
+		document.getElementById('pc1').style.display="none";
 		document.getElementById('player1').style.display="none";
 		document.getElementById('pc2').style.display="none";
 		document.getElementById('pc3').style.display="none";
@@ -486,9 +592,8 @@
 		}
 	</script>
 		<script type="text/javascript">
-			// 手机端按钮
-			document.getElementById('ph1').style.display="";
-			document.getElementById('player1').style.display="none";
+			// 手机端弹出功能按钮
+			document.getElementById('ph1').style.display="none";
 			document.getElementById('ph2').style.display="none";
 			document.getElementById('ph3').style.display="none";
 			document.getElementById('ph4').style.display="none";
@@ -505,7 +610,7 @@
 				document.getElementById('ph4').style.display="none";
 			}
 		</script>
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
 		if ((navigator.userAgent.match(/(iPhone|iPod|Android|ios|iPad)/i))) {    //跳到手机端
 			document.getElementById('ph1').style.display="";
 			document.getElementById('pc1').style.display="none";
@@ -514,5 +619,5 @@
 			document.getElementById('ph1').style.display="none";
 			document.getElementById('pc1').style.display="";
 		}
-		</script>
+		</script> -->
 </html>
