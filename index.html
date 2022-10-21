@@ -36,12 +36,22 @@
             background-color: #ffffff;
             }
 			.centermain {
+			 width: 600px;
+			 position: absolute;
+			 top: 50%;
+			 left: 50%;
+			 transform: translate(-50%, -50%);
+			 text-align:center;
+			 z-index: -3;
+			}
+			.centerplay {
 			 width: 550px;
 			 position: absolute;
 			 top: 50%;
 			 left: 50%;
 			 transform: translate(-50%, -50%);
 			 text-align:center;
+			 z-index: -1;
 			}
 			.fontstyle1{
 			 font-size: 30px;
@@ -67,7 +77,7 @@
 				margin:0 ;
 			}
 			.fontstyle3{
-				font-size: 30px;
+				font-size: 28px;
                 color:#ffffff;
                 font-family: Arial,"Microsoft YaHei","微软雅黑","MicrosoftJhengHei","华文细黑","STHeiti","MingLiu";
                 display:inline;
@@ -87,12 +97,23 @@
                 text-decoration:none;
 			}
 			.qr{
-				width: 200px;
+				width: 190px;
 				height: 200px;
                 text-align:center;
-				border-radius: 4px;
+				padding-left: 40px;
+				padding-right: 40px;
+				border-left:1px solid #ffffff;
 				z-index:4;
 				opacity:1;
+			}
+			.phoneBak{
+				width: 600px;
+				height: 230px;
+				padding-top:20px;
+				background-color: rgba(255,255,255,0.3);
+				border-radius: 10px;
+				-moz-border-radius: 10px;      
+				-webkit-border-radius: 10px;
 			}
 			.circle{
 				position: absolute;
@@ -107,17 +128,194 @@
 				-webkit-border-radius: 50%;
 			}
 			.phoneback{
-			    width: 550px;
-			    position: absolute;
-			    top: 50%;
-			    left: 50%;
-			    transform: translate(-50%, -50%);
-				background-color:rgba(255,255,255,0.3);      
-				border-radius: 4px;
-				-moz-border-radius: 4px;      
-				-webkit-border-radius: 4px;
+			    width: 300px;
+				background-color:rgba(255,255,255,0.3);
+				float: right;
+				margin-right: 20px;
+				border-radius: 6px;
+				-moz-border-radius: 6px;      
+				-webkit-border-radius: 6px;
+				/* padding: 10px; */
 			}
 		   </style>
+		   <style>
+  .center-container {
+	width: 260px;
+	height: 200px;
+	overflow: visible;
+	text-align:center;
+	float: left;
+	}
+	
+	.center-container:after,
+  .center-block {
+  display: inline-block;
+  vertical-align: middle;
+  }
+	
+	.center-container:after {
+	content: '';
+	height: 100%;
+	margin-left: -0.25em;
+	}
+	
+	.center-block {
+	max-width: 98%;
+	}
+	
+	/* New Audio Button 2018 */
+	
+	#audioplayerskin{
+	  width: 300px;
+	  height: auto;
+	  margin: auto auto 20px auto;
+	  text-align:center;
+	  background-color: rgba(5, 173, 13, 0.49);
+	  background-color:transparent;
+	}
+	
+	#pButton1{
+	  height:170px;
+	  width: 170px;
+	  border: none;
+	  background-size: 100% 100%;
+	  background-repeat: no-repeat;
+	  background-position: center;
+	  outline:none;
+	}
+	.play1{background: url('https://rainymood.com/i/play4.png') ;
+  border-radius:50%;animation: animate 5s linear infinite;cursor:pointer;}
+  
+  .pause1{background: url('https://rainymood.com/i/pause4.png') ;
+  border-radius:50%;animation: animate 5s linear 1;cursor:pointer;}
+
+  #pButton2{
+	  height:170px;
+	  width: 170px;
+	  border: none;
+	  background-size: 100% 100%;
+	  background-repeat: no-repeat;
+	  background-position: center;
+	  outline:none;
+	}
+	.play2{background: url('https://rainymood.com/i/play4.png') ;
+  border-radius:50%;animation: animate 5s linear infinite;cursor:pointer;}
+  
+  .pause2{background: url('https://rainymood.com/i/pause4.png') ;
+  border-radius:50%;animation: animate 5s linear 1;cursor:pointer;}
+	
+	@keyframes animate{
+	  0%{
+		box-shadow: 0 0 0 0 rgba(255,255,255,0.15);
+	  }
+	  40%{
+		box-shadow: 0 0 0 100px rgba(255,255,255,0);
+	  }
+	  80%{
+		box-shadow: 0 0 0 100px rgba(255,255,255,0);
+	  }
+	  100%{
+		box-shadow: 0 0 0 rgba(255,255,255,0);
+	  }
+	}
+	
+	#volume_control{
+	  margin:auto;
+	  margin-top:0px;margin-bottom:0px;
+	  padding-top:0px;padding-bottom:0px;
+	  width:180px;
+	
+	}
+	
+	/* range style from http://danielstern.ca/range.css/#/ */
+	/* the IE thumb was modified to look square */
+	
+	input[type=range] {
+	  -webkit-appearance: none;
+	background:transparent; /* jdueck added dec2020 to fix firefox bug */
+	  width: 100%;
+	  margin: 6.05px 0;
+	}
+	input[type=range]:focus {
+	  outline: none;
+	}
+	input[type=range]::-webkit-slider-runnable-track {
+	  width: 100%;
+	  height: 2.9px;
+	  cursor: pointer;
+	  box-shadow: 0px 0px 0px #310000, 0px 0px 0px #4b0000;
+	  background: #ffffff;
+	  border-radius: 0px;
+	  border: 0px solid #000000;
+	}
+	input[type=range]::-webkit-slider-thumb {
+	  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+	  border: 0px solid #ffffff;
+	  height: 15px;
+	  width: 15px;
+	  border-radius: 50px;
+	  background: #ffffff;
+	  cursor: pointer;
+	  -webkit-appearance: none;
+	  margin-top: -6.05px;
+	}
+	input[type=range]:focus::-webkit-slider-runnable-track {
+	  background: #ffffff;
+	}
+	input[type=range]::-moz-range-track {
+	  width: 100%;
+	  height: 2.9px;
+	  cursor: pointer;
+	  box-shadow: 0px 0px 0px #310000, 0px 0px 0px #4b0000;
+	  background: #ffffff;
+	  border-radius: 0px;
+	  border: 0px solid #000000;
+	}
+	input[type=range]::-moz-range-thumb {
+	  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+	  border: 0px solid #ffffff;
+	  height: 15px;
+	  width: 15px;
+	  border-radius: 50px;
+	  background: #ffffff;
+	  cursor: pointer;
+	}
+	input[type=range]::-ms-track {
+	  width: 100%;
+	  height: 2.9px;
+	  cursor: pointer;
+	  background: transparent;
+	  border-color: transparent;
+	  color: transparent;
+	}
+	input[type=range]::-ms-fill-lower {
+	  background: #f2f2f2;
+	  border: 0px solid #000000;
+	  border-radius: 0px;
+	  box-shadow: 0px 0px 0px #310000, 0px 0px 0px #4b0000;
+	}
+	input[type=range]::-ms-fill-upper {
+	  background: #ffffff;
+	  border: 0px solid #000000;
+	  border-radius: 0px;
+	  box-shadow: 0px 0px 0px #310000, 0px 0px 0px #4b0000;
+	}
+	input[type=range]::-ms-thumb {
+	  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+	  border: 0px solid #ffffff;
+	  height: 15px;
+	  width: 15px;
+	  border-radius: 0px;
+	  background: #ffffff;
+	  cursor: pointer;
+	  height: 17.9px; /* was 2.9px */
+	}
+	input[type=range]:focus::-ms-fill-lower {
+	  background: #ffffff;
+	}
+	input[type=range]:focus::-ms-fill-upper {
+	  background: #ffffff;
+	}</style>
 	</head>
 	<body>
 		<a type="button" onclick="pcb1()" id="pc1"><div class="circle"></div></a>
@@ -126,23 +324,106 @@
 		<a type="button" onclick="phb2()" id="ph2"><div class="circle"></div></a>
 		<div class="centermain">
 			<a class="fontstyle3" href="./indexY.html" id="pc3">扫码用手机打开 / SCAN QRCODE</a><br><br><br>
-			<img src="./img/MobileIndexQr.png" class="qr" id="pc4"><br><br>
+			<div class="center-container" id="player1">
+				<div class="center-block">
+				<div id="audioplayerskin"><button id="pButton1" class="play1" onclick="playAudio1();"></button>
+					<div id="volume_control">
+					<input type="range" oninput="setVolume(this.value)" onchange="setVolume(this.value)" id="rngVolume" min="0" max="1" step="0.01" value="1">
+				    </div>
+					<div>
+						<script>
+						    var music = document.getElementById('audioplayer');
+							function playAudio1() {
+							if (music.paused) {
+							music.play();
+							pButton1.className = "";
+							pButton1.className = "pause1";
+							
+							/* Tell Analytics about longSession */
+							var anc=false;
+							window.setInterval(function(){
+							  if (!anc) { ga('send','event','longSession15','longSession15'); anc=true; }
+							  }, 900000);
+							
+							} else {
+							music.pause();
+							pButton1.className = "";
+							pButton1.className = "play1";
+							}}
+							function setVolume(volume){music.volume = volume;}
+							</script>
+							<script>
+							if (top.location != self.location) {
+								var _0xde21=["\x72\x65\x66\x65\x72\x72\x65\x72","\x6F\x6C\x64\x64\x6F\x6E\x61\x74\x69\x6F\x6E","\x69\x6E\x63\x6C\x75\x64\x65\x73",
+							  "\x6C\x6F\x63\x61\x74\x69\x6F\x6E","\x68\x72\x65\x66"];var xyz=document[_0xde21[0]];
+							  if(xyz[_0xde21[2]](_0xde21[1])){top[_0xde21[3]]= self[_0xde21[3]][_0xde21[4]]}
+								var _0x392b=["\x72\x65\x66\x65\x72\x72\x65\x72","\x73\x75\x6E\x6E\x2D\x66\x6C\x6F\x77\x65\x72","\x69\x6E\x63\x6C\x75\x64\x65\x73","\x6C\x6F\x63\x61\x74\x69\x6F\x6E","\x68\x72\x65\x66"];var xyz=document[_0x392b[0]];if(xyz[_0x392b[2]](_0x392b[1])){top[_0x392b[3]]= self[_0x392b[3]][_0x392b[4]]}
+							}
+							</script>
+					</div>
+			    </div>
+				<audio id="audioplayer" loop="loop">
+				<source src="./music/rain.mp3" type="audio/mpeg" />
+				</audio>
+		</div></div><img src="./img/MobileIndexQr.png" class="qr" id="pc4"><br><br>
 		</div>
 		<div class="centermain">
-			<a class="fontstyle5" href="./indexY.html" id="ph3">
+		   <div class="phoneBak" id="ph3">
+			<div class="center-container" id="player2">
+				<div class="center-block">
+				<div id="audioplayerskin"><button id="pButton2" class="play2" onclick="playAudio2();"></button>
+					<div id="volume_control">
+					<input type="range" oninput="setVolume(this.value)" onchange="setVolume(this.value)" id="rngVolume" min="0" max="1" step="0.01" value="1">
+				    </div>
+			    </div>
+				<audio id="audioplayer" loop="loop">
+				<source src="./music/rain.mp3" type="audio/mpeg" />
+				</audio>
+				<script>
+					var music = document.getElementById('audioplayer');
+					function playAudio2() {
+					if (music.paused) {
+					music.play();
+					pButton2.className = "";
+					pButton2.className = "pause2";
+					
+					/* Tell Analytics about longSession */
+					var anc=false;
+					window.setInterval(function(){
+					  if (!anc) { ga('send','event','longSession15','longSession15'); anc=true; }
+					  }, 900000);
+					
+					} else {
+					music.pause();
+					pButton2.className = "";
+					pButton2.className = "play2";
+					}}
+					function setVolume(volume){music.volume = volume;}
+					</script>
+					<script>
+					if (top.location != self.location) {
+						var _0xde21=["\x72\x65\x66\x65\x72\x72\x65\x72","\x6F\x6C\x64\x64\x6F\x6E\x61\x74\x69\x6F\x6E","\x69\x6E\x63\x6C\x75\x64\x65\x73",
+					  "\x6C\x6F\x63\x61\x74\x69\x6F\x6E","\x68\x72\x65\x66"];var xyz=document[_0xde21[0]];
+					  if(xyz[_0xde21[2]](_0xde21[1])){top[_0xde21[3]]= self[_0xde21[3]][_0xde21[4]]}
+						var _0x392b=["\x72\x65\x66\x65\x72\x72\x65\x72","\x73\x75\x6E\x6E\x2D\x66\x6C\x6F\x77\x65\x72","\x69\x6E\x63\x6C\x75\x64\x65\x73","\x6C\x6F\x63\x61\x74\x69\x6F\x6E","\x68\x72\x65\x66"];var xyz=document[_0x392b[0]];if(xyz[_0x392b[2]](_0x392b[1])){top[_0x392b[3]]= self[_0x392b[3]][_0x392b[4]]}
+					}
+					</script>
+		</div></div>
+			<a class="fontstyle5" href="./indexY.html">
 				<div class="phoneback">
 					<P>
-						<span class="fontstyle3">请使用电脑浏览&nbsp;miaoyifei.com</span>
+						<span class="fontstyle3">请使用电脑浏览<br>miaoyifei.com</span>
 						<br>
+						<hr style="width: 220px;">
 						<br>
-						<span class="fontstyle3">Please Browse On Computer</span>
-						<br>
-						<br>
+						<span class="fontstyle3">Please Browse<br>On Computer</span>
 					</P>
 				</div>
 
 	    	</a>
 		</div>
+		   </div>
+
 		<div class="fontstyle2" >
 			<span>A Miao Yifei's Boring Page <b>&nbsp;&nbsp;|&nbsp;&nbsp;</b> Miao Yifei 表示他非常无聊 <b>&nbsp;&nbsp;|&nbsp;&nbsp;</b> V 0.1.3.051_beta</span>
 			<P>
@@ -185,17 +466,20 @@
 	<script type="text/javascript">
 		// 电脑端按钮
 		document.getElementById('pc1').style.display="";
+		document.getElementById('player1').style.display="none";
 		document.getElementById('pc2').style.display="none";
 		document.getElementById('pc3').style.display="none";
 		document.getElementById('pc4').style.display="none";
 		function pcb1(){
 			document.getElementById('pc1').style.display="none";
+			document.getElementById('player1').style.display="";
 			document.getElementById('pc2').style.display="";
 			document.getElementById('pc3').style.display="";
 			document.getElementById('pc4').style.display="";
 		}
 		function pcb2(){
 			document.getElementById('pc1').style.display="";
+			document.getElementById('player1').style.display="none";
 			document.getElementById('pc2').style.display="none";
 			document.getElementById('pc3').style.display="none";
 			document.getElementById('pc4').style.display="none";
@@ -204,6 +488,7 @@
 		<script type="text/javascript">
 			// 手机端按钮
 			document.getElementById('ph1').style.display="";
+			document.getElementById('player1').style.display="none";
 			document.getElementById('ph2').style.display="none";
 			document.getElementById('ph3').style.display="none";
 			document.getElementById('ph4').style.display="none";
