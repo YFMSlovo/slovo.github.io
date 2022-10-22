@@ -47,7 +47,7 @@
 				transform: translateX(-50%);
 				width: 57px;      
 				height: 57px;
-				background-color:rgba(0, 0, 0, 1);      
+				background-color:rgba(255, 255, 255,0.2);      
 				border-radius: 50%;      
 				-moz-border-radius: 50%;
 				-webkit-border-radius: 50%;
@@ -82,7 +82,7 @@
         .fontstyle2{
 			position: fixed;
 				font-size: 10px;
-				color:rgba(0, 0, 0, 1);
+				color:rgba(255, 255, 255, 0.5);
 				font-family: Arial;
 				text-align:center;
 				width: 500px;
@@ -95,7 +95,7 @@
             .fontstyle3{
           -webkit-text-size-adjust: 100%;
           font-size: 24px;
-          color:rgba(0, 0, 0, 0.5);
+          color:rgba(255, 255, 255, 0.8);
           text-decoration:none;
           font-family: Arial;
           /* text-align:center; */
@@ -132,17 +132,17 @@
 				padding-right: 50px;
 				padding-left: 50px;
 				transform: translate(-50%, 0);
-				color: rgba(0, 0, 0, 0.5);
-				background-color:rgba(0, 0, 0, 0.1);
+				color: rgba(255,255,255,0.5);
+				background-color:rgba(255,255,255,0.1);
 				border-bottom-left-radius: 10px;
 				border-bottom-right-radius: 10px;
 				z-index: 8;
 			}
     </style>
 </head>
-<body>
-    <a type="button" onclick="xbak()" id="xb"><div class="xob"><div style="width: 20px;height: 20px;border:2px solid rgba(0, 0, 0, 0.5);border-radius: 4px;"></div></div></a>
-	<a type="button" onclick="obak()" id="ob"><div class="xob"><div style="width: 20px;height: 20px;border:2px solid rgba(0, 0, 0, 0.5);border-radius: 20px;"></div></div></a>
+<body style="background-image: url(https://open.saintic.com/api/bingPic/);">
+    <a type="button" onclick="xbak()" id="xb"><div class="xob"><div style="width: 20px;height: 20px;border:2px solid rgba(255,255,255,0.5);border-radius: 4px;"></div></div></a>
+	<a type="button" onclick="obak()" id="ob"><div class="xob" id="obb"><div style="width: 20px;height: 20px;border:2px solid rgba(255,255,255,0.5);border-radius: 20px;"></div></div></a>
     <div class="centermain">
     <p>
         <div class="fontstyle1">
@@ -176,7 +176,7 @@
         </div>
     </p>
     <hr style="height:1px;width:410px;position: absolute;left: 50%;transform: translate(-50%);bottom:60px;border:none;border-top:1px solid rgb(0, 0, 0);" id="hr2"/>
-        <a class="fontstyle3" href="./Page/login.html" id="yib"><span style="padding-right:26px ;border-right: solid 1px rgba(0, 0, 0, 0.5);" id="ysp">毅卜</span>&nbsp;&nbsp;&nbsp;&nbsp;<span id="logInfo"></span></a>
+        <a class="fontstyle3"  id="yib"><span style="padding-right:26px ;border-right: solid 1px rgba(255, 255, 255, 0.5);" id="ysp">毅卜</span>&nbsp;&nbsp;&nbsp;&nbsp;<span id="logInfo"></span></a>
     </div>
     <div class="container">
         <!-- <a class="circle" href="javascript:location.reload()" target="_self" id="circle"></a> -->
@@ -221,21 +221,22 @@
               setInterval("getCurDate()",100);
               </script>
               <script>
-		        document.getElementById('xb').style.display="none";
-                document.getElementById('hr1').style.display="";
-            document.getElementById('hr2').style.display="";
+		        document.getElementById('ob').style.display="none";
+                document.getElementById('hr1').style.display="none";
+            document.getElementById('hr2').style.display="none";
         function xbak(){
 			document.getElementById('ob').style.display="";
+            document.getElementById('obb').style.backgroundColor="rgba(0, 0, 0, 0.1)";
 			document.getElementById('xb').style.display="none";
 			document.body.style.backgroundImage="none";
 			document.getElementById('footer').style.color="#000"
             document.getElementById("circle").style.backgroundColor="#000"
-            document.getElementById("yib").style.color="rgba(0, 0, 0, 0.5)"
+            document.getElementById("yib").style.color="#000"
             document.getElementById("gua").style.backgroundColor="rgba(255, 255, 255, 0)"
             document.getElementById('hr1').style.display="";
             document.getElementById('hr2').style.display="";
             document.getElementById('ysp').style.borderColor="rgba(0, 0, 0, 0.5)";
-            
+            document.getElementById("yib").href="./Page/login.html"
 
 		}
 		function obak(){
@@ -249,6 +250,7 @@
             document.getElementById('hr1').style.display="none";
             document.getElementById('hr2').style.display="none";
             document.getElementById('ysp').style.borderColor="rgba(255, 255, 255, 0.5)";
+            document.getElementById("yib").removeAttribute("href");
         }
 	</script>
     <script>
