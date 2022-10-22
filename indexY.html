@@ -40,20 +40,6 @@
         button {
             cursor: pointer;
         }
-        .run {
-            position: absolute;
-            left: 0px;
-            bottom: 100px;
-			width: 60px;
-			height: 60px;
-			border-radius: 50%;
-			-moz-border-radius: 50%;      
-			-webkit-border-radius: 50%;
-            border: 0px;
-            left: 50%;
-            background-color: #000;
-				transform: translateX(-50%);
-        }
         .circle{
 				position: absolute;
 				bottom: 100px; 
@@ -61,11 +47,10 @@
 				transform: translateX(-50%);
 				width: 57px;      
 				height: 57px;
-				background-color:rgba(250, 250, 250, 0.5);      
+				background-color:rgba(255, 255, 255,0.2);      
 				border-radius: 50%;      
 				-moz-border-radius: 50%;
 				-webkit-border-radius: 50%;
-                border:1px solid rgba(210, 210, 210, 0.5);
                 z-index: -1;
 			}
             .centermain {
@@ -73,6 +58,7 @@
             position: absolute;
             width: 1100px;
             height: 400px;
+            /* background-color: #fff; */
             top: 40%;
             left: 50%;
             transform: translate(-50%, -50%);
@@ -85,8 +71,9 @@
             /* font-size: 300px; */
             /* color:rgba(255, 255, 255, 0.5); */
             font-family: Arial;
+            background-color: #fff;
             text-align:left;
-            margin: -20px;
+            margin: 20px;
             /* line-height: 200px; */
             display:inline;
             text-decoration:none;  
@@ -107,8 +94,8 @@
 			}
             .fontstyle3{
           -webkit-text-size-adjust: 100%;
-          font-size: 20px;
-          color:rgba(0, 0, 0, 0.5);
+          font-size: 24px;
+          color:rgba(255, 255, 255, 0.8);
           text-decoration:none;
           font-family: Arial;
           /* text-align:center; */
@@ -116,102 +103,92 @@
           z-index: -1;
           bottom: 0%;
           left: 50%;
+
           transform: translate(-50%);
 
           
      }
      .img{
-        width: 231px;
-        height: 259px;
+        width: 147px;
+        height: 179px;
      }
      .imaged{
+        background-color: rgba(255, 255, 255, 1);
+        padding: 35px;
+        border-radius: 4px;
+		-moz-border-radius: 4px;      
+		-webkit-border-radius: 4px;
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
      }
+     .xob{
+				position: absolute;
+				top:0px;
+				left: 50%;
+				padding-top:10px;
+				padding-bottom:10px;
+				padding-right: 50px;
+				padding-left: 50px;
+				transform: translate(-50%, 0);
+				color: rgba(255,255,255,0.5);
+				background-color:rgba(255,255,255,0.1);
+				border-bottom-left-radius: 10px;
+				border-bottom-right-radius: 10px;
+				z-index: 8;
+			}
     </style>
 </head>
-<body style="background-color:#e7e7e7 ;">
+<body style="background-color:#c5c5c5;background-image: url(https://open.saintic.com/api/bingPic/);">
+    <a type="button" onclick="xbak()" id="xb"><div class="xob"><div style="width: 20px;height: 20px;border:2px solid rgba(255,255,255,0.5);border-radius: 4px;"></div></div></a>
+	<a type="button" onclick="obak()" id="ob"><div class="xob"><div style="width: 20px;height: 20px;border:2px solid rgba(255,255,255,0.5);border-radius: 20px;"></div></div></a>
     <div class="centermain">
     <p>
         <div class="fontstyle1">
-            <div class="imaged">
+            <hr style="height:1px;width:410px;position: absolute;left: 50%;transform: translate(-50%);top:60px;border:none;border-top:1px solid rgb(0, 0, 0);" id="hr1" />
+            <div class="imaged" id="gua">
                 <script>
-                   var d = new Date();
-                   var years = d.getFullYear();
-                   var month = d.getMonth()+1;
-                   var days = d.getDate();
-                   var yd = Math.floor(years+2697-3-39)%60; //六十甲子轮回
-                   var ud = Math.floor(month) % 2+ Math.floor(days)% 3; //以月取阴，以日取阳，去三以象万物
-                   var sd = Math.floor(month+days) % 6 + Math.floor(month+days) % 9; //取阴阳至道
-                   var gd = Math.floor(years+month+days)*49%50;//大衍之数五十，其用四十有九
-                   var dd = Math.floor(years+month+days)% 5; //人居岁月天地之中正
-                   var n = (yd+ud+sd+gd+dd)%64+1;//合天意：1+2+5+8+4+43+1=63+1=64
-                    document.write("<img src=./img/gua/"+ n +".png class=img>")
+                    //体卦
+                        var d = new Date();
+                        var years = d.getFullYear();
+                        var month = d.getMonth()+1;
+                        var days = d.getDate();
+                        var yd = Math.floor(years+2697-3-39)%60; //六十甲子轮回
+                        var ud = Math.floor(month) % 2+ Math.floor(days)% 3; //以月取阴，以日取阳，去三以象万物
+                        var sd = Math.floor(month+days) % 6 + Math.floor(month+days) % 9; //取阴阳至道
+                        var gd = Math.floor(years+month+days)*49%50;//大衍之数五十，其用四十有九
+                        var dd = Math.floor(years+month+days)% 5; //人居岁月天地之中正
+                        var n = (yd+ud+sd+gd+dd)%64+1;//合天意：1+2+5+8+4+43+1=63+1=64
+                    document.write("<img src=./img/gua/"+ n +".png class=img id=tg>")
                 </script>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <script>
+                    //用卦
                     var d = new Date();
                     var day = d.getFullYear()+d.getMonth()+1+d.getDate();
                     var now = d.getHours()+d.getMinutes()+d.getSeconds();
                     var nows = d.getMilliseconds();
                     var n=Math.floor(day+now+nows)%64+1; //天地之意，置于一瞬；人事之意，置于一瞬
-                    document.write("<img src=./img/gua/"+ n +".png class=img>")
+                    document.write("<img src=./img/gua/"+ n +".png class=img id=yg>")
                 </script>
             </div>
         </div>
     </p>
-    <hr style="height:1px;width:494px;position: absolute;left: 50%;transform: translate(-50%);bottom:30px;border:none;border-top:1px solid #c5c5c5;" />
-        <a class="fontstyle3" href="./Page/login.html"><span>毅卜</span>&nbsp;&nbsp;<b>|</b>&nbsp;&nbsp;<span id="logInfo"></span></a>
+    <hr style="height:1px;width:410px;position: absolute;left: 50%;transform: translate(-50%);bottom:60px;border:none;border-top:1px solid rgb(0, 0, 0);" id="hr2"/>
+        <a class="fontstyle3" href="./Page/login.html" id="yib"><span>毅卜</span>&nbsp;&nbsp;&nbsp;&nbsp;<b>|</b>&nbsp;&nbsp;&nbsp;&nbsp;<span id="logInfo"></span></a>
     </div>
     <div class="container">
-        <a class="circle" href="javascript:location.reload()" target="_self"></a>
-            <div class="ft">
-                <div class="btn-group">
-                    <div class="btn run" id="run"></div>
-                </div>
-            </div>
+        <!-- <a class="circle" href="javascript:location.reload()" target="_self" id="circle"></a> -->
+        <a class="circle" onclick="yaogua()" id="circle"></a>
     </div>
-    <div class="fontstyle2" >
+    <div class="fontstyle2" id="footer">
         <span>A Miao Yifei's Boring Page <b>&nbsp;&nbsp;|&nbsp;&nbsp;</b> Miao Yifei 表示他非常无聊 <b>&nbsp;&nbsp;|&nbsp;&nbsp;</b> V 0.1.3.051_beta</span>
         <P>
           <script type="text/javascript"> 
           document.write(returnCitySN["cip"]+','+returnCitySN["cname"])  
         </script></P>
     </div>
-    <script>
-        (function(){
-            function $(selector) {
-                return document.querySelector(selector);
-            }
-            var $container = $('.container');
-            var $btn = $('#run');
-            var isBlockClose = true;
-
-            var maxX = $container.clientWidth - 1, maxY = $container.clientHeight - 1;
-            var originPos = $btn.getBoundingClientRect();
-
-            $btn.addEventListener('mouseover', function() {
-                this.style.left = Math.floor(Math.random() * maxX - originPos.left) + 'px';
-                this.style.top = Math.floor(Math.random() * maxY - originPos.top) + 'px';
-                
-            document.getElementById('run').style.backgroundColor=color;
-                //console.log(this.style.left, this.style.top);
-            });
-        })();
-    </script>
-      <script>
-         var color2 = document.getElementById('run');
-         color2.onmouseover=function(){
-            this.style.backgroundColor='#'+Math.floor(Math.random()*0xffffff).toString(16);
-         }
-         setInterval(test2, 64000);
-      function test2(){
-         var color = '#'+Math.floor(Math.random()*0xffffff).toString(16);
-         document.body.style.backgroundColor=color;
-    }
-        </script>
           <script language="javascript">
             function getCurDate()
               {
@@ -243,5 +220,55 @@
               }
               setInterval("getCurDate()",100);
               </script>
+              <script>
+		        document.getElementById('ob').style.display="none";
+                document.getElementById('hr1').style.display="none";
+            document.getElementById('hr2').style.display="none";
+        function xbak(){
+			document.getElementById('ob').style.display="";
+			document.getElementById('xb').style.display="none";
+			document.body.style.backgroundImage="none";
+			document.getElementById('footer').style.color="#000"
+            document.getElementById("circle").style.backgroundColor="#000"
+            document.getElementById("yib").style.color="#000"
+            document.getElementById("gua").style.backgroundColor="rgba(255, 255, 255, 0)"
+            document.getElementById('hr1').style.display="";
+            document.getElementById('hr2').style.display="";
+
+		}
+		function obak(){
+			document.getElementById('ob').style.display="none";
+			document.getElementById('xb').style.display="";
+			document.body.style.backgroundImage="url(https://open.saintic.com/api/bingPic/)"
+            document.getElementById('footer').style.color="rgba(255, 255, 255, 0.5)"
+            document.getElementById("circle").style.backgroundColor="rgba(255, 255, 255,0.2)"
+            document.getElementById("yib").style.color="rgba(255, 255, 255, 0.8)"
+            document.getElementById("gua").style.backgroundColor="rgba(255, 255, 255, 1)"
+            document.getElementById('hr1').style.display="none";
+            document.getElementById('hr2').style.display="none";
+        }
+	</script>
+    <script>
+        function yaogua(){
+            var d = new Date();
+            //体卦逻辑
+            var years = d.getFullYear();
+            var month = d.getMonth()+1;
+            var days = d.getDate();
+            var yd = Math.floor(years+2697-3-39)%60; //六十甲子轮回
+            var ud = Math.floor(month) % 2+ Math.floor(days)% 3; //以月取阴，以日取阳，去三以象万物
+            var sd = Math.floor(month+days) % 6 + Math.floor(month+days) % 9; //取阴阳至道
+            var gd = Math.floor(years+month+days)*49%50;//大衍之数五十，其用四十有九
+            var dd = Math.floor(years+month+days)% 5; //人居岁月天地之中正
+            var m = (yd+ud+sd+gd+dd)%64+1;//合天意：1+2+5+8+4+43+1=63+1=64
+            document.getElementById('tg').src="./img/gua/"+ m +".png"
+            //用卦逻辑
+            var day = d.getFullYear()+d.getMonth()+1+d.getDate();
+            var now = d.getHours()+d.getMinutes()+d.getSeconds();
+            var nows = d.getMilliseconds();
+            var n=Math.floor(day+now+nows)%64+1; //天地之意，置于一瞬；人事之意，置于一瞬
+            document.getElementById('yg').src="./img/gua/"+ n +".png"
+        }
+    </script>
 </body>
 </html>
