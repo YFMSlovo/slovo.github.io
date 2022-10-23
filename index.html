@@ -55,7 +55,7 @@
 			 z-index: -1;
 			}
 			.fontstyle0{
-			font-size: 124px;
+			font-size: 132px;
             color:rgba(255,255,255,1);
             font-family: Arial;
             text-align:center;
@@ -92,7 +92,7 @@
                 text-decoration:none;
 			}
 			.fontstyle4{
-				font-size: 26px;
+				font-size: 20px;
                 color:#ffffff;
                 font-family: Arial;
                 display:inline;
@@ -375,11 +375,11 @@
 	}</style>
 	</head>
 	<body>
-		<div class="centermain" id="miao"><div class="fontstyle0">MIAO</div><br><span class="fontstyle4" id="logInfo"></span></div>
+		<div class="centermain" id="miao"><div class="fontstyle0">MIAO</div><br><span class="fontstyle4" id="logInfo"></span>&nbsp;&nbsp;<span class="fontstyle4" id="clrVal"></span></div>
 		<a type="button" onclick="xbak()" id="xb"><div class="xob"><div style="width: 20px;height: 20px;border:2px solid rgba(255,255,255,0.5);border-radius: 4px;"></div></div></a>
 		<a type="button" onclick="obak()" id="ob"><div class="xob"><div style="width: 20px;height: 20px;border:2px solid rgba(255,255,255,0.5);border-radius: 20px;"></div></div></a>
 
-		<a type="button" href="javascript:location.reload()" target="_self" id="cclr"><div class="circle"></div></a>
+		<a type="button" onclick="bakclr()" id="cclr"><div class="circle"></div></a>
 		<a type="button" onclick="pcb1()" id="pc1"><div class="circle"></div></a>
 		<a type="button" onclick="pcb2()" id="pc2"><div class="circle"></div></a>
 		<a type="button" onclick="phb1()" id="ph1"><div class="circle"></div></a>
@@ -536,6 +536,8 @@
 		//背景选择按钮
 		var color = '#'+Math.floor(Math.random()*0xffffff).toString(16);
          document.body.style.backgroundColor=color;
+		var clrVal=document.getElementById("clrVal");
+		clrVal.innerHTML= color;
 		setInterval(bakclr, 3600000);
 		document.getElementById('xb').style.display="none";
 		document.getElementById('footer').style.display="none";
@@ -582,6 +584,8 @@
       function bakclr(){
          var color = '#'+Math.floor(Math.random()*0xffffff).toString(16);
          document.body.style.backgroundColor=color;
+		 var clrVal=document.getElementById("clrVal");
+		 clrVal.innerHTML= color;
     }
 	</script>
 	<!-- <script>
