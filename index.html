@@ -379,6 +379,7 @@
 		<a type="button" onclick="xbak()" id="xb"><div class="xob"><div style="width: 20px;height: 20px;border:2px solid rgba(255,255,255,0.5);border-radius: 4px;"></div></div></a>
 		<a type="button" onclick="obak()" id="ob"><div class="xob"><div style="width: 20px;height: 20px;border:2px solid rgba(255,255,255,0.5);border-radius: 20px;"></div></div></a>
 
+		<a type="button" href="javascript:location.reload()" target="_self" id="cclr"><div class="circle"></div></a>
 		<a type="button" onclick="pcb1()" id="pc1"><div class="circle"></div></a>
 		<a type="button" onclick="pcb2()" id="pc2"><div class="circle"></div></a>
 		<a type="button" onclick="phb1()" id="ph1"><div class="circle"></div></a>
@@ -535,7 +536,7 @@
 		//背景选择按钮
 		var color = '#'+Math.floor(Math.random()*0xffffff).toString(16);
          document.body.style.backgroundColor=color;
-		setInterval(bakclr, 60000);
+		setInterval(bakclr, 3600000);
 		document.getElementById('xb').style.display="none";
 		document.getElementById('footer').style.display="none";
         function xbak(){
@@ -545,6 +546,7 @@
 			document.getElementById('footer').style.display="none";
 			document.getElementById('miao').style.display="";
 			document.getElementById('rundiv').style.display="";
+			document.getElementById('cclr').style.display="";
 			//电脑端
 			document.getElementById('pc1').style.display="none";
 			document.getElementById('player1').style.display="none";
@@ -566,6 +568,7 @@
 			document.getElementById('footer').style.display="";
 			document.getElementById('miao').style.display="none";
 			document.getElementById('rundiv').style.display="none";
+			document.getElementById('cclr').style.display="none";
 
 			if ((navigator.userAgent.match(/(iPhone|iPod|Android|ios|iPad)/i))) {    //跳到手机端
 			    document.getElementById('ph1').style.display="";
@@ -624,6 +627,7 @@
 			document.getElementById('pc2').style.display="";
 			document.getElementById('pc3').style.display="";
 			document.getElementById('pc4').style.display="";
+			document.getElementById('cclr').style.display="none";
 		}
 		function pcb2(){
 			document.getElementById('pc1').style.display="";
@@ -631,6 +635,7 @@
 			document.getElementById('pc2').style.display="none";
 			document.getElementById('pc3').style.display="none";
 			document.getElementById('pc4').style.display="none";
+			document.getElementById('cclr').style.display="";
 		}
 	</script>
 		<script type="text/javascript">
@@ -644,12 +649,14 @@
 				document.getElementById('ph2').style.display="";
 				document.getElementById('ph3').style.display="";
 				document.getElementById('ph4').style.display="";
+				document.getElementById('cclr').style.display="none";
 			}
 			function phb2(){
 				document.getElementById('ph1').style.display="";
 				document.getElementById('ph2').style.display="none";
 				document.getElementById('ph3').style.display="none";
 				document.getElementById('ph4').style.display="none";
+				document.getElementById('cclr').style.display="";
 			}
 		</script>
     <!-- <script type="text/javascript">
