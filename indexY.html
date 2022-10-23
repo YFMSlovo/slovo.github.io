@@ -260,7 +260,7 @@ function yaogua(){
     var years = d.getFullYear();
     var month = d.getMonth()+1;
     var days = d.getDate();
-    var yd = Math.floor(years+2697-3-39)%60; //六十甲子轮回
+    var yd = Math.floor(years+2697-3-39)%60+1; //六十甲子轮回
     var ud = Math.floor(month) % 2+ Math.floor(days)% 3; //以月取阴，以日取阳，去三以象万物
     var sd = Math.floor(month+days) % 6 + Math.floor(month+days) % 9; //取阴阳至道
     var gd = Math.floor(years+month+days)*49%50;//大衍之数五十，其用四十有九
