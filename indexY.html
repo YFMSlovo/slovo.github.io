@@ -155,11 +155,10 @@
                         var month = d.getMonth()+1;
                         var days = d.getDate();
                         var yd = Math.floor(years+2697-3-39)%60+1; //六十甲子轮回
-                        var ud = Math.floor(month) % 2+ Math.floor(days)% 3; //以月取阴，以日取阳，去三以象万物
-                        var sd = Math.floor(month+days) % 6 + Math.floor(month+days) % 9; //取阴阳至道
-                        var gd = Math.floor(years+month+days)*49%50;//大衍之数五十，其用四十有九
-                        var dd = Math.floor(years+month+days)% 5; //人居岁月天地之中正
-                        var n = (yd+ud+sd+gd+dd)%64+1;//合天意：1+2+5+8+4+43+1=63+1=64
+                        var sd = (Math.floor(years+month+days) % 6+1) * (Math.floor(years+month+days) % 9+1); //以六取阴，以九取阳，阴阳相交以象万物
+                        var gd = sd*50%49+1;//大衍之数五十，其用四十有九
+                        var dd = (Math.floor(years)% 5+1)+(Math.floor(month)% 5+1)+(Math.floor(days)% 5+1); //人居岁月天地之中正
+                        var n = (yd+gd+dd)%64+1;//合天之意：49+15=64
                     document.write("<img src=./img/gua/"+ n +".png class=img id=tg>")
                 </script>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -257,15 +256,15 @@ function obak(){
 function yaogua(){
     var d = new Date();
     //体卦逻辑
+    var d = new Date();
     var years = d.getFullYear();
     var month = d.getMonth()+1;
     var days = d.getDate();
     var yd = Math.floor(years+2697-3-39)%60+1; //六十甲子轮回
-    var ud = Math.floor(month) % 2+ Math.floor(days)% 3; //以月取阴，以日取阳，去三以象万物
-    var sd = Math.floor(month+days) % 6 + Math.floor(month+days) % 9; //取阴阳至道
-    var gd = Math.floor(years+month+days)*49%50;//大衍之数五十，其用四十有九
-    var dd = Math.floor(years+month+days)% 5; //人居岁月天地之中正
-    var m = (yd+ud+sd+gd+dd)%64+1;//合天意：1+2+5+8+4+43+1=63+1=64
+    var sd = (Math.floor(years+month+days) % 6+1) * (Math.floor(years+month+days) % 9+1); //以六取阴，以九取阳，阴阳相交以象万物
+    var gd = sd*50%49+1;//大衍之数五十，其用四十有九
+    var dd = (Math.floor(years)% 5+1)+(Math.floor(month)% 5+1)+(Math.floor(days)% 5+1); //人居岁月天地之中正
+    var m = (yd+gd+dd)%64+1;//合天之意：49+15=64
     document.getElementById('tg').src="./img/gua/"+ m +".png"
     //用卦逻辑
     var day = d.getFullYear()+d.getMonth()+1+d.getDate();
