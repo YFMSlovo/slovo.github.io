@@ -154,21 +154,40 @@
                         var years = d.getFullYear();
                         var month = d.getMonth()+1;
                         var days = d.getDate();
-                        var yd = Math.floor(years+2697-3-39)%60+1; //六十甲子轮回
-                        var sd = (Math.floor(years+month+days) % 6+1) * (Math.floor(years+month+days) % 9+1); //以六取阴，以九取阳，阴阳相交以象万物
-                        var gd = sd*50%49+1;//大衍之数五十，其用四十有九
-                        var dd = (Math.floor(years)% 5+1)+(Math.floor(month)% 5+1)+(Math.floor(days)% 5+1); //人居岁月天地之中正
-                        var n = (yd+gd+dd)%64+1;//合天之意：49+15=64
+                    //六十甲子轮回
+                        var yd = Math.floor(years+2697-3-39)%60;
+                            if (yd==0){yd=60}; 
+                    //天地以时为运
+                        var cd = Math.floor(yd+month+days);
+                    //以日取阳，以月取阴
+                        var md = Math.floor(month+days) % 6;
+                            if (md==0){md=6};
+                        var dd = Math.floor(yd+days) % 9;
+                            if (dd==0){dd=9};
+                    //阴阳交感，大衍之数五十，其用四十有九
+                        var gd = cd*md*dd*50%49;
+                            if (gd==0){gd=49};
+                    //人居岁月天地之中正
+                        var pdy = Math.floor(yd)% 5; 
+                            if (pdy==0){pdy=5};
+                        var pdm = Math.floor(month)% 5;
+                            if (pdm==0){pdm=5};
+                        var pdd = Math.floor(days)% 5;
+                            if (pdd==0){pdd=5};
+                    //合天之意：49+15=64
+                        var n = (gd+pdy+pdm+pdd)%64;
+                            if (n==0){n=64};
                     document.write("<img src=./img/gua/"+ n +".png class=img id=tg>")
                 </script>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <script>
                     //用卦
-                    var d = new Date();
                     var day = d.getFullYear()+d.getMonth()+1+d.getDate();
                     var now = d.getHours()+d.getMinutes()+d.getSeconds();
                     var nows = d.getMilliseconds();
-                    var n=Math.floor(day+now+nows)%64+1; //天地之意，置于一瞬；人事之意，置于一瞬
+                    //天地之意，置于一瞬；人事之意，置于一瞬
+                    var n=Math.floor(day+now+nows)%64;
+                        if (n==0){n=64};
                     document.write("<img src=./img/gua/"+ n +".png class=img id=yg>")
                 </script>
             </div>
@@ -256,21 +275,40 @@ function obak(){
 function yaogua(){
     var d = new Date();
     //体卦逻辑
-    var d = new Date();
     var years = d.getFullYear();
     var month = d.getMonth()+1;
     var days = d.getDate();
-    var yd = Math.floor(years+2697-3-39)%60+1; //六十甲子轮回
-    var sd = (Math.floor(years+month+days) % 6+1) * (Math.floor(years+month+days) % 9+1); //以六取阴，以九取阳，阴阳相交以象万物
-    var gd = sd*50%49+1;//大衍之数五十，其用四十有九
-    var dd = (Math.floor(years)% 5+1)+(Math.floor(month)% 5+1)+(Math.floor(days)% 5+1); //人居岁月天地之中正
-    var m = (yd+gd+dd)%64+1;//合天之意：49+15=64
+    //六十甲子轮回
+    var yd = Math.floor(years+2697-3-39)%60;
+        if (yd==0){yd=60}; 
+    //天地以时为运
+    var cd = Math.floor(yd+month+days);
+    //以日取阳，以月取阴
+    var md = Math.floor(month+days) % 6;
+        if (md==0){md=6};
+    var dd = Math.floor(yd+days) % 9;
+        if (dd==0){dd=9};
+    //阴阳交感，大衍之数五十，其用四十有九
+    var gd = cd*md*dd*50%49;
+        if (gd==0){gd=49};
+    //人居岁月天地之中正
+    var pdy = Math.floor(yd)% 5; 
+        if (pdy==0){pdy=5};
+    var pdm = Math.floor(month)% 5;
+        if (pdm==0){pdm=5};
+    var pdd = Math.floor(days)% 5;
+        if (pdd==0){pdd=5};
+    //合天之意：49+15=64
+    var m = (gd+pdy+pdm+pdd)%64;
+        if (m==0){m=64};
     document.getElementById('tg').src="./img/gua/"+ m +".png"
     //用卦逻辑
     var day = d.getFullYear()+d.getMonth()+1+d.getDate();
     var now = d.getHours()+d.getMinutes()+d.getSeconds();
     var nows = d.getMilliseconds();
-    var n=Math.floor(day+now+nows)%64+1; //天地之意，置于一瞬；人事之意，置于一瞬
+    //天地之意，置于一瞬；人事之意，置于一瞬
+    var n=Math.floor(day+now+nows)%64;
+        if (n==0){n=64};
     document.getElementById('yg').src="./img/gua/"+ n +".png"
 }
 </script>
