@@ -107,18 +107,18 @@
           
      }
      .img{
-        width: 157px;
-        height: 199px;
+        width: 117px;
+        height: 179px;
      }
      .imaged{
         background-color: rgba(255, 255, 255, 1);
-        padding: 50px;
+        padding: 40px;
         border-radius: 4px;
 		-moz-border-radius: 4px;      
 		-webkit-border-radius: 4px;
         position: absolute;
-        width: 360px;
-        height: 200px;
+        width: 414px;
+        height: 180px;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
@@ -146,53 +146,64 @@
 	<a type="button" onclick="obak()" id="ob"><div class="xob" id="obb"><div style="width: 20px;height: 20px;border:2px solid rgba(255,255,255,0.5);border-radius: 20px;"></div></div></a>
     <div class="centermain">
         <div class="fontstyle1">
-            <hr style="height:1px;width:410px;position: absolute;left: 50%;transform: translate(-50%);top:60px;border:none;border-top:1px solid rgb(0, 0, 0);" id="hr1" />
+            <hr style="height:1px;width:414px;position: absolute;left: 50%;transform: translate(-50%);top:60px;border:none;border-top:1px solid rgb(0, 0, 0);" id="hr1" />
             <div class="imaged" id="gua">
                 <script>
-                    //体卦
-                        var d = new Date();
-                        var years = d.getFullYear();
-                        var month = d.getMonth()+1;
-                        var days = d.getDate();
+                var d = new Date();
+                var years = d.getFullYear();
+                var month = d.getMonth()+1;
+                var days = d.getDate();
+                    //年卦
                     //六十甲子轮回
-                        var yd = Math.floor(years+2697-3-39)%60;
+                    var yd = Math.floor(years+2697)%60;
+                        if (yd==0){yd=60}; 
+                    //大衍之数五十，其用四十有九
+                    var jj = yd*50%49;
+                        if (jj==0){jj=49};
+                    //年卦以九取阳，以六取阴
+                    var jx = yd%9;
+                        if (jx==0){jx=9}; 
+                    var jy = yd%6;
+                        if (jy==0){jy=6}; 
+                    var j=(jj*(jx+jy))%64;
+                        if (j==0){j=64};
+                    document.write("<img src=./img/gua/"+ j +".png class=img id=ng>")
+                    </script>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <script>
+                    //体卦
+                    //六十甲子轮回
+                        var yd = Math.floor(years+2697)%60;
                             if (yd==0){yd=60}; 
                     //天地以时为运
-                        var cd = Math.floor(yd+month+days);
-                    //以日取阳，以月取阴
-                        var md = Math.floor(month+days) % 6;
-                            if (md==0){md=6};
+                        var td = Math.floor(yd+month+days);
+                    //大衍之数五十，其用四十有九
+                        var gd = td*50%49;
+                            if (gd==0){gd=49};
+                    //立于当日，以阳取阳，以月取阴
                         var dd = Math.floor(yd+days) % 9;
                             if (dd==0){dd=9};
-                    //阴阳交感，大衍之数五十，其用四十有九
-                        var gd = cd*md*dd*50%49;
-                            if (gd==0){gd=49};
-                    //人居岁月天地之中正
-                        var pdy = Math.floor(yd)% 5; 
-                            if (pdy==0){pdy=5};
-                        var pdm = Math.floor(month)% 5;
-                            if (pdm==0){pdm=5};
-                        var pdd = Math.floor(days)% 5;
-                            if (pdd==0){pdd=5};
-                    //合天之意：49+15=64
-                        var n = (gd+pdy+pdm+pdd)%64;
+                        var md = Math.floor(month+days) % 6;
+                            if (md==0){md=6};
+                    //合天之意，并正其时：49+6+9=64
+                        var n = (gd*(md+dd))%64;
                             if (n==0){n=64};
                     document.write("<img src=./img/gua/"+ n +".png class=img id=tg>")
                 </script>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <script>
                     //用卦
                     var day = d.getFullYear()+d.getMonth()+1+d.getDate();
                     var now = d.getHours()+d.getMinutes()+d.getSeconds();
                     var nows = d.getMilliseconds();
                     //天地之意，置于一瞬；人事之意，置于一瞬
-                    var n=Math.floor(day+now+nows)%64;
-                        if (n==0){n=64};
-                    document.write("<img src=./img/gua/"+ n +".png class=img id=yg>")
+                    var m=Math.floor(day*now*nows)%64;
+                        if (m==0){m=64};
+                    document.write("<img src=./img/gua/"+ m +".png class=img id=yg>")
                 </script>
             </div>
         </div>
-    <hr style="height:1px;width:410px;position: absolute;left: 50%;transform: translate(-50%);bottom:60px;border:none;border-top:1px solid rgb(0, 0, 0);" id="hr2"/>
+    <hr style="height:1px;width:414px;position: absolute;left: 50%;transform: translate(-50%);bottom:60px;border:none;border-top:1px solid rgb(0, 0, 0);" id="hr2"/>
         <a class="fontstyle3"  id="yib"><span style="padding-right:26px ;border-right: solid 1px rgba(255, 255, 255, 0.5);" id="ysp">毅卜</span>&nbsp;&nbsp;&nbsp;&nbsp;<span id="logInfo"></span></a>
     </div>
     <div style="z-index: 6;">
@@ -274,42 +285,51 @@ function obak(){
 <script>
 function yaogua(){
     var d = new Date();
-    //体卦逻辑
     var years = d.getFullYear();
     var month = d.getMonth()+1;
     var days = d.getDate();
+    //年卦逻辑
+    var yd = Math.floor(years+2697)%60;
+        if (yd==0){yd=60}; 
+    //大衍之数五十，其用四十有九
+    var jj = yd*50%49;
+        if (jj==0){jj=49};
+    //年卦以九取阳，以六取阴
+    var jx = yd%9;
+        if (jx==0){jx=9}; 
+    var jy = yd%6;
+        if (jy==0){jy=6}; 
+    var j=(jj*(jx+jy))%64;
+        if (j==0){j=64};
+    document.getElementById('ng').src="./img/gua/"+ j +".png"
+
+    //体卦逻辑
     //六十甲子轮回
-    var yd = Math.floor(years+2697-3-39)%60;
+    var yd = Math.floor(years+2697)%60;
         if (yd==0){yd=60}; 
     //天地以时为运
-    var cd = Math.floor(yd+month+days);
-    //以日取阳，以月取阴
-    var md = Math.floor(month+days) % 6;
-        if (md==0){md=6};
+    var td = Math.floor(yd+month+days);
+    //大衍之数五十，其用四十有九
+    var gd = td*50%49;
+        if (gd==0){gd=49};
+    //立于当日，以阳取阳，以月取阴
     var dd = Math.floor(yd+days) % 9;
         if (dd==0){dd=9};
-    //阴阳交感，大衍之数五十，其用四十有九
-    var gd = cd*md*dd*50%49;
-        if (gd==0){gd=49};
-    //人居岁月天地之中正
-    var pdy = Math.floor(yd)% 5; 
-        if (pdy==0){pdy=5};
-    var pdm = Math.floor(month)% 5;
-        if (pdm==0){pdm=5};
-    var pdd = Math.floor(days)% 5;
-        if (pdd==0){pdd=5};
-    //合天之意：49+15=64
-    var m = (gd+pdy+pdm+pdd)%64;
-        if (m==0){m=64};
-    document.getElementById('tg').src="./img/gua/"+ m +".png"
+    var md = Math.floor(month+days) % 6;
+        if (md==0){md=6};
+    //合天之意，并正其时：49+6+9=64
+    var n = (gd*(md+dd))%64;
+        if (n==0){n=64};
+    document.getElementById('tg').src="./img/gua/"+ n +".png"
+
     //用卦逻辑
     var day = d.getFullYear()+d.getMonth()+1+d.getDate();
     var now = d.getHours()+d.getMinutes()+d.getSeconds();
     var nows = d.getMilliseconds();
     //天地之意，置于一瞬；人事之意，置于一瞬
-    var n=Math.floor(day+now+nows)%64;
-        if (n==0){n=64};
-    document.getElementById('yg').src="./img/gua/"+ n +".png"
+    var m=Math.floor(day*now*nows)%64;
+        if (m==0){m=64};
+    document.getElementById('yg').src="./img/gua/"+ m +".png"
 }
 </script>
 </html>
