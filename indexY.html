@@ -149,23 +149,29 @@
             <hr style="height:1px;width:414px;position: absolute;left: 50%;transform: translate(-50%);top:60px;border:none;border-top:1px solid rgb(0, 0, 0);" id="hr1" />
             <div class="imaged" id="gua">
                 <script>
-                var d = new Date();
-                var years = d.getFullYear();
-                var month = d.getMonth()+1;
-                var days = d.getDate();
+                    var d = new Date();
+                    var years = d.getFullYear();
+                    var month = d.getMonth()+1;
+                    var days = d.getDate();
                     //年卦
                     //六十甲子轮回
                     var yd = Math.floor(years+2697)%60;
                         if (yd==0){yd=60}; 
+                    //天地之数五十有五，天数二十有五，地数三十
+                    var ja = yd%55;
+                        if (ja==0){ja=55};
                     //大衍之数五十，其用四十有九
-                    var jj = yd*50%49;
+                    var jk = yd%50;
+                        if (jk==0){jk=50};
+                    var jj = jk-1;
                         if (jj==0){jj=49};
-                    //年卦以九取阳，以六取阴
+                    //大运以九取阳，以六取阴
                     var jx = yd%9;
                         if (jx==0){jx=9}; 
                     var jy = yd%6;
                         if (jy==0){jy=6}; 
-                    var j=(jj*(jx+jy))%64;
+                    //合天地之意，并正其时：25+30=55；49+6+9=64
+                    var j=(ja*(jj+jx+jy))%64;
                         if (j==0){j=64};
                     document.write("<img src=./img/gua/"+ j +".png class=img id=ng>")
                     </script>
@@ -177,16 +183,21 @@
                             if (yd==0){yd=60}; 
                     //天地以时为运
                         var td = Math.floor(yd+month+days);
+                    //天地之数五十有五，天数二十有五，地数三十
+                        var ga = td%55;
+                            if (ga==0){ga=55};
                     //大衍之数五十，其用四十有九
-                        var gd = td*50%49;
+                        var gf = td%50;
+                            if (gf==0){gf=50};
+                        var gd = gf-1;
                             if (gd==0){gd=49};
                     //立于当日，以阳取阳，以月取阴
                         var dd = Math.floor(yd+days) % 9;
                             if (dd==0){dd=9};
                         var md = Math.floor(month+days) % 6;
                             if (md==0){md=6};
-                    //合天之意，并正其时：49+6+9=64
-                        var n = (gd*(md+dd))%64;
+                    //合天地之意，并正其时：25+30=55；49+6+9=64
+                        var n = (ga*(gd+md+dd))%64;
                             if (n==0){n=64};
                     document.write("<img src=./img/gua/"+ n +".png class=img id=tg>")
                 </script>
@@ -291,15 +302,21 @@ function yaogua(){
     //年卦逻辑
     var yd = Math.floor(years+2697)%60;
         if (yd==0){yd=60}; 
+    //天地之数五十有五，天数二十有五，地数三十
+    var ja = yd%55;
+        if (ja==0){ja=55};
     //大衍之数五十，其用四十有九
-    var jj = yd*50%49;
+    var jk = yd%50;
+        if (jk==0){jk=50};
+    var jj = jk-1;
         if (jj==0){jj=49};
-    //年卦以九取阳，以六取阴
+    //大运以九取阳，以六取阴
     var jx = yd%9;
         if (jx==0){jx=9}; 
     var jy = yd%6;
         if (jy==0){jy=6}; 
-    var j=(jj*(jx+jy))%64;
+    //合天地之意，并正其时：25+30=55；49+6+9=64
+    var j=(ja*(jj+jx+jy))%64;
         if (j==0){j=64};
     document.getElementById('ng').src="./img/gua/"+ j +".png"
 
@@ -309,16 +326,21 @@ function yaogua(){
         if (yd==0){yd=60}; 
     //天地以时为运
     var td = Math.floor(yd+month+days);
+    //天地之数五十有五，天数二十有五，地数三十
+    var ga = td%55;
+        if (ga==0){ga=55};
     //大衍之数五十，其用四十有九
-    var gd = td*50%49;
+    var gf = td%50;
+        if (gf==0){gf=50};
+    var gd = gf-1;
         if (gd==0){gd=49};
     //立于当日，以阳取阳，以月取阴
     var dd = Math.floor(yd+days) % 9;
         if (dd==0){dd=9};
     var md = Math.floor(month+days) % 6;
         if (md==0){md=6};
-    //合天之意，并正其时：49+6+9=64
-    var n = (gd*(md+dd))%64;
+    //合天地之意，并正其时：25+30=55；49+6+9=64
+    var n = (ga*(gd+md+dd))%64;
         if (n==0){n=64};
     document.getElementById('tg').src="./img/gua/"+ n +".png"
 
