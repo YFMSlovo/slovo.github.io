@@ -191,7 +191,7 @@
                             if (gf==0){gf=50};
                         var gd = gf-1;
                             if (gd==0){gd=49};
-                    //立于当日，以阳取阳，以月取阴
+                    //立于当日，以阳取阳，以阴取阴
                         var dd = Math.floor(yd+days) % 9;
                             if (dd==0){dd=9};
                         var md = Math.floor(month+days) % 6;
@@ -204,21 +204,23 @@
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <script>
                     //用卦
-                    var day = d.getFullYear()+d.getMonth()+1+d.getDate();
-                    var now = d.getHours()+d.getMinutes()+d.getSeconds();
-                    var nows = d.getMilliseconds();
+		    var years = d.getFullYear();
+                    var month = d.getMonth()+1;
+                    var days = d.getDate();
+                    var now = d.getHours()+d.getMinutes()+d.getSeconds()+d.getMilliseconds();
+		    var nows = Math.floor(years+month+days+now);
                     //天地之数五十有五，天数二十有五，地数三十
-                    var ua = day%55;
+                    var ua = nows%55;
                             if (ua==0){ua=55};
                     //大衍之数五十，其用四十有九
-                    var uf = day%50;
+                    var uf = nows%50;
                             if (uf==0){uf=50};
                     var ud = uf-1;
                             if (ud==0){ud=49};
-                    //大运以九取阳，以六取阴
-                    var ux = now%9;
+                    //立于当时，以阳取阳，以阴取阴
+                    var ux = Math.floor(years+days+now)%9;
                         if (ux==0){ux=9}; 
-                    var uy = nows%6;
+                    var uy = Math.floor(month+now)%6;
                         if (uy==0){uy=6}; 
                     //天地之意，置于一瞬；人事之意，置于一瞬
                     var m=Math.floor(ua*(ud+ux+uy))%64;
@@ -358,26 +360,27 @@ function yaogua(){
     document.getElementById('tg').src="./img/gua/"+ n +".png"
 
     //用卦逻辑
-    var day = d.getFullYear()+d.getMonth()+1+d.getDate();
-    var now = d.getHours()+d.getMinutes()+d.getSeconds();
-    var nows = d.getMilliseconds();
-    //天地之数五十有五，天数二十有五，地数三十
-    var ua = day%55;
-            if (ua==0){ua=55};
-    //大衍之数五十，其用四十有九
-    var uf = day%50;
-            if (uf==0){uf=50};
-    var ud = uf-1;
-            if (ud==0){ud=49};
-    //大运以九取阳，以六取阴
-    var ux = now%9;
-            if (ux==0){ux=9}; 
-    var uy = nows%6;
-            if (uy==0){uy=6}; 
-    //天地之意，置于一瞬；人事之意，置于一瞬
-    var m=Math.floor(ua*(ud+ux+uy))%64;
-            if (m==0){m=64};
-    document.getElementById('yg').src="./img/gua/"+ m +".png"
-}
+		    var years = d.getFullYear();
+                    var month = d.getMonth()+1;
+                    var days = d.getDate();
+                    var now = d.getHours()+d.getMinutes()+d.getSeconds()+d.getMilliseconds();
+		    var nows = Math.floor(years+month+days+now);
+                    //天地之数五十有五，天数二十有五，地数三十
+                    var ua = nows%55;
+                            if (ua==0){ua=55};
+                    //大衍之数五十，其用四十有九
+                    var uf = nows%50;
+                            if (uf==0){uf=50};
+                    var ud = uf-1;
+                            if (ud==0){ud=49};
+                    //立于当时，以阳取阳，以阴取阴
+                    var ux = Math.floor(years+days+now)%9;
+                        if (ux==0){ux=9}; 
+                    var uy = Math.floor(month+now)%6;
+                        if (uy==0){uy=6}; 
+                    //天地之意，置于一瞬；人事之意，置于一瞬
+                    var m=Math.floor(ua*(ud+ux+uy))%64;
+                        if (m==0){m=64};
+                    document.write("<img src=./img/gua/"+ m +".png class=img id=yg>")
 </script>
 </html>
