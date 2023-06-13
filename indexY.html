@@ -108,7 +108,9 @@
      }
      .img{
         width: 117px;
-        height: 179px;
+        height: 15px;
+        margin-top: 6px;
+        margin-bottom: 6px;
      }
      .imaged{
         background-color: rgba(255, 255, 255, 1);
@@ -123,6 +125,14 @@
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: 8;
+     }
+     .image{
+        width: 117px;
+        height: 200px;
+        float:left; 
+        display:inline;
+        margin-right: 10px;
+        margin-left: 10px;
      }
      .xob{
 				position: absolute;
@@ -148,85 +158,220 @@
         <div class="fontstyle1">
             <hr style="height:1px;width:414px;position: absolute;left: 50%;transform: translate(-50%);top:60px;border:none;border-top:1px solid rgb(0, 0, 0);" id="hr1" />
             <div class="imaged" id="gua">
-                <script>
-                    var d = new Date();
-                    var years = d.getFullYear();
-                    var month = d.getMonth()+1;
-                    var days = d.getDate();
-                    //年卦
-                    //六十甲子轮回
-                    var yd = Math.floor(years+2697)%60;
-                        if (yd==0){yd=60}; 
-                    //天地之数五十有五，天数二十有五，地数三十
-                    var ja = yd%55;
-                        if (ja==0){ja=55};
-                    //大衍之数五十，其用四十有九
-                    var jk = yd%50;
-                        if (jk==0){jk=50};
-                    var jj = jk-1;
-                        if (jj==0){jj=49};
-                    //大运以九取阳，以六取阴
-                    var jx = yd%9;
-                        if (jx==0){jx=9}; 
-                    var jy = yd%6;
-                        if (jy==0){jy=6}; 
-                    //合天地之意，并正其时：25+30=55；49+6+9=64
-                    var j=(ja*(jj+jx+jy))%64;
-                        if (j==0){j=64};
-                    document.write("<img src=./img/gua/"+ j +".png class=img id=ng>")
-                    </script>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <script>
-                    //体卦
-                    //六十甲子轮回
+                <div class="image">
+                    <script>
+                        var d = new Date();
+                        var years = d.getFullYear();
+                        var month = d.getMonth()+1;
+                        var days = d.getDate();
                         var yd = Math.floor(years+2697)%60;
                             if (yd==0){yd=60}; 
-                    //天地以时为运
-                        var td = Math.floor(yd+month+days);
-                    //天地之数五十有五，天数二十有五，地数三十
-                        var ga = td%55;
-                            if (ga==0){ga=55};
-                    //大衍之数五十，其用四十有九
-                        var gf = td%50;
-                            if (gf==0){gf=50};
-                        var gd = gf-1;
-                            if (gd==0){gd=49};
-                    //立于当日，以阳取阳，以阴取阴
-                        var dd = Math.floor(yd+days) % 9;
-                            if (dd==0){dd=9};
-                        var md = Math.floor(month+days) % 6;
-                            if (md==0){md=6};
-                    //合天地之意，并正其时：25+30=55；49+6+9=64
-                        var n = (ga*(gd+md+dd))%64;
-                            if (n==0){n=64};
-                    document.write("<img src=./img/gua/"+ n +".png class=img id=tg>")
-                </script>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <script>
-                    //用卦
-		    var years = d.getFullYear();
-                    var month = d.getMonth()+1;
-                    var days = d.getDate();
-                    var now = d.getHours()+d.getMinutes()+d.getSeconds()+d.getMilliseconds();
-		    var nows = Math.floor(years+month+days+now);
-                    //天地之数五十有五，天数二十有五，地数三十
-                    var ua = nows%55;
-                            if (ua==0){ua=55};
-                    //大衍之数五十，其用四十有九
-                    var uf = nows%50;
-                            if (uf==0){uf=50};
-                    var ud = uf-1;
-                            if (ud==0){ud=49};
-                    //立于当时，以阳取阳，以阴取阴
-                    var ux = Math.floor(years+days+now)%9;
-                        if (ux==0){ux=9}; 
-                    var uy = Math.floor(month+now)%6;
-                        if (uy==0){uy=6}; 
-                    //天地之意，置于一瞬；人事之意，置于一瞬
-                    var m=Math.floor(ua*(ud+ux+uy))%64;
-                        if (m==0){m=64};
-                    document.write("<img src=./img/gua/"+ m +".png class=img id=yg>")
-                </script>
+                        //年卦
+                        //六十甲子轮回
+                        var ns = yd;
+                        var nht1 = 1;
+                        var nht2 = ns%2;
+                            if (nht2==0){nht2=2};
+                        var nht3 = ns%3;
+                            if (nht3==0){nht3=3};
+                        var nht4 = ns%4;
+                            if (nht4==0){nht4=4};
+                        var nht5 = ns%5;
+                            if (nht5==0){nht5=5};
+                        var nht6 = ns%6;
+                            if (nht6==0){nht6=6};
+                        var nht7 = ns%7;
+                            if (nht7==0){nht7=7};
+                        var nht8 = ns%8;
+                            if (nht8==0){nht8=8};
+                        var nht9 = ns%9;
+                            if (nht9==0){nht9=9};
+                        
+                        //据河图，取变爻，自地至天
+                        var bgn1 = (nht2+nht5+nht8)%6;
+                            if (bgn1==0){bgn1=6};
+                        var bgn2 = (nht4+nht5+nht6)%6;
+                            if (bgn2==0){bgn2=6};
+                        //据河图取卦，自下至上，自右至左，用之以用，变之以变
+                        var ng1 = nht4+nht3+nht8
+                            if(bgn1==1){ng1++};
+                            if(bgn2==1){ng1++};
+                            ng1 = ng1%2
+                        document.write("<img src=./img/"+ ng1 +".jpg class=img id=ng1>")
+    
+                        var ng2 = nht9+nht5+nht1
+                            if(bgn1==2){ng2++};
+                            if(bgn2==2){ng2++};
+                            ng2 = ng2%2
+                        document.write("<img src=./img/"+ ng2 +".jpg class=img id=ng2>")
+
+                        var ng3 = nht2+nht7+nht6
+                            if(bgn1==3){ng3++};
+                            if(bgn2==3){ng3++};
+                            ng3 = ng3%2
+                        document.write("<img src=./img/"+ ng3 +".jpg class=img id=ng3>")
+    
+                        var ng4 = nht4+nht9+nht2
+                            if(bgn1==4){ng4++};
+                            if(bgn2==4){ng4++};
+                            ng4 = ng4%2
+                        document.write("<img src=./img/"+ ng4 +".jpg class=img id=ng4>")
+    
+                        var ng5 = nht3+nht5+nht7
+                            if(bgn1==5){ng5++};
+                            if(bgn2==5){ng5++};
+                            ng5 = ng5%2
+                        document.write("<img src=./img/"+ ng5 +".jpg class=img id=ng5>")
+    
+                        var ng6 = nht8+nht1+nht6
+                            if(bgn1==6){ng6++};
+                            if(bgn2==6){ng6++};
+                            ng6 = ng6%2
+                        document.write("<img src=./img/"+ ng6 +".jpg class=img id=ng6>")
+                    </script>
+                </div>
+                <div class="image">
+                    <script>
+                        //体卦
+                        var d = new Date();
+                            var years = d.getFullYear();
+                            var month = d.getMonth()+1;
+                            var days = d.getDate();
+                            var yd = Math.floor(years+2697)%60;
+                                if (yd==0){yd=60}; 
+                            var rs = Math.floor(yd+month+days);
+                            var rht1 = 1;
+                        var rht2 = rs%2;
+                            if (rht2==0){rht2=2};
+                        var rht3 = rs%3;
+                            if (rht3==0){rht3=3};
+                        var rht4 = rs%4;
+                            if (rht4==0){rht4=4};
+                        var rht5 = rs%5;
+                            if (rht5==0){rht5=5};
+                        var rht6 = rs%6;
+                            if (rht6==0){rht6=6};
+                        var rht7 = rs%7;
+                            if (rht7==0){rht7=7};
+                        var rht8 = rs%8;
+                            if (rht8==0){rht8=8};
+                        var rht9 = rs%9;
+                            if (rht9==0){rht9=9};
+                        
+                        //据河图，取变爻，自地至天
+                        var bgr1 = (rht2+rht5+rht8)%6;
+                            if (bgr1==0){bgr1=6};
+                        var bgr2 = (rht4+rht5+rht6)%6;
+                            if (bgr2==0){bgr2=6};
+                            //据河图取卦，自下至上，自右至左，用之以用，变之以变
+                            var rg1 = rht4+rht3+rht8
+                                if(bgr1==1){rg1++};
+                                if(bgr2==1){rg1++};
+                                rg1 = rg1%2
+                            document.write("<img src=./img/"+ rg1 +".jpg class=img id=tg1>")
+        
+                            var rg2 = rht9+rht5+rht1
+                                if(bgr1==2){rg2++};
+                                if(bgr2==2){rg2++};
+                                rg2 = rg2%2
+                            document.write("<img src=./img/"+ rg2 +".jpg class=img id=tg2>")
+    
+                            var rg3 = rht2+rht7+rht6
+                                if(bgr1==3){rg3++};
+                                if(bgr2==3){rg3++};
+                                rg3 = rg3%2
+                            document.write("<img src=./img/"+ rg3 +".jpg class=img id=tg3>")
+        
+                            var rg4 = rht4+rht9+rht2
+                                if(bgr1==4){rg4++};
+                                if(bgr2==4){rg4++};
+                                rg4 = rg4%2
+                            document.write("<img src=./img/"+ rg4 +".jpg class=img id=tg4>")
+        
+                            var rg5 = rht3+rht5+rht7
+                                if(bgr1==5){rg5++};
+                                if(bgr2==5){rg5++};
+                                rg5 = rg5%2
+                            document.write("<img src=./img/"+ rg5 +".jpg class=img id=tg5>")
+        
+                            var rg6 = rht8+rht1+rht6
+                                if(bgr1==6){rg6++};
+                                if(bgr2==6){rg6++};
+                                rg6 = rg6%2
+                            document.write("<img src=./img/"+ rg6 +".jpg class=img id=tg6>")
+                    </script>
+                </div>
+                <div class="image">
+                    <script>
+                        //用卦
+                        var years = d.getFullYear();
+                        var day = d.getMonth()+1+d.getDate();
+                        var now = d.getHours()+d.getMinutes()+d.getSeconds();
+                        var nows = d.getMilliseconds();
+                        var yd = Math.floor(years+2697)%60;
+                            if (yd==0){yd=60}; 
+                        var ss = Math.floor(yd+day+now+nows);
+                        var sht1 = 1;
+                        var sht2 = ss%2;
+                            if (sht2==0){sht2=2};
+                        var sht3 = ss%3;
+                            if (sht3==0){sht3=3};
+                        var sht4 = ss%4;
+                            if (sht4==0){sht4=4};
+                        var sht5 = ss%5;
+                            if (sht5==0){sht5=5};
+                        var sht6 = ss%6;
+                            if (sht6==0){sht6=6};
+                        var sht7 = ss%7;
+                            if (sht7==0){sht7=7};
+                        var sht8 = ss%8;
+                            if (sht8==0){sht8=8};
+                        var sht9 = ss%9;
+                            if (sht9==0){sht9=9};
+                        
+                        //据河图，取变爻，自地至天
+                        var bgs1 = (sht2+sht5+sht8)%6;
+                            if (bgs1==0){bgs1=6};
+                        var bgs2 = (sht4+sht5+sht6)%6;
+                            if (bgs2==0){bgs2=6};
+                        //据河图取卦，自下至上，自右至左，用之以用，变之以变
+                        var sg1 = sht4+sht3+sht8
+                            if(bgs1==1){sg1++};
+                            if(bgs2==1){sg1++};
+                            sg1 = sg1%2
+                        document.write("<img src=./img/"+ sg1 +".jpg class=img id=yg1>")
+            
+                        var sg2 = sht9+sht5+sht1
+                            if(bgs1==2){sg2++};
+                            if(bgs2==2){sg2++};
+                            sg2 = sg2%2
+                        document.write("<img src=./img/"+ sg2 +".jpg class=img id=yg2>")
+        
+                        var sg3 = sht2+sht7+sht6
+                            if(bgs1==3){sg3++};
+                            if(bgs2==3){sg3++};
+                            sg3 = sg3%2
+                        document.write("<img src=./img/"+ sg3 +".jpg class=img id=yg3>")
+            
+                        var sg4 = sht4+sht9+sht2
+                            if(bgs1==4){sg4++};
+                            if(bgs2==4){sg4++};
+                            sg4 = sg4%2
+                        document.write("<img src=./img/"+ sg4 +".jpg class=img id=yg4>")
+            
+                        var sg5 = sht3+sht5+sht7
+                            if(bgs1==5){sg5++};
+                            if(bgs2==5){sg5++};
+                            sg5 = sg5%2
+                        document.write("<img src=./img/"+ sg5 +".jpg class=img id=yg5>")
+            
+                        var sg6 = sht8+sht1+sht6
+                            if(bgs1==6){sg6++};
+                            if(bgs2==6){sg6++};
+                            sg6 = sg6%2
+                        document.write("<img src=./img/"+ sg6 +".jpg class=img id=yg6>")
+                    </script>
+                </div>
             </div>
         </div>
     <hr style="height:1px;width:414px;position: absolute;left: 50%;transform: translate(-50%);bottom:60px;border:none;border-top:1px solid rgb(0, 0, 0);" id="hr2"/>
@@ -314,73 +459,197 @@ function yaogua(){
     var years = d.getFullYear();
     var month = d.getMonth()+1;
     var days = d.getDate();
-    //年卦逻辑
     var yd = Math.floor(years+2697)%60;
-        if (yd==0){yd=60}; 
-    //天地之数五十有五，天数二十有五，地数三十
-    var ja = yd%55;
-        if (ja==0){ja=55};
-    //大衍之数五十，其用四十有九
-    var jk = yd%50;
-        if (jk==0){jk=50};
-    var jj = jk-1;
-        if (jj==0){jj=49};
-    //大运以九取阳，以六取阴
-    var jx = yd%9;
-        if (jx==0){jx=9}; 
-    var jy = yd%6;
-        if (jy==0){jy=6}; 
-    //合天地之意，并正其时：25+30=55；49+6+9=64
-    var j=(ja*(jj+jx+jy))%64;
-        if (j==0){j=64};
-    document.getElementById('ng').src="./img/gua/"+ j +".png"
+                            if (yd==0){yd=60}; 
+                        //年卦
+                        //六十甲子轮回
+                        var ns = yd;
+                        var nht1 = 1;
+                        var nht2 = ns%2;
+                            if (nht2==0){nht2=2};
+                        var nht3 = ns%3;
+                            if (nht3==0){nht3=3};
+                        var nht4 = ns%4;
+                            if (nht4==0){nht4=4};
+                        var nht5 = ns%5;
+                            if (nht5==0){nht5=5};
+                        var nht6 = ns%6;
+                            if (nht6==0){nht6=6};
+                        var nht7 = ns%7;
+                            if (nht7==0){nht7=7};
+                        var nht8 = ns%8;
+                            if (nht8==0){nht8=8};
+                        var nht9 = ns%9;
+                            if (nht9==0){nht9=9};
+                        
+                        //据河图，取变爻，自地至天
+                        var bgn1 = (nht2+nht5+nht8)%6;
+                            if (bgn1==0){bgn1=6};
+                        var bgn2 = (nht4+nht5+nht6)%6;
+                            if (bgn2==0){bgn2=6};
+                        //据河图取卦，自下至上，自右至左，用之以用，变之以变
+                        var ng1 = nht4+nht3+nht8
+                            if(bgn1==1){ng1++};
+                            if(bgn2==1){ng1++};
+                            ng1 = ng1%2
+                        document.getElementById('ng1').src="./img/"+ ng1 +".jpg"
+                        var ng2 = nht9+nht5+nht1
+                            if(bgn1==2){ng2++};
+                            if(bgn2==2){ng2++};
+                            ng2 = ng2%2
+                        document.getElementById('ng2').src="./img/"+ ng2 +".jpg"
+
+                        var ng3 = nht2+nht7+nht6
+                            if(bgn1==3){ng3++};
+                            if(bgn2==3){ng3++};
+                            ng3 = ng3%2
+                        document.getElementById('ng3').src="./img/"+ ng3 +".jpg"
+    
+                        var ng4 = nht4+nht9+nht2
+                            if(bgn1==4){ng4++};
+                            if(bgn2==4){ng4++};
+                            ng4 = ng4%2
+                        document.getElementById('ng4').src="./img/"+ ng4 +".jpg"
+    
+                        var ng5 = nht3+nht5+nht7
+                            if(bgn1==5){ng5++};
+                            if(bgn2==5){ng5++};
+                            ng5 = ng5%2
+                        document.getElementById('ng5').src="./img/"+ ng5 +".jpg"
+    
+                        var ng6 = nht8+nht1+nht6
+                            if(bgn1==6){ng6++};
+                            if(bgn2==6){ng6++};
+                            ng6 = ng6%2
+                        document.getElementById('ng6').src="./img/"+ ng6 +".jpg"
 
     //体卦逻辑
     //六十甲子轮回
-    var yd = Math.floor(years+2697)%60;
-        if (yd==0){yd=60}; 
-    //天地以时为运
-    var td = Math.floor(yd+month+days);
-    //天地之数五十有五，天数二十有五，地数三十
-    var ga = td%55;
-        if (ga==0){ga=55};
-    //大衍之数五十，其用四十有九
-    var gf = td%50;
-        if (gf==0){gf=50};
-    var gd = gf-1;
-        if (gd==0){gd=49};
-    //立于当日，以阳取阳，以月取阴
-    var dd = Math.floor(yd+days) % 9;
-        if (dd==0){dd=9};
-    var md = Math.floor(month+days) % 6;
-        if (md==0){md=6};
-    //合天地之意，并正其时：25+30=55；49+6+9=64
-    var n = (ga*(gd+md+dd))%64;
-        if (n==0){n=64};
-    document.getElementById('tg').src="./img/gua/"+ n +".png"
+    var rs = Math.floor(yd+month+days);
+                            var rht1 = 1;
+                        var rht2 = rs%2;
+                            if (rht2==0){rht2=2};
+                        var rht3 = rs%3;
+                            if (rht3==0){rht3=3};
+                        var rht4 = rs%4;
+                            if (rht4==0){rht4=4};
+                        var rht5 = rs%5;
+                            if (rht5==0){rht5=5};
+                        var rht6 = rs%6;
+                            if (rht6==0){rht6=6};
+                        var rht7 = rs%7;
+                            if (rht7==0){rht7=7};
+                        var rht8 = rs%8;
+                            if (rht8==0){rht8=8};
+                        var rht9 = rs%9;
+                            if (rht9==0){rht9=9};
+                        
+                        //据河图，取变爻，自地至天
+                        var bgr1 = (rht2+rht5+rht8)%6;
+                            if (bgr1==0){bgr1=6};
+                        var bgr2 = (rht4+rht5+rht6)%6;
+                            if (bgr2==0){bgr2=6};
+                            //据河图取卦，自下至上，自右至左，用之以用，变之以变
+                            var rg1 = rht4+rht3+rht8
+                                if(bgr1==1){rg1++};
+                                if(bgr2==1){rg1++};
+                                rg1 = rg1%2
+                            document.getElementById('tg1').src="./img/"+ rg1 +".jpg"
+        
+                            var rg2 = rht9+rht5+rht1
+                                if(bgr1==2){rg2++};
+                                if(bgr2==2){rg2++};
+                                rg2 = rg2%2
+                            document.getElementById('tg2').src="./img/"+ rg2 +".jpg"
+    
+                            var rg3 = rht2+rht7+rht6
+                                if(bgr1==3){rg3++};
+                                if(bgr2==3){rg3++};
+                                rg3 = rg3%2
+                                document.getElementById('tg3').src="./img/"+ rg3 +".jpg"
+        
+                            var rg4 = rht4+rht9+rht2
+                                if(bgr1==4){rg4++};
+                                if(bgr2==4){rg4++};
+                                rg4 = rg4%2
+                            document.getElementById('tg4').src="./img/"+ rg4 +".jpg"
+        
+                            var rg5 = rht3+rht5+rht7
+                                if(bgr1==5){rg5++};
+                                if(bgr2==5){rg5++};
+                                rg5 = rg5%2
+                            document.getElementById('tg5').src="./img/"+ rg5 +".jpg"
+        
+                            var rg6 = rht8+rht1+rht6
+                                if(bgr1==6){rg6++};
+                                if(bgr2==6){rg6++};
+                                rg6 = rg6%2
+                            document.getElementById('tg6').src="./img/"+ rg6 +".jpg"
 
     //用卦逻辑
-		    var years = d.getFullYear();
-                    var month = d.getMonth()+1;
-                    var days = d.getDate();
-                    var now = d.getHours()+d.getMinutes()+d.getSeconds()+d.getMilliseconds();
-		    var nows = Math.floor(years+month+days+now);
-                    //天地之数五十有五，天数二十有五，地数三十
-                    var ua = nows%55;
-                            if (ua==0){ua=55};
-                    //大衍之数五十，其用四十有九
-                    var uf = nows%50;
-                            if (uf==0){uf=50};
-                    var ud = uf-1;
-                            if (ud==0){ud=49};
-                    //立于当时，以阳取阳，以阴取阴
-                    var ux = Math.floor(years+days+now)%9;
-                        if (ux==0){ux=9}; 
-                    var uy = Math.floor(month+now)%6;
-                        if (uy==0){uy=6}; 
-                    //天地之意，置于一瞬；人事之意，置于一瞬
-                    var m=Math.floor(ua*(ud+ux+uy))%64;
-                        if (m==0){m=64};
-                        document.getElementById('yg').src="./img/gua/"+ m +".png"}
+    var day = d.getFullYear()+d.getMonth()+1+d.getDate();
+    var now = d.getHours()+d.getMinutes()+d.getSeconds();
+    var nows = d.getMilliseconds();
+    var ss = Math.floor(yd+day+now+nows);
+                        var sht1 = 1;
+                        var sht2 = ss%2;
+                            if (sht2==0){sht2=2};
+                        var sht3 = ss%3;
+                            if (sht3==0){sht3=3};
+                        var sht4 = ss%4;
+                            if (sht4==0){sht4=4};
+                        var sht5 = ss%5;
+                            if (sht5==0){sht5=5};
+                        var sht6 = ss%6;
+                            if (sht6==0){sht6=6};
+                        var sht7 = ss%7;
+                            if (sht7==0){sht7=7};
+                        var sht8 = ss%8;
+                            if (sht8==0){sht8=8};
+                        var sht9 = ss%9;
+                            if (sht9==0){sht9=9};
+                        
+                        //据河图，取变爻，自地至天
+                        var bgs1 = (sht2+sht5+sht8)%6;
+                            if (bgs1==0){bgs1=6};
+                        var bgs2 = (sht4+sht5+sht6)%6;
+                            if (bgs2==0){bgs2=6};
+                        //据河图取卦，自下至上，自右至左，用之以用，变之以变
+                        var sg1 = sht4+sht3+sht8
+                            if(bgs1==1){sg1++};
+                            if(bgs2==1){sg1++};
+                            sg1 = sg1%2
+                        document.getElementById('yg1').src="./img/"+ sg1 +".jpg"
+            
+                        var sg2 = sht9+sht5+sht1
+                            if(bgs1==2){sg2++};
+                            if(bgs2==2){sg2++};
+                            sg2 = sg2%2
+                        document.getElementById('yg2').src="./img/"+ sg2 +".jpg"
+        
+                        var sg3 = sht2+sht7+sht6
+                            if(bgs1==3){sg3++};
+                            if(bgs2==3){sg3++};
+                            sg3 = sg3%2
+                        document.getElementById('yg3').src="./img/"+ sg3 +".jpg"
+            
+                        var sg4 = sht4+sht9+sht2
+                            if(bgs1==4){sg4++};
+                            if(bgs2==4){sg4++};
+                            sg4 = sg4%2
+                        document.getElementById('yg4').src="./img/"+ sg4 +".jpg"
+            
+                        var sg5 = sht3+sht5+sht7
+                            if(bgs1==5){sg5++};
+                            if(bgs2==5){sg5++};
+                            sg5 = sg5%2
+                        document.getElementById('yg5').src="./img/"+ sg5 +".jpg"
+            
+                        var sg6 = sht8+sht1+sht6
+                            if(bgs1==6){sg6++};
+                            if(bgs2==6){sg6++};
+                            sg6 = sg6%2
+                        document.getElementById('yg6').src="./img/"+ sg6 +".jpg"
+}
 </script>
 </html>
