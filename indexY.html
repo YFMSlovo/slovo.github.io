@@ -164,8 +164,7 @@
                         var years = d.getFullYear();
                         var month = d.getMonth()+1;
                         var days = d.getDate();
-                        var yd = Math.floor(years+2697)%60;
-                            if (yd==0){yd=60}; 
+                        var yd = Math.floor(years+2697);
                         //年卦
                         //六十甲子轮回
                         var ns = yd;
@@ -237,8 +236,7 @@
                             var years = d.getFullYear();
                             var month = d.getMonth()+1;
                             var days = d.getDate();
-                            var yd = Math.floor(years+2697)%60;
-                                if (yd==0){yd=60}; 
+                            var yd = Math.floor(years+2697);
                             var rs = Math.floor(yd+month+days);
                             var rht1 = 1;
                         var rht2 = rs%2;
@@ -308,8 +306,7 @@
                         var day = d.getMonth()+1+d.getDate();
                         var now = d.getHours()+d.getMinutes()+d.getSeconds();
                         var nows = d.getMilliseconds();
-                        var yd = Math.floor(years+2697)%60;
-                            if (yd==0){yd=60}; 
+                        var yd = Math.floor(years+2697);
                         var ss = Math.floor(yd+day+now+nows);
                         var sht1 = 1;
                         var sht2 = ss%2;
@@ -459,8 +456,7 @@ function yaogua(){
     var years = d.getFullYear();
     var month = d.getMonth()+1;
     var days = d.getDate();
-    var yd = Math.floor(years+2697)%60;
-                            if (yd==0){yd=60}; 
+    var yd = Math.floor(years+2697);
                         //年卦
                         //六十甲子轮回
                         var ns = yd;
