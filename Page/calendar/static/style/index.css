@@ -32,8 +32,8 @@ a:hover{
     padding-bottom: 30px;
 }
 .inner{
-    max-width: 1000px;
-    padding: 0 10px;
+    /* max-width: 1000px; */
+    padding: 0 30px;
     margin: 0 auto;
 }
 
@@ -130,6 +130,7 @@ a:hover{
     background: #fff;
     /* box-shadow: 0 1px 5px 0 rgba(0,0,0,0.05); */
     /* border: 1px solid rgba(0,0,0,0.075); */
+
 }
 .mod-panel .bd .c-hd{
     padding: 20px 20px 10px 5px;
@@ -147,9 +148,10 @@ a:hover{
     float: right;
     text-decoration: none;
     color: #999;
+
 }
 .mod-panel .bd .c-bd{
-    padding:20px;
+    padding-top:40px;
 }
 .mod-panel .bd .c-ft{
     padding:20px;
