@@ -92,7 +92,6 @@
           -webkit-text-size-adjust: 100%;
           font-size: 24px;
           color:rgba(255, 255, 255, 0.8);
-          text-decoration:none;
           font-family: Arial;
           text-align:center;
           position: absolute;
@@ -372,7 +371,7 @@
             </div>
         </div>
     <hr style="height:1px;width:414px;position: absolute;left: 50%;transform: translate(-50%);bottom:60px;border:none;border-top:1px solid rgb(0, 0, 0);" id="hr2"/>
-        <a class="fontstyle3"  id="yib"><span style="padding-right:26px ;border-right: solid 1px rgba(255, 255, 255, 0.5);" id="ysp">毅术</span>&nbsp;&nbsp;&nbsp;&nbsp;<span id="logInfo"></span></a>
+        <div class="fontstyle3"><a style="text-decoration:none;" id="yib1"><span style="padding-right:26px ;border-right: solid 1px rgba(255, 255, 255, 0.5);" id="ysp">毅术</span></a>&nbsp;&nbsp;&nbsp;&nbsp;<a style="text-decoration:none;" id="yib2"><span id="logInfo"></span></a></div>
     </div>
     <div style="z-index: 6;">
         <!-- <a class="circle" href="javascript:location.reload()" target="_self" id="circle"></a> -->
@@ -428,12 +427,14 @@ function xbak(){
     document.body.style.backgroundImage="none";
     // document.getElementById('footer').style.color="#000"
     document.getElementById("circle").style.backgroundColor="#000"
-    document.getElementById("yib").style.color="#000"
+    document.getElementById("yib1").style.color="#000"
+    document.getElementById("yib2").style.color="#000"
     document.getElementById("gua").style.backgroundColor="rgba(255, 255, 255, 0)"
     document.getElementById('hr1').style.display="";
     document.getElementById('hr2').style.display="";
     document.getElementById('ysp').style.borderColor="rgba(0, 0, 0, 0.5)";
-    document.getElementById("yib").href="./Page/login.html"
+    document.getElementById("yib1").href="./Page/login.html"
+    document.getElementById("yib2").href="./Page/calender/calender.html"
 
 }
 function obak(){
@@ -442,12 +443,14 @@ function obak(){
     document.body.style.backgroundImage="url(https://open.saintic.com/api/bingPic/)"
     // document.getElementById('footer').style.color="rgba(255, 255, 255, 0.5)"
     document.getElementById("circle").style.backgroundColor="rgba(255, 255, 255,0.2)"
-    document.getElementById("yib").style.color="rgba(255, 255, 255, 0.8)"
+    document.getElementById("yib1").style.color="rgba(255, 255, 255, 0.8)"
+    document.getElementById("yib2").style.color="rgba(255, 255, 255, 0.8)"
     document.getElementById("gua").style.backgroundColor="rgba(255, 255, 255, 1)"
     document.getElementById('hr1').style.display="none";
     document.getElementById('hr2').style.display="none";
     document.getElementById('ysp').style.borderColor="rgba(255, 255, 255, 0.5)";
-    document.getElementById("yib").removeAttribute("href");
+    document.getElementById("yib1").removeAttribute("href");
+    document.getElementById("yib2").removeAttribute("href");
 }
 </script>
 <script>
