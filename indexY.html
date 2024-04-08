@@ -153,7 +153,7 @@
 <body>
     <a type="button" onclick="xbak()" id="xb"><div class="xob"><div style="width: 20px;height: 20px;border:2px solid rgba(255,255,255,0.5);border-radius: 4px;"></div></div></a>
 	<a type="button" onclick="obak()" id="ob"><div class="xob" id="obb"><div style="width: 20px;height: 20px;border:2px solid rgba(255,255,255,0.5);border-radius: 20px;"></div></div></a>
-    <div class="centermain">
+    <a style="text-decoration:none;" href="./Page/divine.html"><div class="centermain">
         <div class="fontstyle1">
             <hr style="height:1px;width:414px;position: absolute;left: 50%;transform: translate(-50%);top:60px;border:none;border-top:1px solid rgb(0, 0, 0);" id="hr1" />
             <div class="imaged" id="gua">
@@ -370,9 +370,11 @@
                 </div>
             </div>
         </div>
+    </a>
     <hr style="height:1px;width:414px;position: absolute;left: 50%;transform: translate(-50%);bottom:60px;border:none;border-top:1px solid rgb(0, 0, 0);" id="hr2"/>
         <div class="fontstyle3"><a style="text-decoration:none;" id="yib1"><span style="padding-right:26px ;border-right: solid 1px rgba(255, 255, 255, 0.5);" id="ysp">毅术</span></a>&nbsp;&nbsp;&nbsp;&nbsp;<a style="text-decoration:none;" id="yib2"><span id="logInfo"></span></a></div>
     </div>
+
     <div style="z-index: 6;">
         <!-- <a class="circle" href="javascript:location.reload()" target="_self" id="circle"></a> -->
         <a class="circle" onclick="yaogua()" id="circle"></a>
@@ -434,7 +436,7 @@ function xbak(){
     document.getElementById('hr2').style.display="";
     document.getElementById('ysp').style.borderColor="rgba(0, 0, 0, 0.5)";
     document.getElementById("yib1").href="./Page/login.html"
-    document.getElementById("yib2").href="./Page/divine.html"
+    document.getElementById("yib2").href="./Page/calendar/calendar.html"
 
 }
 function obak(){
