@@ -1,0 +1,313 @@
+
+<!DOCTYPE html>
+<html lang="cn">
+<!-- 
+  you can't stop the signal.
+-->
+<head>
+  <title>今日</title>
+  <link rel="icon" href="favicon.png" type="image/x-icon">
+  <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+  <meta name="description" content="There is nothing, there is everything">
+  <meta name="author" content="Yifei Miao">
+  <meta name="viewport" content="width=device-width, initial-scale=0.6, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+  <meta property="og:title" content="Miao Boring Page" />
+  <meta property="og:description" content="A Boring Page" />
+  <meta property="og:type" content="website" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="apple-touch-icon-precomposed" sizes="57x57" href="./img/ico/icon-57.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="./img/ico/icon-72.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="./img/ico/icon-114.png">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="./img/ico/icon-144.png">
+  <!-- <embed src="music/rain.mp3" hidden="true" autostart="true" loop="true" width="0px" height="0px">  -->
+  <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
+  <script src="https://pv.sohu.com/cityjson?ie=utf-8"></script> 
+  <style>
+    body{
+          /* 加载背景图 */
+          /* background-image: url(https://open.saintic.com/api/bingPic/); */
+
+    /* 加载背景图-随机 */
+    /* background-image: url(https://api.kdcc.cn/img/rand.php); */
+          /* 背景图垂直、水平均居中 */
+          background-position: center center;
+          /* 背景图不平铺 */
+          background-repeat: no-repeat;
+          /* 当内容高度大于图片高度时，背景图像的位置相对于viewport固定 */
+          background-attachment: fixed;
+          /* 让背景图基于容器大小伸缩 */
+          background-size: cover; 
+          /* 设置背景颜色，背景图加载过程中会显示背景色 */
+          background-color: #ffffff;
+          }
+    .centermain {
+     width: 600px;
+     position: absolute;
+     top: 45%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+     text-align:center;
+     z-index: -3;
+    }
+    .centerplay {
+     width: 550px;
+     position: absolute;
+     top: 50%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+     text-align:center;
+     z-index: -1;
+    }
+    .fontstyle0{
+    font-size: 200px;
+          color:rgba(255,255,255,1);
+          font-family: Arial;
+          text-align:center;
+    height: 260px;
+    }
+    .fontstyle1{
+     font-size: 30px;
+     color:rgba(100,100,100,1);
+     font-family: Arial;
+     text-align:center;
+     display:inline;
+     text-decoration:none;
+     border-bottom: #b1b1b1 solid 1px;
+    }
+    .fontstyle2{
+    position: fixed;
+      font-size: 10px;
+      color:rgba(255, 255, 255, 0.5);
+      font-family: Arial;
+      text-align:center;
+      width: 500px;
+      bottom: 0%;
+      left: 50%;
+      z-index:2;		 
+      transform: translateX(-50%);
+      margin:0 ;
+    }
+    .fontstyle3{
+      font-size: 28px;
+              color:#ffffff;
+              font-family: Arial,"Microsoft YaHei","微软雅黑","MicrosoftJhengHei","华文细黑","STHeiti","MingLiu";
+              display:inline;
+      text-align:left;
+              text-decoration:none;
+    }
+    .fontstyle4{
+      font-size: 14px;
+              color:#ffffff;
+              font-family: Arial;
+              display:inline;
+              text-decoration:none;
+              }
+    .fontstyle5{
+              font-size: 22px;
+              color:#ffffff;
+              font-family: Arial,"Microsoft YaHei","微软雅黑","MicrosoftJhengHei","华文细黑","STHeiti","MingLiu";
+              display:inline;
+              text-decoration:none;
+    }
+
+     </style>
+</head>
+  <body text-align:center >
+  <div class="centermain" ><span class="fontstyle4" >今日天气 | </span><span class="fontstyle4" id="logInfo"></span><br><a style="text-decoration:none;" href="./calendar/calendar.html"><div class="fontstyle0" id="rst">测</div></a><br><span class="fontstyle5" id="jy">解 </span></div>
+            <script>
+                var d = new Date();
+                var years = d.getFullYear();
+                var month = d.getMonth()+1;
+                var days = d.getDate();
+                var yd = Math.floor(years+2697);
+                //体卦
+                //六十甲子轮回
+                var ns = yd;
+                var nht1 = 1;
+                var nht2 = ns%2;
+                    if (nht2==0){nht2=2};
+                var nht3 = ns%3;
+                    if (nht3==0){nht3=3};
+                var nht4 = ns%4;
+                    if (nht4==0){nht4=4};
+                var nht5 = ns%5;
+                    if (nht5==0){nht5=5};
+                var nht6 = ns%6;
+                    if (nht6==0){nht6=6};
+                var nht7 = ns%7;
+                    if (nht7==0){nht7=7};
+                var nht8 = ns%8;
+                    if (nht8==0){nht8=8};
+                var nht9 = ns%9;
+                    if (nht9==0){nht9=9};
+                
+                //据洛书，取变爻，自地至天
+                var bgn1 = (nht2+nht5+nht8)%6;
+                    if (bgn1==0){bgn1=6};
+                var bgn2 = (nht4+nht5+nht6)%6;
+                    if (bgn2==0){bgn2=6};
+                //据洛书取卦，自下至上，自右至左，用之以用，变之以变
+                var ng1 = nht4+nht3+nht8
+                    if(bgn1==1){ng1++};
+                    if(bgn2==1){ng1++};
+                    ng1 = ng1%2
+
+                var ng2 = nht9+nht5+nht1
+                    if(bgn1==2){ng2++};
+                    if(bgn2==2){ng2++};
+                    ng2 = ng2%2
+
+                var ng3 = nht2+nht7+nht6
+                    if(bgn1==3){ng3++};
+                    if(bgn2==3){ng3++};
+                    ng3 = ng3%2
+
+                var ng4 = nht4+nht9+nht2
+                    if(bgn1==4){ng4++};
+                    if(bgn2==4){ng4++};
+                    ng4 = ng4%2
+
+                var ng5 = nht3+nht5+nht7
+                    if(bgn1==5){ng5++};
+                    if(bgn2==5){ng5++};
+                    ng5 = ng5%2
+
+                var ng6 = nht8+nht1+nht6
+                    if(bgn1==6){ng6++};
+                    if(bgn2==6){ng6++};
+                    ng6 = ng6%2
+            </script>
+            <script>
+                //用卦
+                var d = new Date();
+                    var years = d.getFullYear();
+                    var month = d.getMonth()+1;
+                    var days = d.getDate();
+                    var yd = Math.floor(years+2697);
+                    var rs = Math.floor(yd+month+days);
+                    var rht1 = 1;
+                var rht2 = rs%2;
+                    if (rht2==0){rht2=2};
+                var rht3 = rs%3;
+                    if (rht3==0){rht3=3};
+                var rht4 = rs%4;
+                    if (rht4==0){rht4=4};
+                var rht5 = rs%5;
+                    if (rht5==0){rht5=5};
+                var rht6 = rs%6;
+                    if (rht6==0){rht6=6};
+                var rht7 = rs%7;
+                    if (rht7==0){rht7=7};
+                var rht8 = rs%8;
+                    if (rht8==0){rht8=8};
+                var rht9 = rs%9;
+                    if (rht9==0){rht9=9};
+                
+                //据洛书，取变爻，自地至天
+                var bgr1 = (rht2+rht5+rht8)%6;
+                    if (bgr1==0){bgr1=6};
+                var bgr2 = (rht4+rht5+rht6)%6;
+                    if (bgr2==0){bgr2=6};
+                    //据洛书取卦，自下至上，自右至左，用之以用，变之以变
+                    var rg1 = rht4+rht3+rht8
+                        if(bgr1==1){rg1++};
+                        if(bgr2==1){rg1++};
+                        rg1 = rg1%2
+
+                    var rg2 = rht9+rht5+rht1
+                        if(bgr1==2){rg2++};
+                        if(bgr2==2){rg2++};
+                        rg2 = rg2%2
+
+                    var rg3 = rht2+rht7+rht6
+                        if(bgr1==3){rg3++};
+                        if(bgr2==3){rg3++};
+                        rg3 = rg3%2
+
+                    var rg4 = rht4+rht9+rht2
+                        if(bgr1==4){rg4++};
+                        if(bgr2==4){rg4++};
+                        rg4 = rg4%2
+
+                    var rg5 = rht3+rht5+rht7
+                        if(bgr1==5){rg5++};
+                        if(bgr2==5){rg5++};
+                        rg5 = rg5%2
+
+                    var rg6 = rht8+rht1+rht6
+                        if(bgr1==6){rg6++};
+                        if(bgr2==6){rg6++};
+                        rg6 = rg6%2
+            </script>
+            <script>
+              var ngs = 32*ng1+16*ng2+8*ng3+4*ng4+2*ng5+ng6
+              var rgs =  32*rg1+16*rg2+8*rg3+4*rg4+2*rg5+rg6
+              var nrgs = rgs - ngs + 64
+              var result = nrgs % 4
+              if (result==1) {
+              var color ='#df9c00'
+			         document.body.style.backgroundColor=color;
+               var divR=document.getElementById("rst");
+               divR.innerHTML= '悔';
+               var divR=document.getElementById("jy");
+               divR.innerHTML= '—— 小有所得 ——';
+
+		           } else if(result==2){
+                var color ='#008343'
+			         document.body.style.backgroundColor=color;
+               var divR=document.getElementById("rst");
+               divR.innerHTML= '吝';
+               var divR=document.getElementById("jy");
+               divR.innerHTML= '—— 小有所失 ——';
+               }
+               else if(result==3){
+              var color ='#990000'
+			         document.body.style.backgroundColor=color;
+               var divR=document.getElementById("rst");
+               divR.innerHTML= '吉';
+               var divR=document.getElementById("jy");
+               divR.innerHTML= '—— 大吉大利 ——';
+
+		           }else{
+                var color ='#000279'
+			         document.body.style.backgroundColor=color;
+               var divR=document.getElementById("rst");
+               divR.innerHTML= '凶';
+               var divR=document.getElementById("jy");
+               divR.innerHTML= '—— 谨慎行事 ——';
+               }
+        </script>
+        <script language="javascript">
+          //时间
+          function getCurDate()
+      {
+       var d = new Date();
+       var week;
+       switch (d.getDay()){
+       case 1: week="星期一"; break;
+       case 2: week="星期二"; break;
+       case 3: week="星期三"; break;
+       case 4: week="星期四"; break;
+       case 5: week="星期五"; break;
+       case 6: week="星期六"; break;
+       default: week="星期日";
+      }
+       var years = d.getFullYear();
+       var month = add_zero(d.getMonth()+1);
+       var days = add_zero(d.getDate());
+       var hours = add_zero(d.getHours());
+       var minutes = add_zero(d.getMinutes());
+       var seconds=add_zero(d.getSeconds());
+       var ndate = years+"年 "+month+"月 "+days+"日 "+hours+":"+minutes+":"+seconds+" "+week;
+       var divT=document.getElementById("logInfo");
+       divT.innerHTML= ndate;
+      }
+    function add_zero(temp)
+      {
+      if(temp<10) return "0"+temp;
+      else return temp;
+      }
+      setInterval("getCurDate()",100);
+      </script>
+  </body>
+</html>
