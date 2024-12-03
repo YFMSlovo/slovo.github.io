@@ -1,6 +1,6 @@
 # MIAO
 
-A boring pag, It's of no use.
+A boring page, It's of no use.
 
 ### Display UR
 
