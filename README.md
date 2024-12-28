@@ -1,5 +1,6 @@
 # MIAO
 ![Static Badge](https://img.shields.io/badge/YFMS-CODE-blue)
+![Static Badge](https://img.shields.io/badge/License-MIT-red)
 
 A web maze that integrates numerous JavaScript projects
 
