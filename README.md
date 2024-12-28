@@ -17,7 +17,7 @@ Project/
 │   ├── login
 │   ├── mdeditor
 │   ├── paint
-│   ├── data.csv
+│   ├── error
 ├── ...
 ```
 
