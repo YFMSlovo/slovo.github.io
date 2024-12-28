@@ -1,13 +1,25 @@
 # MIAO
+![Static Badge](https://img.shields.io/badge/YFMS-CODE-blue)
 
-A boring page, It's of no use.
+A web maze that integrates numerous JavaScript projects
 
-### Display UR
+### Display URL
 
 [MIAO](https://www.miaoyifei.com) 
 
-### Have Fun
+### Main Pages
 
-There are many hidden buttons to go to the new page, but many designs of this website violate design principles, need to give up common ideas to use the website.
----
-有点功能，但不多
+```bash
+Project/
+├── index/
+│   ├── indexY
+│   ├── login
+│   ├── mdeditor
+│   ├── paint
+│   ├── data.csv
+├── ...
+```
+
+### Have Fun
+* A boring and useless webpage.
+* There are many hidden buttons to go to the new page, but many designs of this website violate design principles, need to give up common ideas to use the website.
