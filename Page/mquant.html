@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUANTUM - 量化策略分析系统</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/map/js/china.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #000000;
+            color: #e0e0e0;
+            font-family: 'Consolas', 'Monaco', monospace;
+            overflow-x: hidden;
+        }
+        .quant-window {
+            background: #0a0a0a;
+            border: 1px solid #1a1a1a;
+            border-radius: 4px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        .quant-window::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #00ffff, #ff00ff, #ffff00, #00ffff);
+            background-size: 300% 100%;
+            animation: gradient-line 3s linear infinite;
+        }
+        @keyframes gradient-line {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 300% 50%; }
+        }
+        .window-header {
+            padding: 8px 12px;
+            background: #111;
+            border-bottom: 1px solid #1a1a1a;
+            font-size: 12px;
+            color: #00ffff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .window-content {
+            padding: 12px;
+            height: calc(100% - 32px);
+        }
+        .data-stream {
+            font-size: 11px;
+            line-height: 1.4;
+            color: #00ff00;
+            height: 100%;
+            overflow: hidden;
+        }
+        .matrix-text {
+            font-family: 'Consolas', monospace;
+            color: #00ffff;
+            font-size: 10px;
+            line-height: 1.2;
+        }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #1a1a1a; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #00ffff; }
+        .blink { animation: blink 1s infinite alternate; }
+        @keyframes blink { 0% { opacity: 0.6; } 100% { opacity: 1; } }
+        .grid-bg {
+            background-image: 
+                linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .chart-box {
+            width: 100% !important;
+            height: 100% !important;
+            min-height: 100px;
+            display: block;
+        }
+    </style>
+</head>
+<body class="grid-bg">
+    <div class="fixed top-0 left-0 w-full h-6 bg-[#111] border-b border-[#1a1a1a] z-50 flex items-center px-4 text-[10px] text-gray-400">
+        <div class="flex items-center gap-6">
+            <span>QUANTUM-CORE v7.2.4</span>
+            <span>状态: <span class="text-green-400">运行中</span></span>
+            <span>同步率: <span id="sync-rate" class="text-cyan-400">98.7%</span></span>
+            <span>节点: <span class="text-purple-400">ACTIVE</span></span>
+        </div>
+        <div class="ml-auto flex items-center gap-6">
+            <span id="current-time">00:00:00</span>
+            <span>CPU: <span id="cpu-load" class="blink">27%</span></span>
+            <span>MEM: <span id="mem-load" class="blink">64%</span></span>
+        </div>
+    </div>
+
+    <div class="pt-8 p-4 pb-20">
+        <!-- 主K线：超级大波动 + 实时随机刷新 + 纵坐标自适应 -->
+        <div class="quant-window w-full h-[500px] mb-6">
+            <div class="window-header">
+                <span>【CORE-01】时序特征K线可视化 - 高阶状态向量分析</span>
+                <span class="text-pink-400">实时分析中</span>
+            </div>
+            <div class="window-content">
+                <div id="main-kline" class="chart-box"></div>
+            </div>
+        </div>
+
+        <div class="flex flex-wrap gap-6 mb-8">
+            <div class="quant-window w-[380px] h-[320px]">
+                <div class="window-header">
+                    <span>【SYSTEM-02】系统资源占用监控</span>
+                    <span class="text-yellow-400">实时监控</span>
+                </div>
+                <div class="window-content">
+                    <div id="gauge-chart" class="chart-box"></div>
+                </div>
+            </div>
+            <div class="quant-window flex-1 h-[320px] min-w-[500px]">
+                <div class="window-header">
+                    <span>【AI-03】注意力分数热力图 - 谱嵌入分析</span>
+                    <span class="text-cyan-400">计算中</span>
+                </div>
+                <div class="window-content">
+                    <div id="heatmap-chart" class="chart-box"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-wrap gap-6 mb-8">
+            <div class="quant-window flex-1 h-[350px] min-w-[450px]">
+                <div class="window-header">
+                    <span>【ANALYZE-04】特征空间散点分布</span>
+                    <span class="text-purple-400">映射中</span>
+                </div>
+                <div class="window-content">
+                    <div id="scatter-chart" class="chart-box"></div>
+                </div>
+            </div>
+            <div class="quant-window w-[420px] h-[350px]">
+                <div class="window-header">
+                    <span>【DATA-05】量化数据流实时日志</span>
+                    <span class="text-green-400">接收中</span>
+                </div>
+                <div class="window-content">
+                    <div id="data-log" class="data-stream"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-wrap gap-6 mb-8">
+            <div class="quant-window w-[450px] h-[400px]">
+                <div class="window-header">
+                    <span>【MODEL-06】高阶特征参数矩阵</span>
+                    <span class="text-pink-400">优化中</span>
+                </div>
+                <div class="window-content matrix-text overflow-auto p-2" id="param-matrix"></div>
+            </div>
+            <div class="quant-window flex-1 h-[400px] min-w-[500px]">
+                <div class="window-header">
+                    <span>【SPACE-07】空间特征气泡分布图</span>
+                    <span class="text-yellow-400">渲染中</span>
+                </div>
+                <div class="window-content">
+                    <div id="bubble-chart" class="chart-box"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-wrap gap-6 mb-8">
+            <div class="quant-window flex-1 h-[380px] min-w-[600px]">
+                <div class="window-header">
+                    <span>【MAP-08】特征轨迹流向地图（中国区）</span>
+                    <span class="text-cyan-400">追踪中</span>
+                </div>
+                <div class="window-content">
+                    <div id="map-chart" class="chart-box"></div>
+                </div>
+            </div>
+            <div class="quant-window w-[380px] h-[380px]">
+                <div class="window-header">
+                    <span>【STAT-09】边缘分布箱形图</span>
+                    <span class="text-purple-400">统计中</span>
+                </div>
+                <div class="window-content">
+                    <div id="box-chart" class="chart-box"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-wrap gap-6 mb-8">
+            <div class="quant-window w-[320px] h-[300px]">
+                <div class="window-header">
+                    <span>【TIME-10】时序核函数分析</span>
+                    <span class="text-green-400">运算中</span>
+                </div>
+                <div class="window-content">
+                    <div id="line-chart" class="chart-box"></div>
+                </div>
+            </div>
+            <div class="quant-window flex-1 h-[300px] min-w-[400px]">
+                <div class="window-header">
+                    <span>【DISTR-11】特征抖动分布图</span>
+                    <span class="text-pink-400">采样中</span>
+                </div>
+                <div class="window-content">
+                    <div id="jitter-chart" class="chart-box"></div>
+                </div>
+            </div>
+            <div class="quant-window w-[280px] h-[300px]">
+                <div class="window-header">
+                    <span>【COUNT-12】维度计数统计</span>
+                    <span class="text-yellow-400">更新中</span>
+                </div>
+                <div class="window-content">
+                    <div id="count-chart" class="chart-box"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="quant-window w-full h-[400px] mb-8">
+            <div class="window-header">
+                <span>【CORR-13】特征关联矩阵图 - 全维度相关性分析</span>
+                <span class="text-cyan-400">深度分析</span>
+            </div>
+            <div class="window-content">
+                <div id="matrix-chart" class="chart-box"></div>
+            </div>
+        </div>
+
+        <div class="quant-window w-full h-[120px]">
+            <div class="window-header">
+                <span>【SYSTEM-14】系统总控面板</span>
+                <span class="text-green-400">运行正常</span>
+            </div>
+            <div class="window-content grid grid-cols-6 gap-4 text-[11px]">
+                <div class="border border-[#1a1a1a] p-2">
+                    <div class="text-gray-400">模型状态</div>
+                    <div class="text-cyan-400 text-lg mt-1" id="model-status">ACTIVE</div>
+                </div>
+                <div class="border border-[#1a1a1a] p-2">
+                    <div class="text-gray-400">计算节点</div>
+                    <div class="text-green-400 text-lg mt-1" id="node-count">24/24</div>
+                </div>
+                <div class="border border-[#1a1a1a] p-2">
+                    <div class="text-gray-400">数据吞吐量</div>
+                    <div class="text-purple-400 text-lg mt-1" id="data-speed">4.2GB/s</div>
+                </div>
+                <div class="border border-[#1a1a1a] p-2">
+                    <div class="text-gray-400">特征提取率</div>
+                    <div class="text-pink-400 text-lg mt-1" id="feature-rate">99.2%</div>
+                </div>
+                <div class="border border-[#1a1a1a] p-2">
+                    <div class="text-gray-400">预测精度</div>
+                    <div class="text-yellow-400 text-lg mt-1" id="predict-acc">87.6%</div>
+                </div>
+                <div class="border border-[#1a1a1a] p-2">
+                    <div class="text-gray-400">系统版本</div>
+                    <div class="text-white text-lg mt-1">PRO-7.2.4</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateTime(){const t=new Date;document.getElementById('current-time').innerText=t.toLocaleTimeString()}
+        setInterval(updateTime,1000);updateTime();
+        function random(min,max){return Math.random()*(max-min)+min}
+        function randomInt(min,max){return Math.floor(random(min,max))}
+
+        setInterval(()=>{
+            document.getElementById('cpu-load').innerText=randomInt(20,40)+'%';
+            document.getElementById('mem-load').innerText=randomInt(55,75)+'%';
+            document.getElementById('sync-rate').innerText=(97+random(0,3)).toFixed(1)+'%';
+            document.getElementById('data-speed').innerText=(3.5+random(0,2)).toFixed(1)+'GB/s';
+            document.getElementById('feature-rate').innerText=(98+random(0,2)).toFixed(1)+'%';
+            document.getElementById('predict-acc').innerText=(85+random(0,5)).toFixed(1)+'%';
+        },1500);
+
+        const logTypes=['FETCH','ANALYZE','COMPUTE','OPTIMIZE','EMBED','TRANSFORM','ENCODE','DECODE','TRAIN','PREDICT'];
+        const dataElements=['时序特征','谱嵌入','空间向量','注意力分数','高阶特征','状态矩阵','核函数','维度映射','特征提取','深度编码'];
+        function generateLog(){
+            const log=document.getElementById('data-log');
+            const type=logTypes[randomInt(0,logTypes.length)];
+            const elem=dataElements[randomInt(0,dataElements.length)];
+            const hash=Array(16).fill(0).map(()=>Math.random().toString(16).slice(2,3)).join('');
+            const time=new Date().toLocaleTimeString();
+            log.innerHTML+=`[${time}] [${type}] ${elem} | HASH:${hash} | STATUS:${randomInt(100,999)} | SIG:${random(0.1,0.99).toFixed(4)}<br>`;
+            log.scrollTop=log.scrollHeight;
+            if(log.children.length>80)log.removeChild(log.firstChild);
+        }
+        setInterval(generateLog,200);for(let i=0;i<50;i++)generateLog();
+
+        function generateMatrix(){
+            const m=document.getElementById('param-matrix');let h='';
+            for(let i=0;i<30;i++){
+                let l='';
+                for(let j=0;j<12;j++)l+=random(-1.5,1.5).toFixed(6).padStart(10)+' ';
+                h+=l+'<br>';
+            }
+            m.innerHTML=h;
+        }
+        setInterval(generateMatrix,3000);generateMatrix();
+
+        let mainKline,gaugeChart,heatmapChart,scatterChart,bubbleChart,mapChart,boxChart,lineChart,jitterChart,countChart,matrixChart;
+
+        setTimeout(()=>{
+            initAllCharts();
+            setInterval(updateKline,2000);
+            setInterval(updateGauge,1500);
+            setInterval(updateHeatmap,2500);
+            setInterval(updateScatter,2000);
+            setInterval(updateBubble,3000);
+            setInterval(updateMap,4000);
+            setInterval(updateBox,2500);
+            setInterval(updateLine,1500);
+            setInterval(updateJitter,2000);
+            setInterval(updateCount,2000);
+            setInterval(updateMatrixChart,3000);
+
+            window.addEventListener('resize',()=>{
+                mainKline&&mainKline.resize();
+                gaugeChart&&gaugeChart.resize();
+                heatmapChart&&heatmapChart.resize();
+                scatterChart&&scatterChart.resize();
+                bubbleChart&&bubbleChart.resize();
+                mapChart&&mapChart.resize();
+                boxChart&&boxChart.resize();
+                lineChart&&lineChart.resize();
+                jitterChart&&jitterChart.resize();
+                countChart&&countChart.resize();
+                matrixChart&&matrixChart.resize();
+            });
+        },800);
+
+        function initAllCharts(){
+            mainKline=echarts.init(document.getElementById('main-kline'));updateKline();
+            gaugeChart=echarts.init(document.getElementById('gauge-chart'));updateGauge();
+            heatmapChart=echarts.init(document.getElementById('heatmap-chart'));updateHeatmap();
+            scatterChart=echarts.init(document.getElementById('scatter-chart'));updateScatter();
+            bubbleChart=echarts.init(document.getElementById('bubble-chart'));updateBubble();
+            mapChart=echarts.init(document.getElementById('map-chart'));updateMap();
+            boxChart=echarts.init(document.getElementById('box-chart'));updateBox();
+            lineChart=echarts.init(document.getElementById('line-chart'));updateLine();
+            jitterChart=echarts.init(document.getElementById('jitter-chart'));updateJitter();
+            countChart=echarts.init(document.getElementById('count-chart'));updateCount();
+            matrixChart=echarts.init(document.getElementById('matrix-chart'));updateMatrixChart();
+        }
+
+        // ========== 终极超级大波动K线 + 实时随机刷新 ==========
+        function updateKline(){
+            const base = random(8000, 12000);
+            const data = [];
+            const categories = [];
+            
+            // 生成120根K线，每一根波动都超级大
+            for(let i=0; i<120; i++) {
+                categories.push(i);
+                
+                // 超级大波动
+                const open  = base + random(-200, 200);
+                const close = open + random(-150, 150);
+                const low   = Math.min(open, close) - random(100, 200);
+                const high  = Math.max(open, close) + random(100, 200);
+                
+                data.push([open, close, low, high]);
+            }
+            
+            const option = {
+                backgroundColor: 'transparent',
+                grid: { top: 20, right: 40, bottom: 40, left: 60 },
+                xAxis: {
+                    type: 'category',
+                    data: categories,
+                    axisLine: { lineStyle: { color: '#333' } },
+                    axisLabel: { color: '#888', fontSize: 10 }
+                },
+                yAxis: {
+                    type: 'value',
+                    axisLine: { lineStyle: { color: '#333' } },
+                    axisLabel: { color: '#888', fontSize: 10 },
+                    splitLine: { lineStyle: { color: '#111' } },
+                    // 自动缩放，不从0开始，K线完全舒展
+                    scale: true
+                },
+                series: [{
+                    type: 'candlestick',
+                    data: data,
+                    itemStyle: {
+                        color: '#00ff00',
+                        color0: '#ff0000',
+                        borderColor: '#00ff00',
+                        borderColor0: '#ff0000'
+                    }
+                }]
+            };
+            mainKline.setOption(option);
+        }
+
+        function updateGauge(){
+            const opt={backgroundColor:'transparent',series:[{
+                type:'gauge',radius:'75%',
+                axisLine:{lineStyle:{width:6,color:[[0.3,'#00ff00'],[0.7,'#ffff00'],[1,'#ff0000']]}},
+                pointer:{itemStyle:{color:'#fff'}},axisTick:{show:false},splitLine:{lineStyle:{color:'#fff'}},
+                axisLabel:{show:false},detail:{formatter:'{value}%',textStyle:{color:'#00ffff',fontSize:14}},
+                data:[{value:randomInt(20,80)}]
+            }]};
+            gaugeChart.setOption(opt);
+        }
+
+        function updateHeatmap(){
+            const d=[];
+            for(let i=0;i<20;i++)for(let j=0;j<20;j++)d.push([i,j,random(0,100)]);
+            const opt={
+                backgroundColor:'transparent',grid:{top:10,right:10,bottom:10,left:10},
+                xAxis:{type:'category',axisLine:{show:false},axisLabel:{show:false}},
+                yAxis:{type:'category',axisLine:{show:false},axisLabel:{show:false}},
+                visualMap:{min:0,max:100,calculable:true,orient:'horizontal',left:'center',bottom:0,textStyle:{color:'#888'},inRange:{color:['#000033','#003366','#006699','#0099cc','#00ccff','#33ccff']}},
+                series:[{type:'heatmap',data:d,emphasis:{itemStyle:{borderColor:'#fff',borderWidth:1}}}]
+            };
+            heatmapChart.setOption(opt);
+        }
+
+        function updateScatter(){
+            const d=[];
+            for(let i=0;i<200;i++)d.push([random(-50,50),random(-50,50),random(0,100)]);
+            const opt={
+                backgroundColor:'transparent',
+                xAxis:{type:'value',axisLine:{lineStyle:{color:'#333'}},axisLabel:{color:'#888'},splitLine:{lineStyle:{color:'#111'}}},
+                yAxis:{type:'value',axisLine:{lineStyle:{color:'#333'}},axisLabel:{color:'#888'},splitLine:{lineStyle:{color:'#111'}}},
+                series:[{
+                    type:'scatter',data:d,symbolSize:d=>Math.abs(d[2])/5,
+                    itemStyle:{color:p=>['#00ffff','#ff00ff','#ffff00','#00ff00','#ff6600'][p.dataIndex%5],opacity:0.7}
+                }]
+            };
+            scatterChart.setOption(opt);
+        }
+
+        function updateBubble(){
+            const d=[];
+            for(let i=0;i<50;i++)d.push([random(10,100),random(10,100),random(5,100),randomInt(0,100)]);
+            const opt={
+                backgroundColor:'transparent',
+                xAxis:{type:'value',axisLine:{lineStyle:{color:'#333'}},axisLabel:{color:'#888'}},
+                yAxis:{type:'value',axisLine:{lineStyle:{color:'#333'}},axisLabel:{color:'#888'}},
+                visualMap:{min:0,max:100,inRange:{color:['#00ffff','#ff00ff','#ffff00']}},
+                series:[{
+                    type:'scatter',data:d,symbolSize:d=>d[2],
+                    emphasis:{focus:'series',label:{show:true,formatter:p=>p.data[3],position:'top'}},
+                    itemStyle:{shadowBlur:10,shadowColor:'rgba(0,255,255,0.3)'}
+                }]
+            };
+            bubbleChart.setOption(opt);
+        }
+
+        function updateMap(){
+            const pts=[],lines=[];
+            for(let i=0;i<30;i++){
+                const lng=random(73,135);
+                const lat=random(18,53);
+                pts.push({name:'FP-'+i,value:[lng,lat,random(10,100)]});
+            }
+            for(let i=0;i<20;i++){
+                let f=randomInt(0,30),t=randomInt(0,30);
+                if(f!==t){
+                    const coords=[
+                        [random(73,135),random(18,53)],
+                        [random(73,135),random(18,53)]
+                    ];
+                    lines.push({coords:coords});
+                }
+            }
+            const opt={
+                backgroundColor:'transparent',
+                geo:{
+                    map:'china',
+                    roam:false,
+                    zoom:1.2,
+                    itemStyle:{color:'#050505',borderColor:'#1a1a1a'},
+                    emphasis:{itemStyle:{color:'#111'}}
+                },
+                series:[
+                    {type:'scatter',coordinateSystem:'geo',data:pts,symbolSize:v=>v[2]/3,itemStyle:{color:'#00ffff',opacity:0.8}},
+                    {type:'lines',coordinateSystem:'geo',data:lines,lineStyle:{color:'#ff00ff',width:1,opacity:0.6,curveness:0.2},effect:{show:true,period:random(2,4),trailLength:0.1,color:'#fff',symbolSize:2}}
+                ]
+            };
+            mapChart.setOption(opt);
+        }
+
+        function updateBox(){
+            const d=[];
+            for(let i=0;i<5;i++){let a=[];for(let j=0;j<100;j++)a.push(random(20,80));d.push(a);}
+            const opt={
+                backgroundColor:'transparent',
+                xAxis:{type:'category',data:['DIM-1','DIM-2','DIM-3','DIM-4','DIM-5'],axisLine:{lineStyle:{color:'#333'}},axisLabel:{color:'#888',fontSize:10}},
+                yAxis:{type:'value',axisLine:{lineStyle:{color:'#333'}},axisLabel:{color:'#888'},splitLine:{lineStyle:{color:'#111'}}},
+                series:[{type:'boxplot',data:d,itemStyle:{color:'#00ffff',color0:'#ff00ff',borderColor:'#00ffff',borderColor0:'#ff00ff'}}]
+            };
+            boxChart.setOption(opt);
+        }
+
+        function updateLine(){
+            const d=[];for(let i=0;i<50;i++)d.push(random(50,150));
+            const opt={
+                backgroundColor:'transparent',
+                xAxis:{type:'category',data:Array.from({length:50},(_,i)=>i),axisLine:{lineStyle:{color:'#333'}},axisLabel:{show:false}},
+                yAxis:{type:'value',axisLine:{lineStyle:{color:'#333'}},axisLabel:{show:false},splitLine:{lineStyle:{color:'#111'}}},
+                series:[{
+                    type:'line',data:d,smooth:true,symbol:'none',lineStyle:{color:'#00ff00',width:2},
+                    areaStyle:{color:{type:'linear',x:0,y:0,x2:0,y2:1,colorStops:[{offset:0,color:'rgba(0,255,0,0.3)'},{offset:1,color:'rgba(0,255,0,0)'}]}}
+                }]
+            };
+            lineChart.setOption(opt);
+        }
+
+        function updateJitter(){
+            const d=[];for(let i=0;i<150;i++)d.push([randomInt(0,6),random(0,100)]);
+            const opt={
+                backgroundColor:'transparent',
+                xAxis:{type:'value',axisLine:{lineStyle:{color:'#333'}},axisLabel:{color:'#888'}},
+                yAxis:{type:'value',axisLine:{lineStyle:{color:'#333'}},axisLabel:{color:'#888'}},
+                series:[{type:'scatter',data:d,symbolSize:4,itemStyle:{color:'#ff00ff',opacity:0.7}}]
+            };
+            jitterChart.setOption(opt);
+        }
+
+        function updateCount(){
+            const opt={
+                backgroundColor:'transparent',
+                xAxis:{type:'category',data:['D1','D2','D3','D4','D5'],axisLine:{lineStyle:{color:'#333'}},axisLabel:{color:'#888'}},
+                yAxis:{type:'value',axisLine:{lineStyle:{color:'#333'}},axisLabel:{color:'#888'},splitLine:{lineStyle:{color:'#111'}}},
+                series:[{type:'bar',data:[randomInt(100,500),randomInt(100,500),randomInt(100,500),randomInt(100,500),randomInt(100,500)],itemStyle:{color:()=>['#00ffff','#ff00ff','#ffff00','#00ff00','#ff6600'][randomInt(0,5)]}}]
+            };
+            countChart.setOption(opt);
+        }
+
+        function updateMatrixChart(){
+            const d=[],names=[];
+            for(let i=0;i<15;i++){names.push('FEAT-'+i);for(let j=0;j<15;j++)d.push([i,j,random(-1,1).toFixed(2)]);}
+            const opt={
+                backgroundColor:'transparent',grid:{top:40,right:40,bottom:40,left:60},
+                xAxis:{type:'category',data:names,axisLine:{lineStyle:{color:'#333'}},axisLabel:{color:'#888',fontSize:10}},
+                yAxis:{type:'category',data:names,axisLine:{lineStyle:{color:'#333'}},axisLabel:{color:'#888',fontSize:10}},
+                visualMap:{min:-1,max:1,calculable:true,text:['高相关','低相关'],textStyle:{color:'#888'},inRange:{color:['#0000ff','#00ffff','#ffffff','#ffff00','#ff0000']}},
+                series:[{type:'heatmap',data:d,label:{show:true,color:'#fff',fontSize:9}}]
+            };
+            matrixChart.setOption(opt);
+        }
+
+    </script>
+</body>
+</html>
