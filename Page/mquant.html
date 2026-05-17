@@ -667,10 +667,10 @@
                                      data:[{type:'max',valueDim:'highest'},{type:'min',valueDim:'lowest'}], 
                                     //  itemStyle:{color:'#ffeb3b'},
                                     itemStyle:{color:'rgba(255,255,255,0)'},
-                                     label: {
-                                         formatter: (params) => params.value.toFixed(2),
-                                         textStyle: { color: '#ffffff' }
-                                         }
+                                    label: {
+                                        formatter: (params) => params.value.toFixed(2),
+                                        textStyle: { color: '#ffffff' }
+                                        }
                                  },
                         z: 2
                     },
@@ -709,8 +709,9 @@
                         itemStyle:{
                             color:p=>klineData[p.dataIndex][1]>=klineData[p.dataIndex][0]
                                 ?'rgba(38,166,154,0.7)':'rgba(239,83,80,0.7)',
-                            borderColor:p=>klineData[p.dataIndex][1]>=klineData[p.dataIndex][0]
-                                ?'#26a69a':'#ef5350'
+                            borderColor:'#000'
+                            // borderColor:p=>klineData[p.dataIndex][1]>=klineData[p.dataIndex][0]
+                                // ?'#26a69a':'#ef5350'
                         },
                         z: 0
                     }
