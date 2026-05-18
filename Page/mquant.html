@@ -431,9 +431,20 @@
             setInterval(autoAddNewKline, 5000);
             // 其他图表刷新
             setInterval(()=>{
-                updateGauge();updateHeatmap();updateScatter();updateBubble();
-                updateMap();updateBox();updateLine();updateJitter();updateCount();updateMatrixChart();
+                updateGauge();updateHeatmap();updateMap();updateLine();updateCount();
             },1800);
+            setInterval(()=>{
+                updateScatter();updateJitter();
+            },2000);
+            setInterval(()=>{
+                updateBox();
+            },1000);
+            setInterval(()=>{
+                updateBubble();
+            },3000);
+            setInterval(()=>{
+                updateMatrixChart();
+            },4000);
 
             window.addEventListener('resize',()=>{
                 mainKline&&mainKline.resize();
