@@ -464,8 +464,9 @@
             matrixChart=echarts.init(document.getElementById('matrix-chart'));
 
             // 初始化初始K线
+            let startIndex = 0; // 新增起始索引变量
             for(let i=0;i<MAX_KLINE_COUNT;i++){
-                const timeStr = String(i);
+                const timeStr = String(startIndex + i); // 使用起始索引+循环数
                 xAxisData.push(timeStr);
                 const open = lastPrice + random(-80,80);
                 const close = open + random(-60,60);
@@ -554,7 +555,8 @@
             const vol = Math.abs(close-open)*60 + random(2000,12000);
 
             // 加入尾部
-            xAxisData.push(String(xAxisData.length));
+            const lastIndex = parseInt(xAxisData[xAxisData.length - 1]) || 0;
+            xAxisData.push(String(lastIndex + 1));
             klineData.push([open,close,low,high]);
             volData.push(vol);
 
