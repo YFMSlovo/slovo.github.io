@@ -144,8 +144,7 @@
     </div>
 
     <div class="pt-8 p-4 pb-20">
-        <!-- <div class="quant-window w-full h-[calc(100vh-120px)] mb-6"> -->
-        <div class="quant-window w-full h-[calc(100vh-48px)] mb-6" style="position: relative;">
+        <div class="quant-window w-full h-[calc(100vh-120px)] mb-6">
             <div class="window-header h-10">
                 <span class="text-base">【CORE-01】时序特征K线可视化 - 高阶状态向量分析</span>
                 <div class="flex items-center gap-6">
@@ -414,7 +413,7 @@
         let mainKline,gaugeChart,heatmapChart,scatterChart,bubbleChart,mapChart,boxChart,lineChart,jitterChart,countChart,matrixChart;
 
         // K线全局数据
-        const MAX_KLINE_COUNT = 240;
+        const MAX_KLINE_COUNT = 120;
         let klineData = [];
         let xAxisData = [];
         let volData = [];
@@ -425,13 +424,6 @@
         let bollUpperData = [];
         let bollMiddleData = [];
         let bollLowerData = [];
-        // 新增：MACD和KDJ数据
-        let macdData = [];
-        let difData = [];
-        let deaData = [];
-        let kdjKData = [];
-        let kdjDData = [];
-        let kdjJData = [];
 
         setTimeout(()=>{
             initAllCharts();
@@ -469,12 +461,9 @@
             });
         },600);
 
-
-
         function initAllCharts(){
             mainKline=echarts.init(document.getElementById('main-kline'));
-            // 替换原有gaugeChart初始化逻辑
-            initGaugeChart(); 
+            gaugeChart=echarts.init(document.getElementById('gauge-chart'));
             heatmapChart=echarts.init(document.getElementById('heatmap-chart'));
             scatterChart=echarts.init(document.getElementById('scatter-chart'));
             bubbleChart=echarts.init(document.getElementById('bubble-chart'));
@@ -485,10 +474,10 @@
             countChart=echarts.init(document.getElementById('count-chart'));
             matrixChart=echarts.init(document.getElementById('matrix-chart'));
 
-            // 原有K线初始化逻辑保持不变
-            let startIndex = 0; 
+            // 初始化初始K线
+            let startIndex = 0; // 新增起始索引变量
             for(let i=0;i<MAX_KLINE_COUNT;i++){
-                const timeStr = String(startIndex + i); 
+                const timeStr = String(startIndex + i); // 使用起始索引+循环数
                 xAxisData.push(timeStr);
                 const open = lastPrice + random(-80,80);
                 const close = open + random(-60,60);
@@ -498,516 +487,427 @@
                 volData.push(Math.abs(close-open)*60 + random(2000,12000));
                 lastPrice = close;
             }
+            // 初始化技术指标数据
             calculateTechIndicators();
             renderKline();
         }
 
         // 新增：计算技术指标（MA7、MA25、布林带）
-function calculateTechIndicators() {
-    ma7Data = [];
-    ma25Data = [];
-    bollUpperData = [];
-    bollMiddleData = [];
-    bollLowerData = [];
-    macdData = [];
-    difData = [];
-    deaData = [];
-    kdjKData = [];
-    kdjDData = [];
-    kdjJData = [];
+        function calculateTechIndicators() {
+            ma7Data = [];
+            ma25Data = [];
+            bollUpperData = [];
+            bollMiddleData = [];
+            bollLowerData = [];
 
-    // === MA7 计算 ===
-    for (let i = 0; i < klineData.length; i++) {
-        if (i < 6) {
-            ma7Data.push(null);
-        } else {
-            let sum = 0;
-            for (let j = i - 6; j <= i; j++) {
-                sum += klineData[j][1]; // 收盘价
+            // 计算MA7
+            for (let i = 0; i < klineData.length; i++) {
+                if (i < 6) {
+                    ma7Data.push(null);
+                } else {
+                    let sum = 0;
+                    for (let j = i - 6; j <= i; j++) {
+                        sum += klineData[j][1]; // 收盘价
+                    }
+                    ma7Data.push(sum / 7);
+                }
             }
-            ma7Data.push(sum / 7);
+
+            // 计算MA25
+            for (let i = 0; i < klineData.length; i++) {
+                if (i < 24) {
+                    ma25Data.push(null);
+                } else {
+                    let sum = 0;
+                    for (let j = i - 24; j <= i; j++) {
+                        sum += klineData[j][1]; // 收盘价
+                    }
+                    ma25Data.push(sum / 25);
+                }
+            }
+
+            // 计算布林带（20周期，2倍标准差）
+            for (let i = 0; i < klineData.length; i++) {
+                if (i < 19) {
+                    bollUpperData.push(null);
+                    bollMiddleData.push(null);
+                    bollLowerData.push(null);
+                } else {
+                    let sum = 0;
+                    let closeArr = [];
+                    for (let j = i - 19; j <= i; j++) {
+                        sum += klineData[j][1];
+                        closeArr.push(klineData[j][1]);
+                    }
+                    const middle = sum / 20; // 中轨=MA20
+                    // 计算标准差
+                    let variance = 0;
+                    closeArr.forEach(close => {
+                        variance += Math.pow(close - middle, 2);
+                    });
+                    const std = Math.sqrt(variance / 20);
+                    const upper = middle + 2 * std; // 上轨
+                    const lower = middle - 2 * std; // 下轨
+
+                    bollUpperData.push(upper);
+                    bollMiddleData.push(middle);
+                    bollLowerData.push(lower);
+                }
+            }
         }
-    }
 
-    // === MA25 计算 ===
-    for (let i = 0; i < klineData.length; i++) {
-        if (i < 24) {
-            ma25Data.push(null);
-        } else {
-            let sum = 0;
-            for (let j = i - 24; j <= i; j++) {
-                sum += klineData[j][1]; // 收盘价
+        // 核心：新增一根K线，淘汰最旧一根
+        function autoAddNewKline(){
+            // 生成新一根K线
+            const open = lastPrice + random(-50,50);
+            const close = open + random(-40,40);
+            const low = Math.min(open,close) - random(20,60);
+            const high = Math.max(open,close) + random(20,60);
+            const vol = Math.abs(close-open)*60 + random(2000,12000);
+
+            // 加入尾部
+            const lastIndex = parseInt(xAxisData[xAxisData.length - 1]) || 0;
+            xAxisData.push(String(lastIndex + 1));
+            klineData.push([open,close,low,high]);
+            volData.push(vol);
+
+            // 超出长度删掉头部
+            if(xAxisData.length > MAX_KLINE_COUNT){
+                xAxisData.shift();
+                klineData.shift();
+                volData.shift();
             }
-            ma25Data.push(sum / 25);
+            lastPrice = close;
+
+            // 重新计算技术指标
+            calculateTechIndicators();
+            // 立即重绘K线
+            renderKline();
         }
-    }
 
-    // === 布林带计算（20周期，2倍标准差） ===
-    for (let i = 0; i < klineData.length; i++) {
-        if (i < 19) {
-            bollUpperData.push(null);
-            bollMiddleData.push(null);
-            bollLowerData.push(null);
-        } else {
-            let sum = 0;
-            let closeArr = [];
-            for (let j = i - 19; j <= i; j++) {
-                sum += klineData[j][1];
-                closeArr.push(klineData[j][1]);
-            }
-            const middle = sum / 20; // 中轨=MA20
-            // 计算标准差
-            let variance = 0;
-            closeArr.forEach(close => {
-                variance += Math.pow(close - middle, 2);
+        // 渲染K线图表（添加趋势线/技术指标）
+        function renderKline(){
+            let maxP = -Infinity, minP = Infinity;
+            klineData.forEach(item=>{
+                maxP = Math.max(maxP, item[3]);
+                minP = Math.min(minP, item[2]);
             });
-            const std = Math.sqrt(variance / 20);
-            const upper = middle + 2 * std; // 上轨
-            const lower = middle - 2 * std; // 下轨
 
-            bollUpperData.push(upper);
-            bollMiddleData.push(middle);
-            bollLowerData.push(lower);
-        }
-    }
+            // 刷新顶部指标面板
+            const firstClose = klineData[0][1];
+            const nowClose = klineData[klineData.length-1][1];
+            const chg = ((nowClose - firstClose)/firstClose*100).toFixed(2);
 
-    // === MACD 计算（12,26,9周期） ===
-    let ema12 = [];
-    let ema26 = [];
-    for (let i = 0; i < klineData.length; i++) {
-        const close = klineData[i][1];
-        // EMA12
-        if (i === 0) {
-            ema12.push(close);
-        } else {
-            ema12.push((2 * close + 10 * ema12[i - 1]) / 12);
-        }
-        // EMA26
-        if (i === 0) {
-            ema26.push(close);
-        } else {
-            ema26.push((2 * close + 24 * ema26[i - 1]) / 26);
-        }
-        // DIF = EMA12 - EMA26
-        const dif = ema12[i] - ema26[i];
-        difData.push(dif);
-        // DEA = DIF的9日EMA
-        if (i === 0) {
-            deaData.push(dif);
-        } else {
-            deaData.push((2 * dif + 7 * deaData[i - 1]) / 9);
-        }
-        // MACD = 2*(DIF-DEA)
-        macdData.push(2 * (dif - deaData[i]));
-    }
+            document.getElementById('tv-price').innerText = nowClose.toFixed(2);
+            document.getElementById('tv-change').innerText = (chg>=0?'+':'') + chg + '%';
+            document.getElementById('tv-change').className = 'tv-value ' + (chg>=0?'text-red-400':'text-green-400');
+            document.getElementById('tv-high').innerText = maxP.toFixed(2);
+            document.getElementById('tv-low').innerText = minP.toFixed(2);
+            document.getElementById('tv-volume').innerText = (volData.reduce((a,b)=>a+b,0)/1000).toFixed(1)+'K';
 
-    // === KDJ 计算（9周期） ===
-    let rsv = [];
-    for (let i = 0; i < klineData.length; i++) {
-        if (i < 8) {
-            rsv.push(null);
-            kdjKData.push(null);
-            kdjDData.push(null);
-            kdjJData.push(null);
-        } else {
-            // 找9周期内的最高价和最低价
-            let highArr = [];
-            let lowArr = [];
-            for (let j = i - 8; j <= i; j++) {
-                highArr.push(klineData[j][3]); // 最高价
-                lowArr.push(klineData[j][2]);  // 最低价
-            }
-            const highest = Math.max(...highArr);
-            const lowest = Math.min(...lowArr);
-            const close = klineData[i][1];
-            // RSV = (收盘价-最低价)/(最高价-最低价)*100
-            rsv.push(((close - lowest) / (highest - lowest)) * 100);
-            // K = 2/3*前K + 1/3*RSV
-            const k = (2 * (kdjKData[i - 1] || 50) + rsv[i]) / 3;
-            // D = 2/3*前D + 1/3*K
-            const d = (2 * (kdjDData[i - 1] || 50) + k) / 3;
-            // J = 3*K - 2*D
-            const j = 3 * k - 2 * d;
-
-            kdjKData.push(k);
-            kdjDData.push(d);
-            kdjJData.push(j);
-        }
-    }
-}
-
-// 核心：新增一根K线，淘汰最旧一根
-function autoAddNewKline() {
-    // 生成新一根K线
-    const open = lastPrice + random(-50, 50);
-    const close = open + random(-40, 40);
-    const low = Math.min(open, close) - random(20, 60);
-    const high = Math.max(open, close) + random(20, 60);
-    const vol = Math.abs(close - open) * 60 + random(2000, 12000);
-
-    // 加入尾部
-    const lastIndex = parseInt(xAxisData[xAxisData.length - 1]) || 0;
-    xAxisData.push(String(lastIndex + 1));
-    klineData.push([open, close, low, high]);
-    volData.push(vol);
-
-    // 超出长度删掉头部
-    if (xAxisData.length > MAX_KLINE_COUNT) {
-        xAxisData.shift();
-        klineData.shift();
-        volData.shift();
-    }
-    lastPrice = close;
-
-    // 重新计算技术指标（含MACD/KDJ）
-    calculateTechIndicators();
-    // 立即重绘K线
-    renderKline();
-}
-
-// 渲染K线图表（添加MACD/KDJ）
-function renderKline() {
-    let maxP = -Infinity, minP = Infinity;
-    klineData.forEach(item => {
-        maxP = Math.max(maxP, item[3]);
-        minP = Math.min(minP, item[2]);
-    });
-
-    // 刷新顶部指标面板
-    const firstClose = klineData[0][1];
-    const nowClose = klineData[klineData.length - 1][1];
-    const chg = ((nowClose - firstClose) / firstClose * 100).toFixed(2);
-
-    document.getElementById('tv-price').innerText = nowClose.toFixed(2);
-    document.getElementById('tv-change').innerText = (chg >= 0 ? '+' : '') + chg + '%';
-    document.getElementById('tv-change').className = 'tv-value ' + (chg >= 0 ? 'text-red-400' : 'text-green-400');
-    document.getElementById('tv-high').innerText = maxP.toFixed(2);
-    document.getElementById('tv-low').innerText = minP.toFixed(2);
-    document.getElementById('tv-volume').innerText = (volData.reduce((a, b) => a + b, 0) / 1000).toFixed(1) + 'K';
-
-    // 同步更新指标数值
-    const currentMA7 = ma7Data[ma7Data.length - 1] || nowClose;
-    const currentMA25 = ma25Data[ma25Data.length - 1] || nowClose;
-    const currentBOLL = bollMiddleData[bollMiddleData.length - 1] || nowClose;
-    const currentMACD = macdData[macdData.length - 1] || 0;
-    const currentKDJ = kdjKData[kdjKData.length - 1] || 50;
-
-    document.getElementById('ma7').innerText = currentMA7.toFixed(2);
-    document.getElementById('ma25').innerText = currentMA25.toFixed(2);
-    document.getElementById('rsi').innerText = random(20, 80).toFixed(2);
-    document.getElementById('macd').innerText = currentMACD.toFixed(2);
-    document.getElementById('boll').innerText = currentBOLL.toFixed(2);
-    document.getElementById('kdj').innerText = currentKDJ.toFixed(2);
-
-    const option = {
-        backgroundColor: 'transparent',
-        // 扩展网格：新增MACD/KDJ网格区域
-        grid: [
-            { top: 15, right: 50, bottom: 220, left: 60 }, // K线主区域
-            { top: '70%', right: 50, bottom: 150, left: 60, height: 45 }, // 成交量
-            { top: '78%', right: 50, bottom: 80, left: 60, height: 45 }, // MACD
-            { top: '86%', right: 50, bottom: 30, left: 60, height: 45 }  // KDJ
-        ],
-        dataZoom: [
-            { type: 'inside', xAxisIndex: [0, 1, 2, 3], start: 60, end: 100 },
-            { type: 'slider', xAxisIndex: [0, 1, 2, 3], bottom: 0, height: 22,
-              backgroundColor: 'rgba(10,10,10,0.6)', borderColor: '#2a2a2a',
-              handleStyle: { color: '#00ffff' }, fillerColor: 'rgba(0,255,255,0.12)' }
-        ],
-        xAxis: [
-            { type: 'category', data: xAxisData, gridIndex: 0,
-              axisLine: { lineStyle: { color: '#333' } },
-              axisLabel: { color: '#888', fontSize: 11 },
-              splitLine: { lineStyle: { color: 'rgba(255,255,255,0.04)' } } },
-            { type: 'category', data: xAxisData, gridIndex: 1, axisLine: { show: false }, axisLabel: { show: false } },
-            { type: 'category', data: xAxisData, gridIndex: 2, axisLine: { show: false }, axisLabel: { show: false } },
-            { type: 'category', data: xAxisData, gridIndex: 3, axisLine: { show: false }, axisLabel: { show: false } }
-        ],
-        yAxis: [
-            { type: 'value', gridIndex: 0, position: 'right', offset: 15, scale: true,
-              axisLabel: { color: '#888', fontSize: 11, formatter: v => v.toFixed(0) },
-              axisLine: { lineStyle: { color: '#333' } },
-              splitLine: { lineStyle: { color: 'rgba(255,255,255,0.04)' } } },
-            { type: 'value', gridIndex: 1, axisLabel: { color: '#888', fontSize: 10 }, splitLine: { show: false } },
-            { type: 'value', gridIndex: 2, axisLabel: { color: '#888', fontSize: 10 }, splitLine: { show: false }, scale: true },
-            { type: 'value', gridIndex: 3, axisLabel: { color: '#888', fontSize: 10 }, splitLine: { show: false }, min: 0, max: 100 } // KDJ固定0-100
-        ],
-        tooltip: {
-            trigger: 'axis', className: 'kline-tooltip',
-            axisPointer: { type: 'cross', lineStyle: { color: 'rgba(0,255,255,0.6)', width: 1, type: 'dashed' } },
-            backgroundColor: 'rgba(10,10,10,0.97)', borderColor: '#333', textStyle: { color: '#eee' }, padding: 12,
-            formatter(params) {
-                let tooltipHtml = `<div class="text-cyan-400 font-bold mb-1">时间:${params[0].axisValue}</div>`;
-                params.forEach(param => {
-                    if (param.seriesName === 'K线') {
-                        const d = param.data;
-                        tooltipHtml += `
-                        开: <span class="${d[1]>=d[0]?'text-red-400':'text-green-400'}">${d[0].toFixed(2)}</span><br>
-                        高: <span class="text-yellow-400">${d[3].toFixed(2)}</span><br>
-                        低: <span class="text-cyan-400">${d[2].toFixed(2)}</span><br>
-                        收: <span class="${d[1]>=d[0]?'text-red-400':'text-green-400'}">${d[1].toFixed(2)}</span><br>`;
-                    } else if (param.seriesName === '成交量') {
-                        tooltipHtml += `量: <span class="text-orange-400">${param.data.toLocaleString()}</span><br>`;
-                    } else if (param.data !== null) {
-                        tooltipHtml += `${param.seriesName}: <span class="text-white">${param.data.toFixed(2)}</span><br>`;
-                    }
-                });
-                return tooltipHtml;
-            }
-        },
-        legend: {
-            data: ['K线', 'MA7', 'MA25', 'BOLL上轨', 'BOLL中轨', 'BOLL下轨', '成交量', 'DIF', 'DEA', 'MACD', 'K', 'D', 'J'],
-            textStyle: { color: '#888', fontSize: 10 },
-            top: 0,
-            right: 10
-        },
-        series: [
-            // K线主图
-            {
-                name: 'K线', type: 'candlestick', data: klineData,
-                itemStyle: { color: '#ef5350', color0: '#26a690', borderColor: '#ef5350', borderColor0: '#26a690' },
-                markPoint: {
-                    data: [{ type: 'max', valueDim: 'highest' }, { type: 'min', valueDim: 'lowest' }],
-                    itemStyle: { color: 'rgba(255,255,255,0)' },
-                    label: {
-                        formatter: (params) => params.value.toFixed(2),
-                        textStyle: { color: '#ffffff' }
-                    }
-                },
-                z: 2
-            },
-            // MA7
-            {
-                name: 'MA7', type: 'line', data: ma7Data,
-                lineStyle: { color: '#4CAF50', width: 1.5, type: 'solid' },
-                symbol: 'none',
-                z: 1
-            },
-            // MA25
-            {
-                name: 'MA25', type: 'line', data: ma25Data,
-                lineStyle: { color: '#FF9800', width: 1.5, type: 'solid' },
-                symbol: 'none',
-                z: 1
-            },
-            // BOLL上轨
-            {
-                name: 'BOLL上轨', type: 'line', data: bollUpperData,
-                lineStyle: { color: '#F44336', width: 1, type: 'dashed' },
-                symbol: 'none',
-                z: 1
-            },
-            // BOLL中轨
-            {
-                name: 'BOLL中轨', type: 'line', data: bollMiddleData,
-                lineStyle: { color: '#9C27B0', width: 1, type: 'dashed' },
-                symbol: 'none',
-                z: 1
-            },
-            // BOLL下轨
-            {
-                name: 'BOLL下轨', type: 'line', data: bollLowerData,
-                lineStyle: { color: '#2196F3', width: 1, type: 'dashed' },
-                symbol: 'none',
-                z: 1
-            },
-            // 成交量
-            {
-                name: '成交量', type: 'bar', data: volData, xAxisIndex: 1, yAxisIndex: 1,
-                itemStyle: {
-                    color: p => klineData[p.dataIndex][1] >= klineData[p.dataIndex][0]
-                        ? 'rgba(239,83,80,0.7)' : 'rgba(38,166,154,0.7)',
-                    borderColor: '#000'
-                },
-                z: 0
-            },
-            // MACD - DIF
-            {
-                name: 'DIF', type: 'line', data: difData, xAxisIndex: 2, yAxisIndex: 2,
-                lineStyle: { color: '#00ffff', width: 1.2 },
-                symbol: 'none',
-                z: 1
-            },
-            // MACD - DEA
-            {
-                name: 'DEA', type: 'line', data: deaData, xAxisIndex: 2, yAxisIndex: 2,
-                lineStyle: { color: '#ff00ff', width: 1.2 },
-                symbol: 'none',
-                z: 1
-            },
-            // MACD 柱状图
-            {
-                name: 'MACD', type: 'bar', data: macdData, xAxisIndex: 2, yAxisIndex: 2,
-                itemStyle: {
-                    color: p => macdData[p.dataIndex] >= 0 ? 'rgba(0,255,255,0.6)' : 'rgba(255,0,255,0.6)',
-                    borderColor: '#000'
-                },
-                z: 0
-            },
-            // KDJ - K
-            {
-                name: 'K', type: 'line', data: kdjKData, xAxisIndex: 3, yAxisIndex: 3,
-                lineStyle: { color: '#ffff00', width: 1.2 },
-                symbol: 'none',
-                z: 1
-            },
-            // KDJ - D
-            {
-                name: 'D', type: 'line', data: kdjDData, xAxisIndex: 3, yAxisIndex: 3,
-                lineStyle: { color: '#00ff00', width: 1.2 },
-                symbol: 'none',
-                z: 1
-            },
-            // KDJ - J
-            {
-                name: 'J', type: 'line', data: kdjJData, xAxisIndex: 3, yAxisIndex: 3,
-                lineStyle: { color: '#ff0000', width: 1.2 },
-                symbol: 'none',
-                z: 1
-            }
-        ]
-    };
-    mainKline.setOption(option, true);
-}
-
-        // 重构：系统资源监控面板（多维度、科技感）
-        function generateResourceData() {
-            // 模拟计算节点资源占用（CPU/内存/磁盘/网络/显存）
-            const resources = [
-                { name: '计算节点-01', cpu: random(15, 85), mem: random(40, 90), disk: random(20, 75), net: random(10, 95), gpuMem: random(30, 88) },
-                { name: '计算节点-02', cpu: random(10, 80), mem: random(35, 85), disk: random(15, 70), net: random(15, 90), gpuMem: random(25, 85) },
-                { name: '计算节点-03', cpu: random(20, 90), mem: random(45, 95), disk: random(25, 80), net: random(5, 85), gpuMem: random(35, 90) },
-                { name: '计算节点-04', cpu: random(12, 78), mem: random(38, 88), disk: random(18, 72), net: random(12, 88), gpuMem: random(28, 82) },
-                { name: '计算节点-05', cpu: random(18, 88), mem: random(42, 92), disk: random(22, 78), net: random(8, 82), gpuMem: random(32, 86) }
-            ];
-            return resources;
-        }
-
-        // 2. 重写仪表盘初始化函数为条形图初始化
-        function initGaugeChart() {
-            const chartDom = document.getElementById('gauge-chart');
-            gaugeChart = echarts.init(chartDom);
+            // 同步更新指标数值
+            const currentMA7 = ma7Data[ma7Data.length-1] || nowClose;
+            const currentMA25 = ma25Data[ma25Data.length-1] || nowClose;
+            const currentBOLL = bollMiddleData[bollMiddleData.length-1] || nowClose;
             
-            const resourceData = generateResourceData();
-            const nodeNames = resourceData.map(item => item.name);
-            const cpuData = resourceData.map(item => item.cpu);
-            const memData = resourceData.map(item => item.mem);
-            const gpuMemData = resourceData.map(item => item.gpuMem);
+            document.getElementById('ma7').innerText = currentMA7.toFixed(2);
+            document.getElementById('ma25').innerText = currentMA25.toFixed(2);
+            document.getElementById('rsi').innerText = random(20,80).toFixed(2);
+            document.getElementById('macd').innerText = random(-1.5,1.5).toFixed(2);
+            document.getElementById('boll').innerText = currentBOLL.toFixed(2);
+            document.getElementById('kdj').innerText = random(15,85).toFixed(2);
 
             const option = {
                 backgroundColor: 'transparent',
+                grid: [
+                    { top:15, right:50, bottom:85, left:60 },
+                    { top:'82%', right:50, bottom:30, left:60, height:45 }
+                ],
+                dataZoom: [
+                    { type:'inside', xAxisIndex:[0,1], start:60, end:100 },
+                    { type:'slider', xAxisIndex:[0,1], bottom:0, height:22,
+                      backgroundColor:'rgba(10,10,10,0.6)', borderColor:'#2a2a2a',
+                      handleStyle:{color:'#00ffff'}, fillerColor:'rgba(0,255,255,0.12)'}
+                ],
+                xAxis: [
+                    { type:'category', data:xAxisData, gridIndex:0,
+                      axisLine:{lineStyle:{color:'#333'}},
+                      axisLabel:{color:'#888', fontSize:11},
+                      splitLine:{lineStyle:{color:'rgba(255,255,255,0.04)'}} },
+                    { type:'category', data:xAxisData, gridIndex:1, axisLine:{show:false}, axisLabel:{show:false} }
+                ],
+                yAxis: [
+                    { type:'value', gridIndex:0, position:'right', offset:15, scale:true,
+                      axisLabel:{color:'#888', fontSize:11, formatter:v=>v.toFixed(0)},
+                      axisLine:{lineStyle:{color:'#333'}},
+                      splitLine:{lineStyle:{color:'rgba(255,255,255,0.04)'}} },
+                    { type:'value', gridIndex:1, axisLabel:{color:'#888', fontSize:10}, splitLine:{show:false} }
+                ],
                 tooltip: {
-                    trigger: 'axis',
-                    axisPointer: { type: 'shadow' },
-                    backgroundColor: 'rgba(17, 17, 17, 0.98)',
-                    borderColor: '#333',
-                    borderWidth: 1,
-                    textStyle: { color: '#e0e0e0', fontSize: 11 },
-                    formatter: function (params) {
-                        let res = `<div class="text-cyan-400">${params[0].axisValue}</div>`;
+                    trigger:'axis', className:'kline-tooltip',
+                    axisPointer:{type:'cross', lineStyle:{color:'rgba(0,255,255,0.6)', width:1, type:'dashed'}},
+                    backgroundColor:'rgba(10,10,10,0.97)', borderColor:'#333', textStyle:{color:'#eee'}, padding:12,
+                    formatter(params){
+                        let tooltipHtml = `<div class="text-cyan-400 font-bold mb-1">时间:${params[0].axisValue}</div>`;
                         params.forEach(param => {
-                            const color = param.color;
-                            res += `<div style="color:${color}">${param.seriesName}: ${param.value}%</div>`;
+                            if (param.seriesName === 'K线') {
+                                const d = param.data;
+                                tooltipHtml += `
+                                开: <span class="${d[2]>=d[1]?'text-red-400':'text-green-400'}">${d[1].toFixed(2)}</span><br>
+                                高: <span class="text-yellow-400">${d[4].toFixed(2)}</span><br>
+                                低: <span class="text-cyan-400">${d[3].toFixed(2)}</span><br>
+                                收: <span class="${d[2]>=d[1]?'text-red-400':'text-green-400'}">${d[2].toFixed(2)}</span><br>`;
+                            } else if (param.seriesName === '成交量') {
+                                tooltipHtml += `量: <span class="text-orange-400">${param.data.toLocaleString()}</span><br>`;
+                            } else if (param.data !== null) {
+                                tooltipHtml += `${param.seriesName}: <span class="text-white">${param.data.toFixed(2)}</span><br>`;
+                            }
                         });
-                        return res;
+                        return tooltipHtml;
                     }
                 },
                 legend: {
-                    data: ['CPU', 'MEM', 'VRAM'],
+                    data: ['K线', 'MA7', 'MA25', 'BOLL上轨', 'BOLL中轨', 'BOLL下轨', '成交量'],
                     textStyle: { color: '#888', fontSize: 10 },
                     top: 0,
-                    left: 10
-                },
-                grid: {
-                    left: '10%',
-                    right: '5%',
-                    top: '20%',
-                    bottom: '5%',
-                    containLabel: true
-                },
-                xAxis: {
-                    type: 'category',
-                    data: nodeNames,
-                    axisLine: { lineStyle: { color: '#333' } },
-                    axisLabel: { 
-                        color: '#888', 
-                        fontSize: 10,
-                        rotate: 15 // 旋转标签防止重叠
-                    },
-                    splitLine: { show: false }
-                },
-                yAxis: {
-                    type: 'value',
-                    max: 100,
-                    axisLine: { lineStyle: { color: '#333' } },
-                    axisLabel: { 
-                        color: '#888', 
-                        fontSize: 10,
-                        formatter: '{value}%' 
-                    },
-                    splitLine: { 
-                        lineStyle: { color: 'rgba(255,255,255,0.04)' } 
-                    }
+                    right: 10
                 },
                 series: [
                     {
-                        name: 'CPU',
-                        type: 'bar',
-                        stack: 'total',
-                        emphasis: { focus: 'series' },
-                        itemStyle: { 
-                            color: '#B63C02',
-                            borderColor: '#B63C02',
-                            borderWidth: 0.5 
-                        },
-                        data: cpuData,
-                        barWidth: '60%'
+                        name:'K线', type:'candlestick', data:klineData,
+                        itemStyle:{color:'#ef5350', color0:'#26a690', borderColor:'#ef5350', borderColor0:'#26a690'},
+                        markPoint:{
+                                     data:[{type:'max',valueDim:'highest'},{type:'min',valueDim:'lowest'}], 
+                                    //  itemStyle:{color:'#ffeb3b'},
+                                    itemStyle:{color:'rgba(255,255,255,0)'},
+                                    label: {
+                                        formatter: (params) => params.value.toFixed(2),
+                                        textStyle: { color: '#ffffff' }
+                                        }
+                                 },
+                        z: 2
                     },
                     {
-                        name: 'MEM',
-                        type: 'bar',
-                        stack: 'total',
-                        emphasis: { focus: 'series' },
-                        itemStyle: { 
-                            color: '#E8580C',
-                            borderColor: '#E8580C',
-                            borderWidth: 0.5 
-                        },
-                        data: memData
+                        name:'MA7', type:'line', data:ma7Data,
+                        lineStyle:{color:'#4CAF50', width:1.5, type:'solid'},
+                        symbol: 'none',
+                        z: 1
                     },
                     {
-                        name: 'VRAM',
-                        type: 'bar',
-                        stack: 'total',
-                        emphasis: { focus: 'series' },
-                        itemStyle: { 
-                            color: '#FCDEBE',
-                            borderColor: '#FCDEBE',
-                            borderWidth: 0.5 
+                        name:'MA25', type:'line', data:ma25Data,
+                        lineStyle:{color:'#FF9800', width:1.5, type:'solid'},
+                        symbol: 'none',
+                        z: 1
+                    },
+                    {
+                        name:'BOLL上轨', type:'line', data:bollUpperData,
+                        lineStyle:{color:'#F44336', width:1, type:'dashed'},
+                        symbol: 'none',
+                        z: 1
+                    },
+                    {
+                        name:'BOLL中轨', type:'line', data:bollMiddleData,
+                        lineStyle:{color:'#9C27B0', width:1, type:'dashed'},
+                        symbol: 'none',
+                        z: 1
+                    },
+                    {
+                        name:'BOLL下轨', type:'line', data:bollLowerData,
+                        lineStyle:{color:'#2196F3', width:1, type:'dashed'},
+                        symbol: 'none',
+                        z: 1
+                    },
+                    {
+                        name:'成交量', type:'bar', data:volData, xAxisIndex:1, yAxisIndex:1,
+                        itemStyle:{
+                            color:p=>klineData[p.dataIndex][1]>=klineData[p.dataIndex][0]
+                                ?'rgba(239,83,80,0.7)':'rgba(38,166,154,0.7)',
+                            borderColor:'#000'
+                            // borderColor:p=>klineData[p.dataIndex][1]>=klineData[p.dataIndex][0]
+                                // ?'#26a69a':'#ef5350'
                         },
-                        data: gpuMemData
+                        z: 0
                     }
                 ]
             };
-            gaugeChart.setOption(option);
+            mainKline.setOption(option, true);
         }
 
-        // 3. 重写资源监控更新函数
-        function updateGauge() {
-            const resourceData = generateResourceData();
-            const cpuData = resourceData.map(item => item.cpu);
-            const memData = resourceData.map(item => item.mem);
-            const gpuMemData = resourceData.map(item => item.gpuMem);
-            
-            gaugeChart.setOption({
+        // 重构：系统资源监控面板（多维度、科技感）
+        function updateGauge(){
+            // 生成随机资源数据
+            const cpuValue = randomInt(20, 80);
+            const memValue = randomInt(50, 90);
+            const diskValue = randomInt(30, 70);
+            const netValue = randomInt(10, 90);
+
+            const opt = {
+                backgroundColor: 'transparent',
+                grid: {
+                    left: '5%',
+                    right: '5%',
+                    top: '10%',
+                    bottom: '10%',
+                    containLabel: true
+                },
+                tooltip: {
+                    trigger: 'item',
+                    textStyle: { color: '#fff', fontSize: 10 },
+                    backgroundColor: 'rgba(10,10,10,0.9)'
+                },
                 series: [
-                    { name: 'CPU', data: cpuData },
-                    { name: 'MEM', data: memData },
-                    { name: 'VRAM', data: gpuMemData }
+                    // CPU仪表盘
+                    {
+                        type: 'gauge',
+                        title: { text: 'CPU使用率', offsetCenter: [0, '-60%'], textStyle: { color: '#00ffff', fontSize: 11 } },
+                        center: ['25%', '25%'],
+                        radius: '40%',
+                        startAngle: 90,
+                        endAngle: -270,
+                        axisLine: {
+                            lineStyle: {
+                                width: 8,
+                                color: [
+                                    [0.2, '#00ff00'],
+                                    [0.6, '#ffff00'],
+                                    [1, '#ff0000']
+                                ]
+                            }
+                        },
+                        pointer: {
+                            icon: 'path://M12.8,0.7l12,40.1H0.7L12.8,0.7z',
+                            length: '80%',
+                            width: 3,
+                            itemStyle: { color: '#00ffff' }
+                        },
+                        axisTick: { show: false },
+                        splitLine: {
+                            length: '10%',
+                            lineStyle: { color: '#888', width: 1 }
+                        },
+                        axisLabel: { show: false },
+                        detail: {
+                            formatter: '{value}%',
+                            offsetCenter: [0, '40%'],
+                            textStyle: { color: '#00ffff', fontSize: 10, fontWeight: 'bold' }
+                        },
+                        data: [{ value: cpuValue, name: 'CPU' }]
+                    },
+                    // 内存仪表盘
+                    {
+                        type: 'gauge',
+                        title: { text: '内存使用率', offsetCenter: [0, '-60%'], textStyle: { color: '#ff00ff', fontSize: 11 } },
+                        center: ['75%', '25%'],
+                        radius: '40%',
+                        startAngle: 90,
+                        endAngle: -270,
+                        axisLine: {
+                            lineStyle: {
+                                width: 8,
+                                color: [
+                                    [0.2, '#00ff00'],
+                                    [0.6, '#ffff00'],
+                                    [1, '#ff0000']
+                                ]
+                            }
+                        },
+                        pointer: {
+                            icon: 'path://M12.8,0.7l12,40.1H0.7L12.8,0.7z',
+                            length: '80%',
+                            width: 3,
+                            itemStyle: { color: '#ff00ff' }
+                        },
+                        axisTick: { show: false },
+                        splitLine: {
+                            length: '10%',
+                            lineStyle: { color: '#888', width: 1 }
+                        },
+                        axisLabel: { show: false },
+                        detail: {
+                            formatter: '{value}%',
+                            offsetCenter: [0, '40%'],
+                            textStyle: { color: '#ff00ff', fontSize: 10, fontWeight: 'bold' }
+                        },
+                        data: [{ value: memValue, name: 'MEM' }]
+                    },
+                    // 磁盘IO仪表盘
+                    {
+                        type: 'gauge',
+                        title: { text: '磁盘IO', offsetCenter: [0, '-60%'], textStyle: { color: '#ffff00', fontSize: 11 } },
+                        center: ['25%', '75%'],
+                        radius: '40%',
+                        startAngle: 90,
+                        endAngle: -270,
+                        axisLine: {
+                            lineStyle: {
+                                width: 8,
+                                color: [
+                                    [0.2, '#00ff00'],
+                                    [0.6, '#ffff00'],
+                                    [1, '#ff0000']
+                                ]
+                            }
+                        },
+                        pointer: {
+                            icon: 'path://M12.8,0.7l12,40.1H0.7L12.8,0.7z',
+                            length: '80%',
+                            width: 3,
+                            itemStyle: { color: '#ffff00' }
+                        },
+                        axisTick: { show: false },
+                        splitLine: {
+                            length: '10%',
+                            lineStyle: { color: '#888', width: 1 }
+                        },
+                        axisLabel: { show: false },
+                        detail: {
+                            formatter: '{value}%',
+                            offsetCenter: [0, '40%'],
+                            textStyle: { color: '#ffff00', fontSize: 10, fontWeight: 'bold' }
+                        },
+                        data: [{ value: diskValue, name: 'DISK' }]
+                    },
+                    // 网络吞吐量仪表盘
+                    {
+                        type: 'gauge',
+                        title: { text: '网络吞吐量', offsetCenter: [0, '-60%'], textStyle: { color: '#00ff00', fontSize: 11 } },
+                        center: ['75%', '75%'],
+                        radius: '40%',
+                        startAngle: 90,
+                        endAngle: -270,
+                        axisLine: {
+                            lineStyle: {
+                                width: 8,
+                                color: [
+                                    [0.2, '#00ff00'],
+                                    [0.6, '#ffff00'],
+                                    [1, '#ff0000']
+                                ]
+                            }
+                        },
+                        pointer: {
+                            icon: 'path://M12.8,0.7l12,40.1H0.7L12.8,0.7z',
+                            length: '80%',
+                            width: 3,
+                            itemStyle: { color: '#00ff00' }
+                        },
+                        axisTick: { show: false },
+                        splitLine: {
+                            length: '10%',
+                            lineStyle: { color: '#888', width: 1 }
+                        },
+                        axisLabel: { show: false },
+                        detail: {
+                            formatter: '{value}%',
+                            offsetCenter: [0, '40%'],
+                            textStyle: { color: '#00ff00', fontSize: 10, fontWeight: 'bold' }
+                        },
+                        data: [{ value: netValue, name: 'NET' }]
+                    }
                 ]
-            });
+            };
+            gaugeChart.setOption(opt);
         }
-
 
         function updateHeatmap(){
             const d=[];
