@@ -241,9 +241,10 @@
                         rg6 = rg6%2
             </script>
             <script>
-              var ngs = 32*ng1+16*ng2+8*ng3+4*ng4+2*ng5+ng6
-              var rgs =  32*rg1+16*rg2+8*rg3+4*rg4+2*rg5+rg6
-              var nrgs = rgs - ngs + 64
+			  //《太玄经》：一玄、三方、九州、二十七部、八十一家、二百四十三表，合三百六十四日半
+              var ngs = 243*ng1+81*ng2+27*ng3+9*ng4+3*ng5+ng6
+              var rgs =  243*rg1+81*rg2+27*rg3+9*rg4+3*rg5+rg6
+              var nrgs = rgs - ngs + 365
               var result = nrgs % 5
               if (result==1) {
                var color ='#008010'
